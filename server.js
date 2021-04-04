@@ -7,18 +7,10 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 require('dotenv').config({path:'./config.env'})
 const connectDB=require('./utilsServer/connectDB')
-connectDB();
+// connectDB();
 
 app.prepare().then(() => {
   const server = express()
-
-  server.get('/a', (req, res) => {
-    return app.render(req, res, '/a', req.query)
-  })
-
-  server.get('/b', (req, res) => {
-    return app.render(req, res, '/b', req.query)
-  })
 
   server.all('*', (req, res) => {
     return handle(req, res)
