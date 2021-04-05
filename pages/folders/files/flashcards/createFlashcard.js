@@ -1,5 +1,6 @@
 import { useState } from "react";
-import CreateFlashcard from '../../components/flashcards/createFlashcard/createFlashcard'
+import CreateFlashcard from '../../../../components/flashcards/createFlashcard'
+import ContentFlashcard from "../../../../components/flashcards/contentFlashcard";
 
 export default function CreateFlashcardPage(){
 	const [flashcardValues, setFlashcardValues] = useState([]);
@@ -11,15 +12,7 @@ export default function CreateFlashcardPage(){
 	}
 	return(
 		<>
-			<div>
-				{flashcardValues.map((flashcard)=>{
-					return(
-						<div>
-							<div>{flashcard.term}{flashcard.description}</div>
-						</div>
-					)
-				})}
-			</div>
+			<ContentFlashcard contents={flashcardValues}/>
 			<CreateFlashcard onSubmit={getValue} />
 		</>
 	)

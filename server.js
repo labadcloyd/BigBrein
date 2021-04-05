@@ -7,7 +7,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 require('dotenv').config({path:'./config.env'})
 const connectDB=require('./utilsServer/connectDB')
-// connectDB();
+connectDB();
 
 app.prepare().then(() => {
   const server = express()
