@@ -1,23 +1,30 @@
-import {Fragment} from 'react'
+import {useState} from 'react'
+
 export default function CreateFlashcard(props){
 	const items = props.items
+	const [inputValue, setInputValue] = useState({});
+	function handleChange(event){
+		const {name, value} = event.target
+		setInputValue((prevInput)=>{
+			return({
+				...prevInput,
+				[name]:value
+			})
+		})
+	}
+	function handleSubmit(event){
+		props.onSubmit(inputValue)
+		setInputValue({term:'', description:''})
+		console.log(inputValue)
+		event.preventDefault();
+	}
 	return(
-		<Fragment>
-			{/* <div>
-				{items.map((item)=>{
-					return(
-						<div>
-							<span>{item.term}</span>
-							<span>{item.description}</span>
-						</div>
-					)
-				})}
-			</div> */}
-			<form onSubmit={props.onSubmit}>
-				<input type='text' value={props.termValue} name='term' onChange={props.onChange} placeholder='term' />
-				<input type='text' value={props.descriptionValue} name='description' onChange={props.onChange} placeholder='description' />
+		<>
+			<form onSubmit={handleSubmit}>
+				<input type='text' value={inputValue.term} name='term' onChange={handleChange} placeholder='term' />
+				<input type='text' value={inputValue.description} name='description' onChange={handleChange} placeholder='description' />
 				<button type='submit'>Add</button>
 			</form>
-		</Fragment>
+		</>
 	)
 }
