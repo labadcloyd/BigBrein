@@ -7,10 +7,10 @@ export default function ContentFlashcard(props){
 				{contents.map((content)=>{
 					return(
 						<div style={{display:'flex', flexDirection:'row'}}>
-							<div>
-								{content.term}
+							<div contenteditable="true">
+								{content.term} - 
 							</div>
-							<div>
+							<div contenteditable="true">
 								{content.description}
 							</div>
 						</div>

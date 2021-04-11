@@ -6,8 +6,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 require('dotenv').config({path:'./config.env'})
-const connectDB=require('./utilsServer/connectDB')
-connectDB();
+const connectDb=require('./utilsServer/connectDB')
+connectDb();
 
 app.prepare().then(() => {
   const server = express()

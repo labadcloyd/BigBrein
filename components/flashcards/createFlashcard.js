@@ -15,7 +15,6 @@ export default function CreateFlashcard(props){
 	function handleSubmit(event){
 		props.onSubmit(inputValue)
 		setInputValue({term:'', description:''})
-		console.log(inputValue)
 		event.preventDefault();
 	}
 	return(
