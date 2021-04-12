@@ -3,12 +3,10 @@ const mongoose = require("mongoose");
 const flashcardItemSchema = new mongoose.Schema({
 	term: {
 		type:String,
-		required: true,
 		min:1
 	},
 	description: {
 		type:String,
-		required:true,
 		min:1
 	}
 });

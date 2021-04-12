@@ -4,15 +4,11 @@ export default function ContentFlashcard(props){
 	return(
 		<>
 			<div>
-				{contents.map((content)=>{
+				{contents.map((content, index)=>{
 					return(
-						<div style={{display:'flex', flexDirection:'row'}}>
-							<div contenteditable="true">
-								{content.term} - 
-							</div>
-							<div contenteditable="true">
-								{content.description}
-							</div>
+						<div key={index} style={{display:'flex', flexDirection:'row'}}>
+							<input onChange={props.onChange} data-index={index} value={content.term} name='term'></input>
+							<input onChange={props.onChange} data-index={index} value={content.description} name='description'></input>
 						</div>
 					)
 				})}
