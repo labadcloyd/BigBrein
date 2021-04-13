@@ -1,7 +1,6 @@
 import {useState} from 'react'
 
 export default function CreateFlashcard(props){
-	const items = props.items
 	const [inputValue, setInputValue] = useState({});
 	function handleChange(event){
 		const {name, value} = event.target

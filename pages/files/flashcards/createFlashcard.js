@@ -1,42 +1,44 @@
 import { useState } from "react";
 import CreateFlashcard from '../../../components/flashcards/createFlashcard'
-import EditableContentFlashcard from "../../../components/flashcards/editableCcontentFlashcard";
+import EditableContentFlashcard from "../../../components/flashcards/editableContentFlashcard";
 import axios from "axios";
 
 export default function CreateFlashcardPage(){
-	// all the flashcards
+	/* array of all flashcards */
 	const [flashcardValues, setFlashcardValues] = useState([]);
-	// title of flashcards
-	const [flashcardName, setName] = useState();
+	/* title of flashcards */
+	const [flashcardTitle, setName] = useState();
 
 	function getValue(inputValue){
 		setFlashcardValues((prevValue)=>{
 			return[...prevValue, inputValue]
 		})
 	}
-	async function submitData(){
+	/* sending post request to api */
+	async function postData(){
 		console.log(flashcardValues[0].name)
-		await axios.post('/api/flashcard', {title: flashcardName, flashcards:flashcardValues})
+		await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues})
 		.then((res)=>{console.log(res.data.message); setName(''); setFlashcardValues([])})
 		.catch((err)=>{console.log(err);})
 	}
+	/* changing or adding flashcardSet name */
 	function flashcardNameChange(event){
 		setName(event.target.value)
 	}
-	function handleChange(inputValue, inputIndex, inputName){
+	function changeFlashcardData(inputValue, inputIndex, inputName){
 		const newFlashcardSet = [...flashcardValues]
-		// here we look for the object with the index of event index and name of event name	and change its value
-		if(inputValue[inputName]){
-			newFlashcardSet[inputIndex][inputName] = inputValue[inputName];
+		/* here we look for the object with the index of event index and name of event name	and change its value */
+		if(inputValue){
+			newFlashcardSet[inputIndex][inputName] = inputValue;
 			setFlashcardValues(newFlashcardSet)
 		}
 	}
 	return(
 		<>
-			<EditableContentFlashcard onChange={handleChange} contents={flashcardValues}/>
+			<EditableContentFlashcard onChange={changeFlashcardData} contents={flashcardValues}/>
 			<CreateFlashcard onSubmit={getValue}/>
-			<input placeholder='Name of Flashcard Set' value={flashcardName} onChange={flashcardNameChange} />
-			<button onClick={submitData}>Create FLashcard Set</button>
+			<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} />
+			<button onClick={postData}>Save FLashcard Set</button>
 		</>
 	)
 }
