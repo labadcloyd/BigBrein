@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CreateFlashcard from '../../../components/flashcards/createFlashcard'
-import ContentFlashcard from "../../../components/flashcards/contentFlashcard";
+import EditableContentFlashcard from "../../../components/flashcards/editableCcontentFlashcard";
 import axios from "axios";
 
 export default function CreateFlashcardPage(){
@@ -23,18 +23,17 @@ export default function CreateFlashcardPage(){
 	function flashcardNameChange(event){
 		setName(event.target.value)
 	}
-	function handleChange(event){
-		const {value, name, dataset} = event.target
-		const index = dataset.index
+	function handleChange(inputValue, inputIndex, inputName){
 		const newFlashcardSet = [...flashcardValues]
 		// here we look for the object with the index of event index and name of event name	and change its value
-		newFlashcardSet[index][name] = value;
-		console.log(newFlashcardSet)
-		setFlashcardValues(newFlashcardSet)
+		if(inputValue[inputName]){
+			newFlashcardSet[inputIndex][inputName] = inputValue[inputName];
+			setFlashcardValues(newFlashcardSet)
+		}
 	}
 	return(
 		<>
-			<ContentFlashcard onChange={handleChange} contents={flashcardValues}/>
+			<EditableContentFlashcard onChange={handleChange} contents={flashcardValues}/>
 			<CreateFlashcard onSubmit={getValue}/>
 			<input placeholder='Name of Flashcard Set' value={flashcardName} onChange={flashcardNameChange} />
 			<button onClick={submitData}>Create FLashcard Set</button>

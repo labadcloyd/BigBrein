@@ -2,7 +2,6 @@ import {FlashcardItem, FlashcardSet} from '../../models/flashcardmodel'
 
 export default async function handler(req, res){
 	const {title, flashcards} = req.body
-	console.log(title, flashcards)
 	const createdFlashcardItems = flashcards.map((item)=>{
 		return new FlashcardItem({
 			term:item.term, 
