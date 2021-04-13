@@ -25,6 +25,10 @@ export default function EditableContentFlashcard(props){
 			props.onChange(inputValue, inputIndex, inputName)
 		}
 	}
+	/* a props function is called with index as the parameter to delete a specific flashcard*/ 
+	function handleDelete(index){
+		props.handleDelete(index)
+	}
 	return(
 		<>
 			<div>
@@ -51,6 +55,7 @@ export default function EditableContentFlashcard(props){
 								onBlur={submitData}>
 									{content.description}
 							</div>
+							<button onClick={()=>{handleDelete(index)}}>Delete</button>
 						</div>
 					)
 				})}

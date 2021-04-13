@@ -27,15 +27,23 @@ export default function CreateFlashcardPage(){
 	}
 	function changeFlashcardData(inputValue, inputIndex, inputName){
 		const newFlashcardSet = [...flashcardValues]
-		/* here we look for the object with the index of event index and name of event name	and change its value */
+		/* here we look for the object with the index of dataset's index and name of dataset's name	and change its value */
 		if(inputValue){
 			newFlashcardSet[inputIndex][inputName] = inputValue;
 			setFlashcardValues(newFlashcardSet)
 		}
 	}
+	/* deleting the flashcard using its index */
+	function deleteFlashcard(flashcardIndex){
+		setFlashcardValues((prevFlashcards) => {
+			return prevFlashcards.filter((prevFlashcards, index) => {
+			  return index !== flashcardIndex;
+			});
+		});
+	}
 	return(
 		<>
-			<EditableContentFlashcard onChange={changeFlashcardData} contents={flashcardValues}/>
+			<EditableContentFlashcard onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
 			<CreateFlashcard onSubmit={getValue}/>
 			<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} />
 			<button onClick={postData}>Save FLashcard Set</button>
