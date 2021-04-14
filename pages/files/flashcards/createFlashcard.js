@@ -42,11 +42,14 @@ export default function CreateFlashcardPage(){
 		});
 	}
 	return(
-		<>
+		<>	
+			<div>
+				<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxlength="50" required />
+				<button onClick={postData}>Save FLashcard Set</button>
+			</div>
 			<EditableContentFlashcard onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
 			<CreateFlashcard onSubmit={getValue}/>
-			<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} />
-			<button onClick={postData}>Save FLashcard Set</button>
+			
 		</>
 	)
 }
