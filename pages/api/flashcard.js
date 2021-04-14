@@ -1,6 +1,11 @@
 import {FlashcardItem, FlashcardSet} from '../../models/flashcardmodel'
 
 export default async function handler(req, res){
+	if(req.method==='GET'){
+		console.log(req.query)
+		return res.status(201).json({message:'Successfully added flashcard'})
+	}
+		
 	if(req.method==='POST'){
 		const {title, flashcards} = req.body
 		/* validation: if they dont input a title or flashcard */
