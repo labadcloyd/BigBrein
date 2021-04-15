@@ -8,6 +8,7 @@ const flashcardSetSchema = new mongoose.Schema({
 		required:true,
 	},
 	flashcards:[{term: String, description: String}],
+	type:'flashcard'
 })
 //it is very important to structure the model like this as Nextjs has a bug that creates the model again every render if the model is not done like this
 const FlashcardSet = mongoose.models.FlashcardSet || mongoose.model('FlashcardSet', flashcardSetSchema )
