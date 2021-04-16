@@ -1,18 +1,21 @@
 import Head from 'next/head'
-import {useSession} from 'next-auth/client'
-import {useRouter} from 'next/router'
-//this is the dashboard, where all the study files will be found
-export default function Home() {
-  const router = useRouter();
-  const [session, loading] = useSession();
-  console.log(session, loading)
-  if(!session){
-    console.log('no session')
-  }
+import {getSession} from 'next-auth/client'
+//This is the homepage, users can search for notes, flashcards and quizes
+export default function Home(props) {
+	const {session} = props
+	console.log(session)
+	return (
+		<div>
+		<h1>Welcome to Acadden</h1>
+		</div>
+	)
+}
+export async function getServerSideProps(context){
+	const session = await getSession({req:context.req})
+	return{
+		props:{
+			session:session
+		}
+	}
 
-  return (
-    <div>
-      <h1>Welcome to the dashboard</h1>
-    </div>
-  )
 }

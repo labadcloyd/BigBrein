@@ -2,8 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import classes from './auth-form.module.css';
 import axios from 'axios';
 import {signIn} from 'next-auth/client';
+import {useRouter} from 'next/router';
+import {getSession} from 'next-auth/client'
 
 function AuthForm() {
+	const router = useRouter();
 	/* for switching to login or to signup */
 	const [isLogin, setIsLogin] = useState(true);
 	const [credentials, setCredentials] = useState({})
@@ -85,6 +88,9 @@ function AuthForm() {
 				username: credentials.username,
 				password: credentials.password
 			})
+			if(!result.error){
+				router.push('/')
+			}
 			if(result.error){
 				setUsernameError(true)
 				setErrorMessage(result.error)
@@ -153,3 +159,15 @@ function AuthForm() {
 }
 
 export default AuthForm;
+
+export async function getServerSideProps(context){
+	const session = await getSession({req:context.req})
+
+	if(session){
+		return{
+			redirect:{
+				destination: '/dashboard'
+			}
+		}
+	}
+}
