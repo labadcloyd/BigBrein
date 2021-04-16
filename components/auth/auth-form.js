@@ -7,15 +7,15 @@ function AuthForm() {
 	const [isLogin, setIsLogin] = useState(true);
 	const [credentials, setCredentials] = useState({})
 	const [confirmPassword, setConfirmation] = useState()
-	const [isConfirmationError, setConfirmationError] = useState()
+	const [isConfirmationError, setConfirmationError] = useState(false)
 	/* for showing any errors when submitting data */
-	const [isError, setError] = useState(false);
+	const [isUsernameError, setUsernameError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
-	
-	/* for showing any errors when submitting data */
+	const [isRegisterError, setRegisterError] = useState(false)
+	/* for handling input change */
 	async function handleChange(event){
 		const {id, value} = event.target
-		setError('')
+		setUsernameError('')
 		setCredentials((prevInput)=>{
 			return({
 				...prevInput,
@@ -29,6 +29,30 @@ function AuthForm() {
 		setConfirmation(value)
 		setConfirmationError(false)
 	}
+	useEffect(()=>{
+		if(confirmPassword !== credentials.password){
+			setRegisterError(true)
+			return setConfirmationError(true)
+		} else{
+			setRegisterError(false)
+			return setConfirmationError(false)
+		}
+	},[confirmPassword])
+	/* for validating username */
+	useEffect(()=>{
+		const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
+		/* Validating only when on registration */
+		if(!isLogin){
+			if (regexUserName.test(credentials.username)) {
+				setRegisterError(false)
+				return setUsernameError(false)
+			} else {
+				setUsernameError(true)
+				setErrorMessage('Invalid Username: Special characters are not allowed')
+				setRegisterError(true)
+			}
+		}
+	},[credentials.username])
 	/* function for submiting user credentials */
 	async function createUser(username, password){
 		try{
@@ -48,19 +72,21 @@ function AuthForm() {
 		}
 		/* For Signup */
 		else if (!isLogin){
-			if(confirmPassword !== credentials.password){
-				return setConfirmationError(true)
-			} else{
-				setConfirmationError(false)
+			if(errorMessage===true || isConfirmationError===true){
+				return
 			}
 			const response = await createUser(credentials.username, credentials.password)
 			const data = await response
 			if(data.status===422){
-				setError(true)
+				setUsernameError(true)
 				setErrorMessage(data.data.message)
 			}
 		}
   	}
+	/* for clearing data when switching from login to signup vice verse */
+	useEffect(()=>{
+		setCredentials({username:'', password:''})
+	},[isLogin])
 	function switchAuthModeHandler() {
 		setIsLogin((prevState) => !prevState);
 	}
@@ -70,7 +96,7 @@ function AuthForm() {
 			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
 			<form onSubmit={submitHandler}>
 				<div className={classes.control}>
-					<div style={{color:'red'}}> {isError ? [errorMessage] : ''}</div>
+					<div style={{color:'red'}}> {isUsernameError ? [errorMessage] : ''}</div>
 					<label htmlFor='username'>Your Username</label>
 					<input type='text' id='username' required value={credentials.username} onChange={handleChange} />
 				</div>
@@ -84,7 +110,10 @@ function AuthForm() {
 					<input type='password' id='confirmPassword' required value={confirmPassword} onChange={handleConfirmation}/>
 				</div>
 				<div className={classes.actions}>
-					<button>{isLogin ? 'Login' : 'Create Account'}</button>
+					<button 
+						disabled={isRegisterError? 'true' : 'false'} 
+						style={{backgroundColor:isRegisterError? '#4a4a4a': '', color:isRegisterError? 'black': '', cursor:isRegisterError? 'not-allowed': 'pointer'}}>
+							{isLogin ? 'Login' : 'Create Account'}</button>
 					<button
 						type='button'
 						className={classes.toggle}
