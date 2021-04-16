@@ -19,7 +19,7 @@ export default NextAuth({
           if(!isValid){
             throw new Error('Incorred password or account');
           }
-          return{username: user.username}
+          return Promise.resolve({name:user.username})
         }
     }),
     Providers.Google({
