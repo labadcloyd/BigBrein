@@ -1,4 +1,4 @@
-import {FlashcardItem, FlashcardSet} from '../../models/flashcardmodel'
+import {FlashcardSet} from '../../models/flashcardModel'
 
 export default async function handler(req, res){
 	if(req.method==='GET'){
@@ -21,7 +21,7 @@ export default async function handler(req, res){
 			const createdFlashcardSet = new FlashcardSet({
 				title:title, 
 				flashcards:plainDataFlashcards,
-				require:true
+				fileType:'flashcard'
 			})
 			try{
 				await FlashcardSet.insertMany(createdFlashcardSet)

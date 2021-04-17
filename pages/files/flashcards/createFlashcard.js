@@ -2,8 +2,11 @@ import { useState } from "react";
 import CreateFlashcard from '../../../components/flashcards/createFlashcard'
 import EditableContentFlashcard from "../../../components/flashcards/editableContentFlashcard";
 import axios from "axios";
+import {getSession} from 'next-auth/client'
 
-export default function CreateFlashcardPage(){
+export default function CreateFlashcardPage(props){
+	/* getting the user information from the session props */
+	const {session} = props
 	/* array of all flashcards */
 	const [flashcardValues, setFlashcardValues] = useState([]);
 	/* title of flashcards */
@@ -52,4 +55,20 @@ export default function CreateFlashcardPage(){
 			
 		</>
 	)
+}
+export async function getServerSideProps(context){
+	const session = await getSession({req:context.req})
+	console.log(session)
+	if(!session){
+		return{
+			redirect:{
+				destination: '/auth'
+			}
+		}
+	}
+	return{
+		props:{
+			session:session
+		}
+	}
 }
