@@ -89,7 +89,7 @@ function AuthForm() {
 				password: credentials.password
 			})
 			if(!result.error){
-				router.push('/')
+				router.push('/dashboard')
 			}
 			if(result.error){
 				setUsernameError(true)
@@ -98,6 +98,7 @@ function AuthForm() {
 		}
 		/* submitting Signup */
 		else if (!isLogin){
+			/* not allowing users to sign up if there are errors*/
 			if(errorMessage===true || isConfirmationError===true){
 				return
 			}
@@ -106,6 +107,19 @@ function AuthForm() {
 			if(data.status===422){
 				setUsernameError(true)
 				setErrorMessage(data.data.message)
+			}
+			/* Loggin the user in once finished signing up */
+			const result = await signIn('credentials', {
+				redirect: false,
+				username: credentials.username,
+				password: credentials.password
+			})
+			if(!result.error){
+				router.push('/dashboard')
+			}
+			if(result.error){
+				setUsernameError(true)
+				setErrorMessage(result.error)
 			}
 		}
   	}

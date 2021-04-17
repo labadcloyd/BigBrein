@@ -6,7 +6,6 @@ export default async function handler(req, res){
 		const data = req.body.username
 		const {username, password} = data
 		const regexUserName = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
-		console.log(data)
 		/* basic validation for inputs */
 		if(!username ||!password){
 			return res.status(422).json({message:'Invalid Input'})

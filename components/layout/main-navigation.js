@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/client';
-
+import {useRouter, userRouter} from 'next/router'
 import classes from './main-navigation.module.css';
 
 export default function MainNavigation() {
+  const router = useRouter();
   const [session, loading] = useSession();
 
   function logoutHandler() {
     signOut();
+    return router.push('/auth')
   }
 
   return (

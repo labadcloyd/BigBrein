@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	folders:[{_id:String, title:String}]
+	folders:[{title:String}]
 })
 //it is very important to structure the model like this as Nextjs has a bug that creates the model again every render if the model is not done like this
 const User = mongoose.models.User || mongoose.model('User', userSchema )
