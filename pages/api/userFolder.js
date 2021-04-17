@@ -14,7 +14,7 @@ export default async function handler(req, res){
 			return res.status(422).send(`Invalid Input: Please try again`);
 		} else if(folderTitle && username){
 			try{
-				const folder = await new Folder({title:folderTitle})
+				const folder = await new Folder({title:folderTitle, files:[]})
 				/* when trying to push documents to array, make sure to add square bracket on the data */
 				const response = await User.findOneAndUpdate({username: username}, {$push: {folders: [folder]} })
 				return res.status(201).json({message:'Successfully added folder', folderID: folder._id})

@@ -5,14 +5,13 @@ import {useRouter} from 'next/router'
 export default function Dashboard(props){
 	const router = useRouter();
 	const {session, userFolders} = props;
-	console.log(userFolders)
 	const [folderTitle, setFolderTitle] = useState('');
-	/* for showing the api response */
+	/* for showing the api response when adding a new folder*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	/* controlling the folder title input */
 	function handleChange(event){
-		/* clearing any response */
+		/* clearing any response when adding a new folder*/
 		setResponseAvailable(false)
 		setFolderTitle(event.target.value)
 	}
@@ -26,19 +25,19 @@ export default function Dashboard(props){
 			setResponse(response.data.message)
 		}
 		if(response.status === 201){
+			setFolderTitle('')
 			const folderID = response.data.folderID
-			router.push(`/${folderID}`)
+			router.push(`/files/${folderID}`)
 		}
 	}
 	return(
 		<div>
-			<h1>Welcome to the dashboard</h1>
 			{isApiResponse && (<h2>{apiResponse}</h2>)}
 			<form onSubmit={addFolder}>
 				{userFolders.map((folder, index)=>{
 					return(
 						<div key={index}>
-							<h3>{folder.title}</h3>
+							<a href={`/files/${folder._id}`}>{folder.title}</a>
 						</div>
 					)
 				})}
