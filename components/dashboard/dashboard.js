@@ -15,10 +15,28 @@ export default function Dashboard(props){
 		setResponseAvailable(false)
 		setFolderTitle(event.target.value)
 	}
-	async function addFolder(event){
+	/* function that makes the post request */
+	async function submitFolder(data){
+		try{
+			const username = session.user.name
+			const response = await axios.post('/api/userFolder', {folderTitle:folderTitle, username: username})
+			return response
+		}catch(error){
+			/* You can only retrieve the json of the res error through adding .response at the end */
+			return error.response
+		}		
+	}
+	/* handling submit request */
+	async function submitHandler(event){
 		event.preventDefault()
-		const username = session.user.name
-		const response = await axios.post('/api/userFolder', {folderTitle:folderTitle, username: username})
+		/* checking if input is all just spaces */
+		if(folderTitle.trim() === ''){
+			setFolderTitle('')
+			return
+		}
+		/* calling the function that sends the post request */
+		const response = await submitFolder()
+		/* handling the response */
 		if(response.status !== 201){
 			setResponseAvailable(true)
 			setFolderTitle('')
@@ -33,7 +51,7 @@ export default function Dashboard(props){
 	return(
 		<div>
 			{isApiResponse && (<h2>{apiResponse}</h2>)}
-			<form onSubmit={addFolder}>
+			<form onSubmit={submitHandler}>
 				{userFolders.map((folder, index)=>{
 					return(
 						<div key={index}>
@@ -42,7 +60,7 @@ export default function Dashboard(props){
 					)
 				})}
 				<div>
-					<input onChange={handleChange} value={folderTitle} maxLength="50" required />
+					<input onChange={handleChange} value={folderTitle} maxLength='50' required />
 					<button type='submit'>Add Folder</button>
 				</div>
 			</form>

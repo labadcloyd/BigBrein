@@ -22,7 +22,8 @@ function AuthForm() {
 		setCredentials((prevInput)=>{
 			return({
 				...prevInput,
-				[name]:value
+				/* making sure they dont add spaces*/
+				[name]:value.trim()
 			})
 		})
 	}
@@ -58,13 +59,15 @@ function AuthForm() {
 		}
 		/* Validating only when on registration */
 		if(!isLogin){
-			if (regexUserName.test(credentials.username)) {
-				setRegisterError(false)
-				return setUsernameError(false)
-			} else {
-				setUsernameError(true)
-				setErrorMessage('Invalid Username: Special characters are not allowed')
-				setRegisterError(true)
+			if(credentials.username.length > 1){
+				if (regexUserName.test(credentials.username)) {
+					setRegisterError(false)
+					return setUsernameError(false)
+				} else {
+					setUsernameError(true)
+					setErrorMessage('Invalid Username: Special characters are not allowed')
+					setRegisterError(true)
+				}
 			}
 		}
 	},[credentials.username])
@@ -103,23 +106,24 @@ function AuthForm() {
 				return
 			}
 			const response = await createUser(credentials)
-			const data = await response
-			if(data.status===422){
+			if(response.status===422 || response.status===500){
 				setUsernameError(true)
-				setErrorMessage(data.data.message)
+				return setErrorMessage(response.data.message)
 			}
-			/* Loggin the user in once finished signing up */
-			const result = await signIn('credentials', {
-				redirect: false,
-				username: credentials.username,
-				password: credentials.password
-			})
-			if(!result.error){
-				router.push('/dashboard')
-			}
-			if(result.error){
-				setUsernameError(true)
-				setErrorMessage(result.error)
+			/* Loggin the user in once finished signing up successfuly*/
+			if(response.status===201){
+				const result = await signIn('credentials', {
+					redirect: false,
+					username: credentials.username,
+					password: credentials.password
+				})
+				if(!result.error){
+					router.push('/dashboard')
+				}
+				if(result.error){
+					setUsernameError(true)
+					setErrorMessage(result.error)
+				}
 			}
 		}
   	}
@@ -142,7 +146,7 @@ function AuthForm() {
 				<div className={classes.control}>
 					<div style={{color:'red'}}> {isUsernameError ? [errorMessage] : ''}</div>
 					<label htmlFor='username'>Your Username</label>
-					<input type='text' name='username' required value={credentials.username} onChange={handleChange} />
+					<input type='text' name='username' required value={credentials.username} onChange={handleChange} maxLength='50' />
 				</div>
 				<div className={classes.control}>
 					<label htmlFor='password'>Your Password</label>

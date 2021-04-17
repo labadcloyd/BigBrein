@@ -9,7 +9,7 @@ export default async function handler(req, res){
 	if(req.method==='POST'){
 		const {title, flashcards} = req.body
 		/* validation: if they dont input a title or flashcard */
-		if(!title || !flashcards){
+		if(!title || !flashcards || title.length>50){
 			return res.status(422).send(`Invalid Input: Please try again`);
 		}
 		else if(title.length > 30){

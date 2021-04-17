@@ -16,7 +16,7 @@ export default async function handler(req, res){
 		}
 		/* basic validation for username */
 		if (!regexUserName.test(username)){
-			return res.status(422).json({message:'Invalid Input: uesrname has invalid characters'})
+			return res.status(422).json({message:'Invalid Input: username has invalid characters'})
 		}
 		/* checking for duplicate username */
 		const duplicateUser = await User.findOne({username:username},(err, duplicateUser)=>{

@@ -10,8 +10,8 @@ export default async function handler(req, res){
 		
 	if(req.method==='POST'){
 		const {folderTitle, username} = req.body
-		if(!folderTitle){
-			return res.status(422).send(`Invalid Input: Please try again`);
+		if(!folderTitle || folderTitle.length > 50){
+			return res.status(422).json({message:`Invalid Input or Title is Too Long`});
 		} else if(folderTitle && username){
 			try{
 				const folder = await new Folder({title:folderTitle, files:[]})
