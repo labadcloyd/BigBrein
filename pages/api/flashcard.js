@@ -28,7 +28,7 @@ export default async function handler(req, res){
 				fileType:'flashcard'
 			})
 			try{
-				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  type:'Flashcard', title:title} } })
+				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  fileType:'Flashcard', title:title} } })
 				await FlashcardSet.insertMany(createdFlashcardSet)
 				return res.status(201).json({message:'Successfully added flashcard', flashcardID:createdFlashcardSet._id})
 			}

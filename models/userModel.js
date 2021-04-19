@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 			title:String, 
 			files:[{
 				fileID: String,  
-				type: String,
+				fileType: String,
 				title: String
 			}]
 		}
