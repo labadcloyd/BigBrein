@@ -1,4 +1,4 @@
-import Dashboard from '../../components/dashboard/dashboard'
+import Sidebar from '../../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
 import {User} from '../../models/userModel'
 import Files from '../../components/dashboard/files'
@@ -8,8 +8,8 @@ export default function FolderPage(props) {
 	const {session, userFolders, currentFolder, folderFiles} = props;
 	return (
 		<>
-			<Dashboard session={session} userFolders={userFolders} />
-			<Files currentFolder={currentFolder} folderFiles={folderFiles}></Files>
+			<Sidebar session={session} userFolders={userFolders} />
+			<Files session={session} currentFolder={currentFolder} folderFiles={folderFiles}></Files>
 		</>
 	)
 }
@@ -29,14 +29,13 @@ export async function getServerSideProps(context){
 	const username= session.user.name
 	/*we get the user and their folders and their files*/
 	const user = await User.findOne({username:username})
-	/* data needs to be serialized by stringifying and parsing*/
+	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
 	const currentFolderUnserialized = folders.find((folder, index) => {
 		return folder._id === folderID;
 	  });
 	const currentFolder = JSON.parse(JSON.stringify(currentFolderUnserialized))
 	const files = JSON.parse(JSON.stringify(currentFolder.files))
-	console.log(currentFolder)
 	return{
 		props:{
 			session:session,

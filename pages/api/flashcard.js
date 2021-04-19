@@ -1,13 +1,13 @@
 import {FlashcardSet} from '../../models/flashcardModel'
+import {User} from '../../models/userModel'
 
 export default async function handler(req, res){
 	if(req.method==='GET'){
-		console.log(req.query)
 		return res.status(201).json({message:'Successfully added flashcard'})
 	}
 		
 	if(req.method==='POST'){
-		const {title, flashcards} = req.body
+		const {title, flashcards, username, folderID} = req.body
 		/* validation: if they dont input a title or flashcard */
 		if(!title || !flashcards || title.length>50){
 			return res.status(422).send(`Invalid Input: Please try again`);
@@ -24,8 +24,9 @@ export default async function handler(req, res){
 				fileType:'flashcard'
 			})
 			try{
+				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  type:'Flashcard', title:title} } })
 				await FlashcardSet.insertMany(createdFlashcardSet)
-				return res.status(201).json({message:'Successfully added flashcard'})
+				return res.status(201).json({message:'Successfully added flashcard', flashcardID:createdFlashcardSet._id})
 			}
 			catch (error) {
 				console.error(error);

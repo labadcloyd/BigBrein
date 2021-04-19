@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 
-export default function Dashboard(props){
+export default function Sidebar(props){
 	const router = useRouter();
 	const {session, userFolders} = props;
 	const [folderTitle, setFolderTitle] = useState('');
