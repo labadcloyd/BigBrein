@@ -1,16 +1,21 @@
 import {FlashcardSet} from '../../models/flashcardModel'
 import {User} from '../../models/userModel'
 import {Folder} from '../../models/folderModel'
+import {getSession} from 'next-auth/client'
 
 export default async function handler(req, res){
+	const session = await getSession({req:req})
 	if(req.method==='GET'){
 		// console.log(req.query)
 		// return res.status(201).json({message:'Successfully added flashcard'})
 	}
 		
 	if(req.method==='POST'){
+		if(!session){
+			return res.status(401).json({message:`Unauthorized request`});
+		}
 		const {folderTitle, username} = req.body
-		if(!folderTitle || folderTitle.length > 50){
+		if(!username || !folderTitle || folderTitle.length > 50){
 			return res.status(422).json({message:`Invalid Input or Title is Too Long`});
 		} else if(folderTitle && username){
 			try{
