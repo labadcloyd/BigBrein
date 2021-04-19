@@ -1,6 +1,6 @@
 import { useState } from "react";
-import CreateFlashcard from '../../../components/flashcards/createFlashcard'
-import EditableContentFlashcard from "../../../components/flashcards/editableContentFlashcard";
+import CreateFlashcard from '../../../components/flashcard/createFlashcard'
+import EditableContentFlashcard from "../../../components/flashcard/editableContentFlashcard";
 import axios from "axios";
 import {getSession} from 'next-auth/client'
 
@@ -58,7 +58,6 @@ export default function CreateFlashcardPage(props){
 }
 export async function getServerSideProps(context){
 	const session = await getSession({req:context.req})
-	console.log(session)
 	if(!session){
 		return{
 			redirect:{

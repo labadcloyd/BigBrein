@@ -1,5 +1,5 @@
 import {FlashcardSet} from '../../../models/flashcardmodel'
-import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
+import ContentFlashcard from '../../../components/flashcard/contentFlashcard'
 
 export default function EventID(props){
 	const {title, flashcards} = props
