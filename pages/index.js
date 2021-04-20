@@ -4,9 +4,8 @@ import Style from '../styles/index.module.css'
 import Image from 'next/image'
 import {useRouter} from 'next/router'
 //This is the homepage, users can search for notes, flashcards and quizes
-export default function Home(props) {
+export default function Home() {
 	const router = useRouter()
-	const {session} = props
 	function handleClick(){
 		router.push('/dashboard')
 	}
@@ -20,7 +19,7 @@ export default function Home(props) {
 						<button onClick={handleClick}>Study Now</button>
 					</div>
 					<div className={Style.ImageContainer}>
-						<Image src='/images/study.png' width={900} height={750}></Image>
+						<Image src='/images/study.png' width={1000} height={820}></Image>
 					</div>
 				</div>
 			</div>
@@ -29,9 +28,17 @@ export default function Home(props) {
 }
 export async function getServerSideProps(context){
 	const session = await getSession({req:context.req})
+	if(session){
+		return{
+			redirect:{
+				destination: '/dashboard'
+			}
+		}
+	}
+	if(!session)
 	return{
 		props:{
-			session:session
+			message:'No session'
 		}
 	}
 
