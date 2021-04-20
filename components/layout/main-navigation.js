@@ -13,36 +13,38 @@ export default function MainNavigation() {
   }
 
   return (
-    <header className={classes.header}>
-      <Link href='/'>
-        <a>
-          <div className={classes.logo}>Acadden</div>
-        </a>
-      </Link>
-      <nav>
-        <ul>
-          {!session && !loading && (
-            <li>
-              <Link href='/auth'>Login</Link>
-            </li>
-          )}
-          {session && (
-            <li>
-              <Link href='/dashboard'>Dashboard</Link>
-            </li>
-          )}
-          {session && (
-            <li>
-              <Link href='/profile'>Profile</Link>
-            </li>
-          )}
-          {session && (
-            <li>
-              <button onClick={logoutHandler}>Logout</button>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </header>
+    <div className={classes.headerContainer}>
+      <header className={classes.header}>
+        <Link href='/'>
+          <a>
+            <div className={classes.logo}>AcadDen</div>
+          </a>
+        </Link>
+        <nav>
+          <ul>
+            {!session && !loading && (
+              <li>
+                <Link href='/auth'>Login</Link>
+              </li>
+            )}
+            {session && (
+              <li>
+                <Link href='/dashboard'>Dashboard</Link>
+              </li>
+            )}
+            {session && (
+              <li>
+                <Link href='/profile'>{session.user.name}</Link>
+              </li>
+            )}
+            {session && (
+              <li>
+                <button onClick={logoutHandler}>Logout</button>
+              </li>
+            )}
+          </ul>
+        </nav>
+      </header>
+    </div>
   );
 }
