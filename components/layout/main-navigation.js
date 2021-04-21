@@ -23,10 +23,10 @@ export default function MainNavigation() {
         </Link>
         <nav>
           <ul>
-            {!session && !loading && (
-              <li>
-                <Link href='/auth'>Login</Link>
-              </li>
+            {!session && !loading && ( 
+              <Link href='/auth'>
+                <li className={classes.loginButton}>Login</li>
+              </Link> 
             )}
             {session && (
               <li>

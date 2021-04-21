@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
-
+import Style from './sidebar.module.css'
+import {AddCircle, Folder} from '@material-ui/icons'
 export default function Sidebar(props){
 	const router = useRouter();
 	const {session, userFolders} = props;
@@ -49,19 +50,19 @@ export default function Sidebar(props){
 		}
 	}
 	return(
-		<div>
-			{isApiResponse && (<h2>{apiResponse}</h2>)}
-			<form onSubmit={submitHandler}>
+		<div className={Style.sidebarWrapper}>
+			<div className={Style.sidebarContainer}>
+				{isApiResponse && (<h2>{apiResponse}</h2>)}
 				{userFolders.map((folder, index)=>{
 					return(
-						<div key={index}>
-							<a href={`/files/${folder._id}`}>{folder.title}</a>
-						</div>
+						<a key={index} className={Style.folderContainer} href={`/files/${folder._id}`}><Folder/> {folder.title}</a>
 					)
 				})}
-				<div>
-					<input onChange={handleChange} value={folderTitle} maxLength='50' required />
-					<button type='submit'>Add Folder</button>
+			</div>
+			<form onSubmit={submitHandler}>
+				<div className={Style.addFolderContainer}>
+					<input onChange={handleChange} value={folderTitle} placeholder='Add Folder' maxLength='50' required />
+					<button type='submit'><AddCircle/></button>
 				</div>
 			</form>
 		</div>

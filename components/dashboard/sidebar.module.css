@@ -1,0 +1,59 @@
+.sidebarWrapper{
+	margin-top: 80px;
+	color: white;
+	left: 0;
+	height: 80vh;
+	max-width: 350px;
+	width: 100%;
+	background-color: #020014;
+	padding: 0px 20px 20px 20px;
+}
+.sidebarContainer{
+	margin-top: 20px;
+	padding: 20px 20px 20px 0px;
+	height:75vh;
+	overflow-y: auto;
+}
+.folderContainer{
+	padding: 15px;
+	font-size: 1.1rem;
+	border-radius: 10px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin-bottom: 10px;
+	overflow: hidden;
+	gap: 10px;
+}
+.folderContainer:hover{
+	background-color: #101a35;
+}
+
+.addFolderContainer{
+	margin: 30px 0px 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #101a35;
+	border-radius: 10px;
+	padding: 0px 10px 0px 10px
+}
+.addFolderContainer input{
+	border: none;
+	padding: 10px;
+	color: white;
+	background-color: #101a35;
+	font-size: 1.1rem;
+}
+.addFolderContainer input:focus{
+	outline:none;
+	border: none;
+}
+.addFolderContainer button{
+	border: none;
+	padding: 10px;
+	background-color: #101a35;
+	color: white;
+	font-size: 1.1rem;
+	cursor: pointer;
+}
