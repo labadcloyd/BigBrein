@@ -10,7 +10,10 @@ export default function Home() {
 		router.push('/dashboard')
 	}
 	return (
-		<div>
+		<>
+			<Head>
+				<title>AcadDen - Your Best Study App</title>
+			</Head>
 			<div className={Style.HeaderContainer}>
 				<div className={Style.MainContainer}>
 					<div className={Style.TitleContainer}>
@@ -18,12 +21,9 @@ export default function Home() {
 						<h2>The last study app you'll ever need. Easily create flashcards, notes, and practice quizzes.</h2>
 						<button onClick={handleClick}>Study Now</button>
 					</div>
-					<div className={Style.ImageContainer}>
-						<Image src='/images/study.png' width={1000} height={820}></Image>
-					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 export async function getServerSideProps(context){
