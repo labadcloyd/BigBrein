@@ -1,11 +1,22 @@
 import Sidebar from '../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
 import {User} from '../models/userModel'
+import Style from './dashboard.module.css'
 
 //this is the dashboard, where all the study files will be found
 export default function DashboardPage(props) {
 	const {session, userFolders} = props;
-	return <Sidebar session={session} userFolders={userFolders} />
+	return (
+		<>
+			<div className={Style.folderWrapper}>
+				<Sidebar session={session} userFolders={userFolders} />
+				<div className={Style.fileWrapper}>
+					<h2>Create or open a folder.</h2>
+					<p>Inside the folder you can start making flashcards, notes, or quiz sets.</p>
+				</div>
+			</div>
+		</>
+	)
 }
 
 export async function getServerSideProps(context){

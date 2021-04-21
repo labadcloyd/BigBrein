@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import Style from './sidebar.module.css'
-import {AddCircle, Folder} from '@material-ui/icons'
+import {AddCircle, Folder, Menu} from '@material-ui/icons'
 export default function Sidebar(props){
 	const router = useRouter();
 	const {session, userFolders} = props;
@@ -49,22 +49,40 @@ export default function Sidebar(props){
 			router.push(`/files/${folderID}`)
 		}
 	}
+
+	/* STYLING PURPOSES ONLY */
+	const [displaySidebar, setDisplaySidebar] = useState(true)
+	function toggleSidebar(){
+		setDisplaySidebar((prevValue)=>{
+			return !prevValue
+		})
+	}
 	return(
-		<div className={Style.sidebarWrapper}>
-			<div className={Style.sidebarContainer}>
-				{isApiResponse && (<h2>{apiResponse}</h2>)}
-				{userFolders.map((folder, index)=>{
-					return(
-						<a key={index} className={Style.folderContainer} href={`/files/${folder._id}`}><Folder/> {folder.title}</a>
-					)
-				})}
-			</div>
-			<form onSubmit={submitHandler}>
-				<div className={Style.addFolderContainer}>
-					<input onChange={handleChange} value={folderTitle} placeholder='Add Folder' maxLength='50' required />
-					<button type='submit'><AddCircle/></button>
+		<>	<button className={Style.hamburger} onClick={toggleSidebar}>
+				<Menu fontSize="large"/>
+			</button>
+			<div className={Style.sidebarWrapper} style={displaySidebar?{}:{display:'none'}}>
+				<div className={Style.sidebarContainerContainer}>
+					<div className={Style.sidebarContainer}>
+						{isApiResponse && (<h2>{apiResponse}</h2>)}
+						{userFolders.map((folder, index)=>{
+							const title = folder.title
+							return(
+								<a key={index} className={Style.folderContainer} href={`/files/${folder._id}`}>
+									<Folder/> 
+									{ title.length>16?<>{title.slice(0,16)+'...'}</>:title}
+									</a>
+							)
+						})}
+					</div>
 				</div>
-			</form>
-		</div>
+				<form onSubmit={submitHandler}>
+					<div className={Style.addFolderContainer}>
+						<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='50' required />
+						<button type='submit'><AddCircle/></button>
+					</div>
+				</form>
+			</div>
+		</>
 	)
 }

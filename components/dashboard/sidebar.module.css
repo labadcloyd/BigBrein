@@ -1,18 +1,32 @@
+.hamburger{
+	background-color: transparent;
+	color: white;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+}
 .sidebarWrapper{
+	position:sticky;
 	margin-top: 80px;
 	color: white;
 	left: 0;
-	height: 80vh;
+	height: 85vh;
 	max-width: 350px;
 	width: 100%;
 	background-color: #020014;
-	padding: 0px 20px 20px 20px;
+	padding: 0px 0px 20px 20px;
 }
 .sidebarContainer{
-	margin-top: 20px;
-	padding: 20px 20px 20px 0px;
-	height:75vh;
+	padding: 0px 20px 0px 0px;
+	height: 70vh;
 	overflow-y: auto;
+}
+.sidebarContainerContainer{
+	padding:20px;
+	border-radius: 10px;
+	background-color: #0c152b;
 }
 .folderContainer{
 	padding: 15px;
@@ -26,7 +40,7 @@
 	gap: 10px;
 }
 .folderContainer:hover{
-	background-color: #101a35;
+	background-color: #294481;
 }
 
 .addFolderContainer{
@@ -34,15 +48,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #101a35;
+	background-color: #19274e;
 	border-radius: 10px;
-	padding: 0px 10px 0px 10px
+	padding: 5px 0px 5px 0px;
 }
 .addFolderContainer input{
 	border: none;
 	padding: 10px;
 	color: white;
-	background-color: #101a35;
+	background-color: #19274e;
 	font-size: 1.1rem;
 }
 .addFolderContainer input:focus{
@@ -52,8 +66,11 @@
 .addFolderContainer button{
 	border: none;
 	padding: 10px;
-	background-color: #101a35;
+	background-color: #19274e;
 	color: white;
 	font-size: 1.1rem;
 	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

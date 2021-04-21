@@ -7,18 +7,17 @@ export default function MainNavigation() {
   const router = useRouter();
   const currentRoute = router.pathname
   const [session, loading] = useSession();
-  console.log(currentRoute)
   function logoutHandler() {
     signOut();
     return router.push('/auth')
   }
 
   return (
-    <div className={classes.headerContainer} style={currentRoute==='/'||currentRoute==='/auth'?{backgroundColor:'transparent'}:{backgroundColor:'#202020'}}>
+    <div className={classes.headerContainer} style={currentRoute==='/'||currentRoute==='/auth'?{backgroundColor:'transparent'}:{backgroundColor:'#001d30'}}>
       <header className={classes.header}>
         <Link href='/'>
           <a>
-            <div className={classes.logo}>AcadDen</div>
+            <div className={classes.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'40px'}:{marginLeft:'0'}}>AcadDen</div>
           </a>
         </Link>
         <nav>
