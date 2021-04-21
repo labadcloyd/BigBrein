@@ -139,40 +139,43 @@ function AuthForm() {
 		setIsLogin((prevState) => !prevState);
 	}
   	return (
-		<section className={classes.auth}>
-			
-			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-			<form onSubmit={submitHandler}>
-				<div className={classes.control}>
-					<div style={{color:'red'}}> {isUsernameError ? [errorMessage] : ''}</div>
-					<label htmlFor='username'>Your Username</label>
-					<input type='text' name='username' required value={credentials.username} onChange={handleChange} maxLength='50' />
-				</div>
-				<div className={classes.control}>
-					<label htmlFor='password'>Your Password</label>
-					<input type='password' name='password' required value={credentials.password} onChange={handleChange} />
-				</div>
-				<div className={classes.control} style={ {display:isLogin ? 'none': 'block'}}>
-					<div style={{color:'red'}}> {isConfirmationError ? 'Password does not match' : ''}</div>
-					<label htmlFor='password'>Confirm Your Password</label>
-					<input type='password' name='confirmPassword' value={confirmPassword} onChange={handleConfirmation}/>
-				</div>
-				<div className={classes.actions}>
-					<button 
-						disabled={isRegisterError} 
-						style={{backgroundColor:isRegisterError? '#4a4a4a': '', color:isRegisterError? 'black': '', cursor:isRegisterError? 'not-allowed': 'pointer'}}>
-							{isLogin ? 'Login' : 'Create Account'}
-					</button>
-					<button
-						type='button'
-						className={classes.toggle}
-						onClick={switchAuthModeHandler}
-					>
-					{isLogin ? 'Create new account' : 'Login with existing account'}
-					</button>
-				</div>
-			</form>
-		</section>
+		<div className={classes.loginWrapper}>
+			<div className={classes.loginContainer}>
+				<section className={classes.auth}>
+					<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+					<form onSubmit={submitHandler}>
+						<div className={classes.control}>
+							<div style={{color:'red'}}> {isUsernameError ? [errorMessage] : ''}</div>
+							<label htmlFor='username'>Your Username</label>
+							<input type='text' name='username' required value={credentials.username} onChange={handleChange} maxLength='50' />
+						</div>
+						<div className={classes.control}>
+							<label htmlFor='password'>Your Password</label>
+							<input type='password' name='password' required value={credentials.password} onChange={handleChange} />
+						</div>
+						<div className={classes.control} style={ {display:isLogin ? 'none': 'block'}}>
+							<div style={{color:'red'}}> {isConfirmationError ? 'Password does not match' : ''}</div>
+							<label htmlFor='password'>Confirm Your Password</label>
+							<input type='password' name='confirmPassword' value={confirmPassword} onChange={handleConfirmation}/>
+						</div>
+						<div className={classes.actions}>
+							<button 
+								disabled={isRegisterError} 
+								style={{backgroundColor:isRegisterError? '#4a4a4a': '', color:isRegisterError? 'black': '', cursor:isRegisterError? 'not-allowed': 'pointer'}}>
+									{isLogin ? 'Login' : 'Create Account'}
+							</button>
+							<button
+								type='button'
+								className={classes.toggle}
+								onClick={switchAuthModeHandler}
+							>
+							{isLogin ? 'Create new account' : 'Login with existing account'}
+							</button>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
 	);
 }
 

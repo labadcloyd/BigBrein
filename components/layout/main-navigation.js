@@ -5,15 +5,16 @@ import classes from './main-navigation.module.css';
 
 export default function MainNavigation() {
   const router = useRouter();
+  const currentRoute = router.pathname
   const [session, loading] = useSession();
-
+  console.log(currentRoute)
   function logoutHandler() {
     signOut();
     return router.push('/auth')
   }
 
   return (
-    <div className={classes.headerContainer}>
+    <div className={classes.headerContainer} style={currentRoute==='/'||currentRoute==='/auth'?{backgroundColor:'transparent'}:{backgroundColor:'#202020'}}>
       <header className={classes.header}>
         <Link href='/'>
           <a>

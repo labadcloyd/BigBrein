@@ -1,9 +1,11 @@
-
 .headerContainer{
-	background-color: #ffffff;
+	background-color: #202020;
 	display: flex;
 	justify-content: center;
 	box-shadow: 0px 4px 11px -1px rgba(0,0,0,0.16);
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 .header {
 	width: 100%;
@@ -18,7 +20,7 @@
 .logo {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 1.5rem;
-	color: #202020;
+	color: #ffffff;
 	margin: 0;
 	transition: .5s;
 }
@@ -38,7 +40,7 @@
 .header a {
 	transition: .5s;
 	text-decoration: none;
-	color: #202020;
+	color: #ffffff;
 	font-weight: bold;
 }
 
@@ -46,8 +48,8 @@
 	transition: .5s;
 	font: inherit;
 	background-color: transparent;
-	border: 1px solid #202020;
-	color: #202020;
+	border: 1px solid #ffffff;
+	color: #ffffff;
 	font-weight: bold;
 	padding: 0.5rem 1.5rem;
 	border-radius: 6px;
@@ -56,12 +58,12 @@
 
 .header a:hover {
 	text-decoration: overline;
-	color: #3A6EA5;
+	color: #40BFF8;
 }
 .logo:hover{
-	color: #3A6EA5;
+	color: #40BFF8;
 }
 .header button:hover {
-	background-color: #004E98;
-	color: #ffffff;
+	background-color: #40BFF8;
+	color: #2c2c2c;
 }
