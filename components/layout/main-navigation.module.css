@@ -1,5 +1,5 @@
 .headerContainer{
-	z-index: 1;
+	z-index: 2;
 	background-color: #001d30;
 	display: flex;
 	justify-content: center;
@@ -14,7 +14,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 40px;
+	padding: 0 40px 0px 60px;
 }
 
 .logo {

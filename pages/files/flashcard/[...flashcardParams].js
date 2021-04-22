@@ -4,14 +4,31 @@ import {FlashcardSet} from '../../../models/flashcardModel'
 import css from './flashcard.module.css'
 import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
 import FileSidebar from '../../../components/dashboard/fileSidebar'
+import { useState } from 'react'
+import {Menu} from '@material-ui/icons'
 
 export default function FlashcardSetPage(props){
 	const {title, flashcards, session, currentFolder, files} = props
+	
+	/* displaying or hiding sidebar */
+	const [displaySidebar, setDisplaySidebar] = useState(true)
+	function toggleSidebar(){
+		setDisplaySidebar((prevValue)=>{
+			return !prevValue
+		})
+	}
 	return(
 		<>
+			<button className={css.hamburger} onClick={toggleSidebar} style={displaySidebar?{color: '#40BFF8'}:{color: '#fff'}}>
+				<Menu fontSize="large"/>
+			</button>
 			<div className={css.folderWrapper}> 
-				{currentFolder && (<FileSidebar currentFolder={currentFolder} folderFiles={files} />)} 
-				<div className={css.flashcardComponentWrapper}>
+				{currentFolder && (
+					<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
+						<FileSidebar currentFolder={currentFolder} folderFiles={files} />
+					</div>
+					)} 
+				<div className={css.flashcardComponentWrapper} style={displaySidebar?{transform: 'translateX(+300px)'}:{transform: 'translateX(0px)'}}>
 					<h1>{title}</h1>
 					<ContentFlashcard contents={flashcards} />
 				</div>
@@ -31,7 +48,15 @@ export async function getServerSideProps(context){
 	}) 
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const plainData = JSON.parse(JSON.stringify(specificFlashcardSet))
-
+	
+	if(!session && specificFlashcardSet){
+		return{
+			props:{
+				title: plainData.title,
+				flashcards: plainData.flashcards,
+			}
+		}
+	}
 	/*we get the user and their folders and their files only if its confirmed that currentFolderID exists*/
 	const username = session.user.name
 	const user = await User.findOne({username:username})
@@ -53,12 +78,12 @@ export async function getServerSideProps(context){
 			}
 		}
 	}
-	if(!specificFlashcardSet){
+	else if(!specificFlashcardSet){
 		return{
 			notFound:true
 		}
 	}
-	if(!session && specificFlashcardSet || specificFlashcardSet){
+	else if(!currentFolderUnserialized && specificFlashcardSet){
 		return{
 			props:{
 				title: plainData.title,

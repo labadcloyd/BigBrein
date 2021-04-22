@@ -2,11 +2,12 @@ import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import css from './fileSidebar.module.css'
-import {AddCircle, Menu, LibraryBooks, Subtitles, Style} from '@material-ui/icons'
+import {AddCircle, Menu, LibraryBooks, Subtitles, Style, Folder} from '@material-ui/icons'
 
 export default function FileSidebar(props){
 	const router = useRouter();
 	const {currentFolder, folderFiles} = props;
+	const folderTitle = currentFolder.title
 	const [fileType, setFileType] = useState('');
 	/* controlling the file title input */
 	function handleSelect(event){
@@ -18,46 +19,37 @@ export default function FileSidebar(props){
 	}
 
 	/* STYLING PURPOSES ONLY */
-	/* displaying or hiding sidebar */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
-	function toggleSidebar(){
-		setDisplaySidebar((prevValue)=>{
-			return !prevValue
-		})
-	}
 	/* icons for files */
 	const flashcardIcon = <Style/>
 	const noteIcon = <LibraryBooks/>
 	const quizIcon = <Subtitles/>
 	return(
 		<>	
-			<button className={css.hamburger} onClick={toggleSidebar}>
-				<Menu fontSize="large"/>
-			</button>
-			<div className={css.sidebarWrapper} style={displaySidebar?{}:{display:'none'}}>
-				<div className={css.sidebarContainerContainer}>
-					<div className={css.sidebarContainer}>
-						{folderFiles.map((file, index)=>{
-							const title = file.title
-							return(
-								<a key={index} className={css.fileContainer} href={`/files/${file._id}`}>
-									{flashcardIcon}
-									{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
-								</a>
-							)
-						})}
-					</div>
+			<div className={css.sidebarContainerContainer}>
+				<h2><Folder/>{ folderTitle.length>10?<>{folderTitle.slice(0,10)+'...'}</>:folderTitle}</h2>
+				<div className={css.sidebarContainer}>
+					{folderFiles.map((file, index)=>{
+						const title = file.title
+						return(
+							<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}/${currentFolder._id}`}>
+								{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
+								{file.fileType==='Note'?<>{noteIcon}</>:<></>}
+								{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
+								{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
+							</a>
+						)
+					})}
 				</div>
-				<div className={css.selectContainer}>
-					<div>
-						<select onChange={handleSelect} placeholder='File Type'>
-							<option value="" disabled selected>Select file type to add</option>
-							<option value='Flashcard'>Flashcard</option>
-							<option value='Note'>Note</option>
-							<option value='Quiz'>Quiz</option>
-						</select>
-						<button onClick={(()=>{addFile()})} disabled={!fileType? true: false}><AddCircle/></button>
-					</div>
+			</div>
+			<div className={css.selectContainer}>
+				<div>
+					<select onChange={handleSelect} placeholder='File Type'>
+						<option value="" disabled selected>Select file type to add</option>
+						<option value='Flashcard'>Flashcard</option>
+						<option value='Note'>Note</option>
+						<option value='Quiz'>Quiz</option>
+					</select>
+					<button onClick={(()=>{addFile()})} disabled={!fileType? true: false}><AddCircle/></button>
 				</div>
 			</div>
 		</>

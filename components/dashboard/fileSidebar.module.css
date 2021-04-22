@@ -8,6 +8,9 @@
 	top: 10px;
 	left: 10px;
 }
+.hamburger:hover{
+	color: #40BFF8;
+}
 .sidebarWrapper{ 
 	z-index: 0;
 	position: relative;
@@ -29,6 +32,12 @@
 	padding:20px 20px 60px 20px;
 	border-radius: 10px;
 	background-color: #0c152b;
+}
+.sidebarContainerContainer h2{
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 .fileContainer{
 	padding: 15px;

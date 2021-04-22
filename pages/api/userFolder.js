@@ -15,7 +15,7 @@ export default async function handler(req, res){
 			return res.status(401).json({message:`Unauthorized request`});
 		}
 		const {folderTitle, username} = req.body
-		if(!username || !folderTitle || folderTitle.length > 50){
+		if(!username || !folderTitle || folderTitle.length > 30){
 			return res.status(422).json({message:`Invalid Input or Title is Too Long`});
 		} else if(folderTitle && username){
 			try{

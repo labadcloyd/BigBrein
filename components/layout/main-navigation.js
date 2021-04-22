@@ -17,14 +17,14 @@ export default function MainNavigation() {
       <header className={css.header}>
         <Link href='/'>
           <a>
-            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'40px'}:{marginLeft:'0'}}>AcadDen</div>
+            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}>AcadDen</div>
           </a>
         </Link>
         <nav>
           <ul>
             {!session && !loading && ( 
               <Link href='/auth'>
-                <li className={classes.loginButton}>Login</li>
+                <li className={css.loginButton}>Login</li>
               </Link> 
             )}
             {session && (

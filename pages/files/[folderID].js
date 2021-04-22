@@ -3,15 +3,32 @@ import {getSession} from 'next-auth/client'
 import {User} from '../../models/userModel'
 import Files from '../../components/dashboard/files'
 import css from './folderID.module.css'
+import { useState } from 'react'
+import {Menu} from '@material-ui/icons'
 
 //this is the specific folder directory, where you can find all the files inside the folder
 export default function FolderPage(props) {
 	const {session, userFolders, currentFolder, folderFiles} = props;
+
+	/* STYLING PURPOSES ONLY */
+	const [displaySidebar, setDisplaySidebar] = useState(true)
+	function toggleSidebar(){
+		setDisplaySidebar((prevValue)=>{
+			return !prevValue
+		})
+	}
 	return (
-		<>
+		<>	
+			<button className={css.hamburger} onClick={toggleSidebar} style={displaySidebar?{color: '#fff'}:{color: '#40BFF8'}}>
+				<Menu fontSize="large"/>
+			</button>
 			<div className={css.folderWrapper}>
-				<Sidebar session={session} userFolders={userFolders} />
-				<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
+				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
+					<Sidebar session={session} userFolders={userFolders} />
+				</div>
+				<div className={css.fileComponentWrapper} style={displaySidebar?{transform: 'translateX(+300px)'}:{transform: 'translateX(0px)'}}>	
+					<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
+				</div>
 			</div>
 		</>
 	)

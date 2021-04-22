@@ -49,40 +49,28 @@ export default function Sidebar(props){
 			router.push(`/files/${folderID}`)
 		}
 	}
-
-	/* STYLING PURPOSES ONLY */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
-	function toggleSidebar(){
-		setDisplaySidebar((prevValue)=>{
-			return !prevValue
-		})
-	}
 	return(
-		<>	<button className={css.hamburger} onClick={toggleSidebar}>
-				<Menu fontSize="large"/>
-			</button>
-			<div className={css.sidebarWrapper} style={displaySidebar?{}:{display:'none'}}>
-				<div className={css.sidebarContainerContainer}>
-					<div className={css.sidebarContainer}>
-						{isApiResponse && (<h2>{apiResponse}</h2>)}
-						{userFolders.map((folder, index)=>{
-							const title = folder.title
-							return(
-								<a key={index} className={css.folderContainer} href={`/files/${folder._id}`}>
-									<Folder/> 
-									{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
-									</a>
-							)
-						})}
-					</div>
+		<>
+			<div className={css.sidebarContainerContainer}>
+				<div className={css.sidebarContainer}>
+					{isApiResponse && (<h2>{apiResponse}</h2>)}
+					{userFolders.map((folder, index)=>{
+						const title = folder.title
+						return(
+							<a key={index} className={css.folderContainer} href={`/files/${folder._id}`}>
+								<Folder/> 
+								{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
+								</a>
+						)
+					})}
 				</div>
-				<form onSubmit={submitHandler}>
-					<div className={css.addFolderContainer}>
-						<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='50' required />
-						<button type='submit'><AddCircle/></button>
-					</div>
-				</form>
 			</div>
+			<form onSubmit={submitHandler}>
+				<div className={css.addFolderContainer}>
+					<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
+					<button type='submit'><AddCircle/></button>
+				</div>
+			</form> 
 		</>
 	)
 }
