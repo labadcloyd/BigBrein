@@ -10,9 +10,11 @@ export default function DashboardPage(props) {
 		<>
 			<div className={Style.folderWrapper}>
 				<Sidebar session={session} userFolders={userFolders} />
-				<div className={Style.fileWrapper}>
-					<h2>Create or open a folder.</h2>
-					<p>Inside the folder you can start making flashcards, notes, or quiz sets.</p>
+				<div className={Style.fileComponentWrapper}>
+					<div className={Style.fileComponentContainer}>
+						<h2>Create or open a folder.</h2>
+						<p>Inside the folder you can start making flashcards, notes, or quiz sets.</p>
+					</div>
 				</div>
 			</div>
 		</>

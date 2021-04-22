@@ -1,4 +1,5 @@
 .hamburger{
+	z-index: 2;
 	background-color: transparent;
 	color: white;
 	border:none;
@@ -7,30 +8,31 @@
 	top: 10px;
 	left: 10px;
 }
-.sidebarWrapper{
-	position:sticky;
-	margin-top: 80px;
+.sidebarWrapper{ 
+	z-index: 0;
+	position: relative;
 	color: white;
 	left: 0;
-	height: 85vh;
-	max-width: 350px;
+	height: 100vh;
+	max-width: 300px;
 	width: 100%;
 	background-color: #020014;
-	padding: 0px 0px 20px 20px;
+	padding: 80px 0px 20px 20px;
 }
 .sidebarContainer{
 	padding: 0px 20px 0px 0px;
-	height: 70vh;
+	height: 100%;
 	overflow-y: auto;
 }
 .sidebarContainerContainer{
-	padding:20px;
+	height: 100%;
+	padding:20px 20px 60px 20px;
 	border-radius: 10px;
 	background-color: #0c152b;
 }
 .folderContainer{
 	padding: 15px;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	border-radius: 10px;
 	display: flex;
 	justify-content: start;
@@ -44,15 +46,18 @@
 }
 
 .addFolderContainer{
+	position: absolute;
+	bottom: 20px;
 	margin: 30px 0px 0px 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #19274e;
 	border-radius: 10px;
-	padding: 5px 0px 5px 0px;
+	padding: 5px;
 }
 .addFolderContainer input{
+	width: 226px;
 	border: none;
 	padding: 10px;
 	color: white;

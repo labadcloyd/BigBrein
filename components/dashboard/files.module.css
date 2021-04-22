@@ -1,12 +1,20 @@
 .fileComponentWrapper{
+	z-index: 0;
+	position: relative;
+	right: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 20px 20px 20px;
+}
+.fileComponentContainer{
+	padding: 20px;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
-	margin: 80px 20px 20px 20px;
+	color: white;
 	height: 100%;
+	width: 100%;
 	background-color: #0f1b38;
 	border-radius: 10px;
-	padding: 20px;
 }
 .selectContainer{
 	display: flex;
@@ -52,8 +60,9 @@
 }
 .filesContainer{
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax(150px, 250px) );
+	grid-template-columns: repeat( auto-fill, minmax(200px, 1fr) );
 	margin-top: 20px;
+	gap:1rem;
 }
 .fileContainer{
 	padding:15px;
@@ -61,7 +70,7 @@
 	background-color: #19274e;
 	display: flex;
 	flex-direction: column;
-	gap: 6px;
+	gap: 5px;
 }
 .fileContainer:hover{
 	background-color: #294481;
@@ -70,5 +79,6 @@
 	font-size: 1.4rem;
 }
 .fileContainer span{
+	font-size: 0.9rem;
 	color: rgb(211, 211, 211);
 }

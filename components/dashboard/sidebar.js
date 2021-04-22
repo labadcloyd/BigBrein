@@ -70,7 +70,7 @@ export default function Sidebar(props){
 							return(
 								<a key={index} className={Style.folderContainer} href={`/files/${folder._id}`}>
 									<Folder/> 
-									{ title.length>16?<>{title.slice(0,16)+'...'}</>:title}
+									{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
 									</a>
 							)
 						})}
