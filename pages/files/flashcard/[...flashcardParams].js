@@ -6,33 +6,31 @@ import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
 import FileSidebar from '../../../components/dashboard/fileSidebar'
 import { useState } from 'react'
 import {Menu} from '@material-ui/icons'
+import FolderWrapper from '../../../components/dashboard/folderWrapper'
 
 export default function FlashcardSetPage(props){
 	const {title, flashcards, session, currentFolder, files} = props
 	
 	/* displaying or hiding sidebar */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
+	const [displaySidebar, setDisplaySidebar] = useState(false)
 	function toggleSidebar(){
 		setDisplaySidebar((prevValue)=>{
 			return !prevValue
 		})
 	}
 	return(
-		<>
-			<button className={css.hamburger} onClick={toggleSidebar} style={displaySidebar?{color: '#40BFF8'}:{color: '#fff'}}>
-				<Menu fontSize="large"/>
-			</button>
-			<div className={css.folderWrapper}> 
-				{currentFolder && (
+		<>	
+			<FolderWrapper displaySidebar={displaySidebar} session={session} onClick={toggleSidebar}>
+				{session && (
 					<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
 						<FileSidebar currentFolder={currentFolder} folderFiles={files} />
 					</div>
-					)} 
-				<div className={css.flashcardComponentWrapper} style={displaySidebar?{transform: 'translateX(+300px)'}:{transform: 'translateX(0px)'}}>
+				)} 
+				<div className={css.fileComponentWrapper} style={displaySidebar?{transform: 'translateX(+300px)'}:{transform: 'translateX(0px)'}}>
 					<h1>{title}</h1>
 					<ContentFlashcard contents={flashcards} />
 				</div>
-			</div>
+			</FolderWrapper>
 		</>
 	)
 }

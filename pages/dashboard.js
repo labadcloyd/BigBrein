@@ -3,7 +3,7 @@ import {getSession} from 'next-auth/client'
 import {User} from '../models/userModel'
 import css from './dashboard.module.css'
 import { useState } from 'react'
-import {Menu} from '@material-ui/icons'
+import FolderWrapper from '../components/dashboard/folderWrapper'
 
 //this is the dashboard, where all the study files will be found
 export default function DashboardPage(props) {
@@ -18,10 +18,7 @@ export default function DashboardPage(props) {
 	}
 	return (
 		<>
-			<button className={css.hamburger} onClick={toggleSidebar} style={displaySidebar?{color: '#fff'}:{color: '#40BFF8'}}>
-				<Menu fontSize="large"/>
-			</button>
-			<div className={css.folderWrapper}>
+			<FolderWrapper displaySidebar={displaySidebar} session={session} onClick={toggleSidebar}>
 				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
 					<Sidebar session={session} userFolders={userFolders} />
 				</div>
@@ -31,7 +28,7 @@ export default function DashboardPage(props) {
 						<p>Open the folder so you can start making flashcards, notes, or quiz sets.</p>
 					</div>
 				</div>
-			</div>
+			</FolderWrapper>
 		</>
 	)
 }
