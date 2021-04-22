@@ -1,0 +1,90 @@
+.hamburger{
+	z-index: 2;
+	background-color: transparent;
+	color: white;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 10px;
+}
+.sidebarWrapper{ 
+	z-index: 0;
+	position: relative;
+	color: white;
+	left: 0;
+	height: 100vh;
+	max-width: 300px;
+	width: 100%;
+	background-color: #020014;
+	padding: 80px 0px 20px 20px;
+}
+.sidebarContainer{
+	padding: 0px 20px 0px 0px;
+	height: 100%;
+	overflow-y: auto;
+}
+.sidebarContainerContainer{
+	height: 100%;
+	padding:20px 20px 60px 20px;
+	border-radius: 10px;
+	background-color: #0c152b;
+}
+.fileContainer{
+	padding: 15px;
+	font-size: 1rem;
+	border-radius: 10px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	margin-bottom: 10px;
+	overflow: hidden;
+	gap: 10px;
+}
+.fileContainer:hover{
+	background-color: #294481;
+}
+.selectContainer{
+	position: absolute;
+	bottom: 20px;
+	margin: 30px 0px 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #19274e;
+	border-radius: 10px;
+	padding: 5px;
+}
+.selectContainer div{
+	display: flex;
+	flex-direction: row;
+}
+.selectContainer select{
+	width: 220px;
+	margin-right: 10px;
+	border: none;
+	padding: 10px;
+	color: white;
+	background-color: #19274e;
+	font-size: 1.1rem;
+}
+.selectContainer select:focus{
+	outline: none;
+}
+.selectContainer button{
+	transition: .1s;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.1rem;
+	background-color: #3b3b3b;
+	color: #ffffff;
+	border:none;
+	padding: 8px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.selectContainer button:hover{
+	background-color: #40BFF8;
+	color: white; 
+}

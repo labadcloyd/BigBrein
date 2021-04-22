@@ -6,7 +6,7 @@ import {AddCircle} from '@material-ui/icons'
 
 export default function Files(props){
 	const router = useRouter();
-	const {currentFolder,folderFiles} = props;
+	const {currentFolderID, currentFolder, folderFiles} = props;
 	const [fileType, setFileType] = useState('');
 	/* controlling the file title input */
 	function handleSelect(event){
@@ -38,8 +38,8 @@ export default function Files(props){
 					{folderFiles.map((file, index)=>{
 						const title = file.title
 						return(
-							<a href={`/files/${file.fileType}/${file.fileID}`} className={Style.fileContainer} key={index}>
-								<p>{title.length>16?<>{title.slice(0,16)+'...'}</>:title}</p>
+							<a href={`/files/${file.fileType}/${file.fileID}/${currentFolderID}`} className={Style.fileContainer} key={index}>
+								<p>{title.length>10?<>{title.slice(0,10)+' ...'}</>:title}</p>
 								<span>{file.fileType}</span>
 							</a>
 						)
