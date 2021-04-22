@@ -23,7 +23,7 @@ export default function FolderPage(props) {
 				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
 					<Sidebar session={session} userFolders={userFolders} />
 				</div>
-				<div className={css.fileComponentWrapper} style={displaySidebar?{transform: 'translateX(+300px)'}:{transform: 'translateX(0px)'}}>	
+				<div className={css.fileComponentWrapper} onClick={displaySidebar?toggleSidebar:null} style={displaySidebar?{position: 'relative'}:{position: 'fixed'}}>	
 					<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
 				</div>
 			</FolderWrapper>
