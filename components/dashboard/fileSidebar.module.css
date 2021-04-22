@@ -60,6 +60,7 @@
 	flex-direction: row;
 }
 .selectContainer select{
+	cursor: pointer;
 	width: 220px;
 	margin-right: 10px;
 	border: none;

@@ -1,7 +1,7 @@
 import {getSession} from 'next-auth/client'
 import {User} from '../../../models/userModel' 
 import {FlashcardSet} from '../../../models/flashcardModel'
-import Style from './flashcard.module.css'
+import css from './flashcard.module.css'
 import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
 import FileSidebar from '../../../components/dashboard/fileSidebar'
 
@@ -9,9 +9,9 @@ export default function FlashcardSetPage(props){
 	const {title, flashcards, session, currentFolder, files} = props
 	return(
 		<>
-			<div className={Style.folderWrapper}> 
+			<div className={css.folderWrapper}> 
 				{currentFolder && (<FileSidebar currentFolder={currentFolder} folderFiles={files} />)} 
-				<div className={Style.flashcardComponentWrapper}>
+				<div className={css.flashcardComponentWrapper}>
 					<h1>{title}</h1>
 					<ContentFlashcard contents={flashcards} />
 				</div>

@@ -2,14 +2,14 @@ import Sidebar from '../../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
 import {User} from '../../models/userModel'
 import Files from '../../components/dashboard/files'
-import Style from './folderID.module.css'
+import css from './folderID.module.css'
 
 //this is the specific folder directory, where you can find all the files inside the folder
 export default function FolderPage(props) {
 	const {session, userFolders, currentFolder, folderFiles} = props;
 	return (
 		<>
-			<div className={Style.folderWrapper}>
+			<div className={css.folderWrapper}>
 				<Sidebar session={session} userFolders={userFolders} />
 				<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
 			</div>

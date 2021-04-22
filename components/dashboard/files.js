@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
-import Style from './files.module.css'
-import {AddCircle} from '@material-ui/icons'
+import css from './files.module.css'
+import {AddCircle, LibraryBooks, Subtitles, Style} from '@material-ui/icons'
 
 export default function Files(props){
 	const router = useRouter();
@@ -16,10 +16,14 @@ export default function Files(props){
 	async function addFile(){
 		router.push(`/files/${fileType}/create${fileType}`)
 	}
+	/* icons for files */
+	const flashcardIcon = <Style/>
+	const noteIcon = <LibraryBooks/>
+	const quizIcon = <Subtitles/>
 	return(
-		<div className={Style.fileComponentWrapper}>
-			<div className={Style.fileComponentContainer}> 
-				<div className={Style.selectContainer}>
+		<div className={css.fileComponentWrapper}>
+			<div className={css.fileComponentContainer}> 
+				<div className={css.selectContainer}>
 					<h1>{currentFolder}</h1>
 					<div>
 						Add File
@@ -33,14 +37,19 @@ export default function Files(props){
 					</div>
 				</div>
 				<h3>Files</h3>
-				<div className={Style.filesContainer}>
+				<div className={css.filesContainer}>
 					
 					{folderFiles.map((file, index)=>{
 						const title = file.title
 						return(
-							<a href={`/files/${file.fileType}/${file.fileID}/${currentFolderID}`} className={Style.fileContainer} key={index}>
+							<a href={`/files/${file.fileType}/${file.fileID}/${currentFolderID}`} className={css.fileContainer} key={index}>
 								<p>{title.length>10?<>{title.slice(0,10)+' ...'}</>:title}</p>
-								<span>{file.fileType}</span>
+								<span>
+									{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
+									{file.fileType==='Note'?<>{noteIcon}</>:<></>}
+									{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
+									{file.fileType}
+								</span>
 							</a>
 						)
 					})}

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/client';
 import {useRouter, userRouter} from 'next/router'
-import classes from './main-navigation.module.css';
+import css from './main-navigation.module.css';
 
 export default function MainNavigation() {
   const router = useRouter();
@@ -13,11 +13,11 @@ export default function MainNavigation() {
   }
 
   return (
-    <div className={classes.headerContainer} style={currentRoute==='/'||currentRoute==='/auth'?{backgroundColor:'transparent'}:{backgroundColor:'#001d30'}}>
-      <header className={classes.header}>
+    <div className={css.headerContainer} style={currentRoute==='/'||currentRoute==='/auth'?{backgroundColor:'transparent'}:{backgroundColor:'#001d30'}}>
+      <header className={css.header}>
         <Link href='/'>
           <a>
-            <div className={classes.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'40px'}:{marginLeft:'0'}}>AcadDen</div>
+            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'40px'}:{marginLeft:'0'}}>AcadDen</div>
           </a>
         </Link>
         <nav>
