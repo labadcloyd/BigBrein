@@ -1,11 +1,14 @@
+import css from './contentFlashcard.module.css'
+
 export default function ContentFlashcard(props){
-	const {contents} = props;
+	const {contents, title} = props;
 	return(
 		<>
-			<div>
+			<div className={css.flashcardContentWrapper}>
+				<h1>{title}</h1>
 				{contents.map((content, index)=>{
 					return(
-						<div key={index} style={{display:'flex', flexDirection:'row', gap:'1rem'}}>
+						<div key={index} className={css.flashcardContentContainer}>
 							<div>
 								{content.term}
 							</div>

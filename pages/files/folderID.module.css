@@ -1,6 +1,6 @@
 .sidebarWrapper{ 
 	z-index: 1;
-	position: relative;
+	position: fixed;
 	color: white;
 	left: 0;
 	height: 100vh;

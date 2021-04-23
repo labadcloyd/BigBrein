@@ -22,7 +22,7 @@ export default function DashboardPage(props) {
 				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
 					<Sidebar session={session} userFolders={userFolders} />
 				</div>
-				<div className={css.fileComponentWrapper} style={displaySidebar?{position: 'relative'}:{position: 'fixed'}}>	
+				<div className={css.fileComponentWrapper} style={displaySidebar?{paddingLeft: '320px'}:{paddingLeft: '20px'}}>	
 					<div className={css.fileComponentContainer}>
 						<h2>Create or open a folder.</h2>
 						<p>Open the folder so you can start making flashcards, notes, or quiz sets.</p>

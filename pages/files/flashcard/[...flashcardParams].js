@@ -26,9 +26,8 @@ export default function FlashcardSetPage(props){
 						<FileSidebar currentFolder={currentFolder} folderFiles={files} />
 					</div>
 				)} 
-				<div className={css.fileComponentWrapper} onClick={displaySidebar?toggleSidebar:null} style={displaySidebar?{position: 'relative'}:{position: 'fixed'}}>
-					<h1>{title}</h1>
-					<ContentFlashcard contents={flashcards} />
+				<div className={css.fileComponentWrapper} onClick={displaySidebar?toggleSidebar:null} style={displaySidebar?{paddingLeft: '320px'}:{paddingLeft: '20px'}}>
+					<ContentFlashcard contents={flashcards} title={title} />
 				</div>
 			</FolderWrapper>
 		</>

@@ -45,7 +45,8 @@
 .selectContainer select{
 	cursor: pointer;
 	min-width: 20px;
-	margin-right: 10px;
+	width: 100%;
+	padding: 0px 10px 0px 10px;
 	border: none; 
 	color: white;
 	background-color: #19274e;
