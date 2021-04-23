@@ -23,7 +23,7 @@ export default function Files(props){
 	return(
 		<div className={css.fileComponentContainer}> 
 			<div className={css.selectContainer}>
-				<h1>{currentFolder}</h1>
+				<h1>{currentFolder.length>30?<>{currentFolder.slice(0,30)+' ...'}</>:currentFolder}</h1>
 			</div>
 			<h3>Files:</h3>
 			<div className={css.filesContainer}>

@@ -5,7 +5,7 @@
 }
 .sidebarContainerContainer{
 	height: 100%;
-	padding:20px 20px 60px 20px;
+	padding:20px 20px 80px 20px;
 	border-radius: 10px;
 	background-color: #0c152b;
 }
@@ -20,7 +20,7 @@
 	font-size: 1rem;
 	border-radius: 10px;
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 10px;
 	overflow: hidden;
@@ -30,15 +30,13 @@
 	background-color: #294481;
 }
 .selectContainer{
-	position: absolute;
-	bottom: 20px;
-	margin: 30px 0px 0px 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: #19274e;
-	border-radius: 10px;
-	padding: 5px;
+	border-radius: 10px; 
+	padding: 10px;
+	margin-top: -60px; 
 }
 .selectContainer div{
 	display: flex;
@@ -46,10 +44,9 @@
 }
 .selectContainer select{
 	cursor: pointer;
-	width: 220px;
+	min-width: 20px;
 	margin-right: 10px;
-	border: none;
-	padding: 10px;
+	border: none; 
 	color: white;
 	background-color: #19274e;
 	font-size: 1.1rem;
