@@ -33,9 +33,11 @@
 }
 .folderWrapperSidebar{
 	z-index: 2;
+	position: fixed;
 }
 .folderWrapperFiles{
 	width: 100%;
+	padding-left: 300px;
 }
 .folderOverlay{
 	background-color: rgb(255, 255, 255, 0.2);
@@ -56,6 +58,7 @@
     .folderWrapperFiles{
 		position: fixed;
 		width: 100vw;
+		padding-left: 0px;
 	}
     .checker:not(:checked) ~ .folderWrapperSidebar {
         transform: translateX(-350px);

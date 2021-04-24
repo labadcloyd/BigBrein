@@ -7,18 +7,20 @@ export default function ContentFlashcard(props){
 			<div className={css.fileComponentWrapper}>	
 				<div className={css.flashcardContentWrapper}>
 					<h1>{title}</h1>
-					{contents.map((content, index)=>{
-						return(
-							<div key={index} className={css.flashcardContentContainer}>
-								<div>
-									{content.term}
+					<div className={css.flashcardGrid}>
+						{contents.map((content, index)=>{
+							return(
+								<div key={index} className={css.flashcardContentContainer}>
+									<div>
+										{content.term}
+									</div>
+									<div>
+										{content.description}
+									</div>
 								</div>
-								<div>
-									{content.description}
-								</div>
-							</div>
-						)
-					})}
+							)
+						})}
+					</div>
 				</div>
 			</div>
 		</>

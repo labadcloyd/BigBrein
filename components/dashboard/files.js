@@ -41,7 +41,7 @@ export default function Files(props){
 						<button 
 							onClick={(()=>{addFile()})} 
 							disabled={!fileType? true: false} 
-							style={{backgroundColor:fileType?'#40BFF8':'#3b3b3b'}}>
+							style={{backgroundColor:fileType?'#40BFF8':'#263661'}}>
 								<AddCircle/>
 						</button>
 					</div>

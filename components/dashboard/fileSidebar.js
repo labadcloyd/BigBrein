@@ -43,15 +43,13 @@ export default function FileSidebar(props){
 					</div>
 				</div>
 				<div className={css.selectContainer}>
-					<div>
-						<select onChange={handleSelect} placeholder='File Type'>
-							<option value="" disabled selected>Select file type to add</option>
-							<option value='Flashcard'>Flashcard</option>
-							<option value='Note'>Note</option>
-							<option value='Quiz'>Quiz</option>
-						</select>
-						<button onClick={(()=>{addFile()})} disabled={!fileType? true: false}><AddCircle/></button>
-					</div>
+					<select onChange={handleSelect} placeholder='File Type'>
+						<option value="" disabled selected>Select file type to add</option>
+						<option value='Flashcard'>Flashcard</option>
+						<option value='Note'>Note</option>
+						<option value='Quiz'>Quiz</option>
+					</select>
+					<button onClick={(()=>{addFile()})} disabled={!fileType? true: false}><AddCircle/></button>
 				</div>
 			</div>
 		</>
