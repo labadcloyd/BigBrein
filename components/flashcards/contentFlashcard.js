@@ -14,7 +14,7 @@ export default function ContentFlashcard(props){
 									<div>
 										{content.term}
 									</div>
-									<div>
+									<div className={css.flashcardBorder}>
 										{content.description}
 									</div>
 								</div>
