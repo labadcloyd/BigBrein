@@ -2,7 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import css from './sidebar.module.css'
-import {AddCircle, Folder, Menu} from '@material-ui/icons'
+import {AddCircle, Folder } from '@material-ui/icons'
 export default function Sidebar(props){
 	const router = useRouter();
 	const {session, userFolders} = props;
@@ -50,27 +50,29 @@ export default function Sidebar(props){
 		}
 	}
 	return(
-		<>
-			<div className={css.sidebarContainerContainer}>
-				<div className={css.sidebarContainer}>
-					{isApiResponse && (<h2>{apiResponse}</h2>)}
-					{userFolders.map((folder, index)=>{
-						const title = folder.title
-						return(
-							<a key={index} className={css.folderContainer} href={`/files/${folder._id}`}>
-								<Folder/> 
-								{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
+		<>	
+			<div className={css.sidebarWrapper}>
+				<div className={css.sidebarContainerContainer}>
+					<div className={css.sidebarContainer}>
+						{isApiResponse && (<h2>{apiResponse}</h2>)}
+						{userFolders.map((folder, index)=>{
+							const title = folder.title
+							return(
+								<a key={index} className={css.folderContainer} href={`/files/${folder._id}`}>
+									<Folder/>
+									{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
 								</a>
-						)
-					})}
+							)
+						})}
+					</div>
 				</div>
+				<form onSubmit={submitHandler}>
+					<div className={css.addFolderContainer}>
+						<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
+						<button type='submit'><AddCircle/></button>
+					</div>
+				</form> 
 			</div>
-			<form onSubmit={submitHandler}>
-				<div className={css.addFolderContainer}>
-					<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
-					<button type='submit'><AddCircle/></button>
-				</div>
-			</form> 
 		</>
 	)
 }

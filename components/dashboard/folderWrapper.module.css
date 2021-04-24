@@ -4,17 +4,3 @@
 	width: 100%;
 	overflow-x: auto;
 }
-
-.hamburger{
-	z-index: 3;
-	background-color: transparent;
-	color: white;
-	border:none;
-	cursor: pointer;
-	position: fixed;
-	top: 10px;
-	left: 20px;
-}
-.hamburger:hover{
-	color: #40BFF8;
-}

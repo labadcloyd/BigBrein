@@ -1,3 +1,14 @@
+.sidebarWrapper{ 
+	z-index: 1;
+	position: relative;
+	color: white;
+	left: 0;
+	height: 100vh;
+	max-width: 300px;
+	min-width: 200px;
+	width: 100%;
+	padding: 80px 0px 20px 20px;
+}
 .sidebarContainer{
 	padding: 0px 20px 0px 0px;
 	height: 100%;
@@ -31,7 +42,7 @@
 	background-color: #19274e;
 	border-radius: 10px; 
 	padding: 10px;
-	margin-top: -65px; 
+	margin-top: -64px; 
 }
 .addFolderContainer input{
 	border: none;

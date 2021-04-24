@@ -2,30 +2,32 @@ import Sidebar from '../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
 import {User} from '../models/userModel'
 import css from './dashboard.module.css'
-import { useState } from 'react'
+import {Menu} from '@material-ui/icons'
 import FolderWrapper from '../components/dashboard/folderWrapper'
 
 //this is the dashboard, where all the study files will be found
 export default function DashboardPage(props) {
 	
 	const {session, userFolders} = props;
-	/* STYLING PURPOSES ONLY */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
-	function toggleSidebar(){
-		setDisplaySidebar((prevValue)=>{
-			return !prevValue
-		})
-	}
 	return (
 		<>
-			<FolderWrapper displaySidebar={displaySidebar} session={session} onClick={toggleSidebar}>
-				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
+			<FolderWrapper >
+				{session && (
+					<label for="bar-checker" className={css.hamburger}>
+						<Menu fontSize="large"/>
+					</label>
+				)}
+				<input type="checkbox" className={css.checker} id="bar-checker"/>
+				<div className={css.folderWrapperSidebar}>
 					<Sidebar session={session} userFolders={userFolders} />
 				</div>
-				<div className={css.fileComponentWrapper} style={displaySidebar?{paddingLeft: '320px'}:{paddingLeft: '20px'}}>	
-					<div className={css.fileComponentContainer}>
-						<h2>Create or open a folder.</h2>
-						<p>Open the folder so you can start making flashcards, notes, or quiz sets.</p>
+				<div className={css.folderOverlay}></div>
+				<div className={css.folderWrapperFiles}>
+					<div className={css.fileComponentWrapper} >	
+						<div className={css.fileComponentContainer}>
+							<h2>Create or open a folder.</h2>
+							<p>Open the folder so you can start making flashcards, notes, or quiz sets.</p>
+						</div>
 					</div>
 				</div>
 			</FolderWrapper>

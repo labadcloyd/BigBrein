@@ -1,25 +1,56 @@
-.sidebarWrapper{ 
-	z-index: 1;
-	position: fixed;
+.hamburger{
+	display: none;
+	z-index: 3;
+	background-color: transparent;
 	color: white;
-	left: 0;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+}
+.hamburger:hover{
+	color: #40BFF8;
+}
+.folderWrapperSidebar{
+	z-index: 2;
+}
+.folderWrapperFiles{
+	width: 100%;
+}
+.folderOverlay{
+	background-color: rgb(255, 255, 255, 0.2);
+	position: fixed;
+	width: 100vw;
 	height: 100vh;
-	max-width: 300px;
-	min-width: 200px;
-	width: 100%;
-	padding: 80px 0px 20px 20px;
+	z-index: 1;
+	display: none;
 }
-.fileComponentWrapper{
-	z-index: 0;
-	position: relative;
-	right: 0;
-	height: 100vh;  
-	width: 100%;
-	padding: 80px 20px 20px 20px;
+.checker {
+    display: none;
 }
+
 @media only screen and (max-width: 700px) {
-	.sidebarWrapper{
+	.hamburger{
+		display: block;
+	}
+    .folderWrapperFiles{
 		position: fixed;
-		padding: 80px 20px 20px 20px;
+		width: 100vw;
+	}
+    .checker:not(:checked) ~ .folderWrapperSidebar {
+        transform: translateX(-350px);
+    }
+    .checker:checked ~ .folderWrapperSidebar{
+        transform: translateX(0px);
+    }
+	.checker:checked ~ .hamburger{
+		color: #40BFF8;
+	}
+	.checker:not(:checked) ~ .hamburger {
+		color: white;
+    }
+	.checker:checked ~ .folderOverlay{
+		display: block;
 	}
 }

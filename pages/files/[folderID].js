@@ -5,6 +5,7 @@ import Files from '../../components/dashboard/files'
 import css from './folderID.module.css'
 import { useState } from 'react'
 import FolderWrapper from '../../components/dashboard/folderWrapper'
+import {Menu} from '@material-ui/icons'
 
 //this is the specific folder directory, where you can find all the files inside the folder
 export default function FolderPage(props) {
@@ -19,11 +20,18 @@ export default function FolderPage(props) {
 	}
 	return (
 		<>	
-			<FolderWrapper displaySidebar={displaySidebar} session={session} onClick={toggleSidebar}>
-				<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
+			<FolderWrapper>
+				{session && (
+					<label for="bar-checker" className={css.hamburger}>
+						<Menu fontSize="large"/>
+					</label>
+				)}
+				<input type="checkbox" className={css.checker} id="bar-checker"/>
+				<div className={css.folderWrapperSidebar}>
 					<Sidebar session={session} userFolders={userFolders} />
 				</div>
-				<div className={css.fileComponentWrapper} onClick={displaySidebar?toggleSidebar:null} style={displaySidebar?{paddingLeft: '320px'}:{paddingLeft: '20px'}}>	
+				<div className={css.folderOverlay}></div>
+				<div className={css.folderWrapperFiles}>
 					<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
 				</div>
 			</FolderWrapper>

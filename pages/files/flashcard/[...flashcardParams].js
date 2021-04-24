@@ -11,22 +11,22 @@ import FolderWrapper from '../../../components/dashboard/folderWrapper'
 export default function FlashcardSetPage(props){
 	const {title, flashcards, session, currentFolder, files} = props
 	
-	/* displaying or hiding sidebar */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
-	function toggleSidebar(){
-		setDisplaySidebar((prevValue)=>{
-			return !prevValue
-		})
-	}
 	return(
 		<>	
-			<FolderWrapper displaySidebar={displaySidebar} session={session} onClick={toggleSidebar}>
+			<FolderWrapper >
 				{session && (
-					<div className={css.sidebarWrapper} style={displaySidebar?{transform: 'translateX(0px)'}:{transform: 'translateX(-350px)'}} >
-						<FileSidebar currentFolder={currentFolder} folderFiles={files} />
-					</div>
-				)} 
-				<div className={css.fileComponentWrapper} onClick={displaySidebar?toggleSidebar:null} style={displaySidebar?{paddingLeft: '320px'}:{paddingLeft: '20px'}}>
+					<>
+						<label for="bar-checker" className={css.hamburger}>
+							<Menu fontSize="large"/>
+						</label>
+						<input type="checkbox" className={css.checker} id="bar-checker"/>
+						<div className={css.folderWrapperSidebar} >
+							<FileSidebar currentFolder={currentFolder} folderFiles={files} />
+						</div>
+					</>
+				)}
+				<div className={css.folderOverlay}></div>
+				<div className={css.folderWrapperFiles}>
 					<ContentFlashcard contents={flashcards} title={title} />
 				</div>
 			</FolderWrapper>

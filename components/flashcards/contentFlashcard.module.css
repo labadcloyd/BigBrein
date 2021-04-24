@@ -1,3 +1,11 @@
+.fileComponentWrapper{
+	z-index: 0;
+	position: relative;
+	right: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 20px 20px 20px;
+}
 .flashcardContentWrapper{
 	padding: 20px;
 	display: flex;
@@ -8,6 +16,7 @@
 	background-color: #0c152b;
 	border-radius: 10px;
 	min-width: 230px;
+	overflow-y: auto;
 }
 .flashcardContentWrapper h1{
 	margin-bottom: 20px;
