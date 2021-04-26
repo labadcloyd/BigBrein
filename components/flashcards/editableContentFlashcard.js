@@ -1,4 +1,6 @@
+import css from './editableContentFlashcard.module.css'
 import {useState} from 'react'
+import {Clear, AddCircle} from '@material-ui/icons'
 
 export default function EditableContentFlashcard(props){
 	const {contents} = props;
@@ -19,34 +21,75 @@ export default function EditableContentFlashcard(props){
 	function handleDelete(index){
 		props.handleDelete(index)
 	}
+	/* adding the flashcard to the state */
+	const [inputValue, setInputValue] = useState({});
+	function handleChange(event){
+		const {name, value} = event.target
+		setInputValue((prevInput)=>{
+			return({
+				...prevInput,
+				[name]:value
+			})
+		})
+	}
+	function handleSubmit(event){
+		props.onSubmit(inputValue)
+		setInputValue({term:'', description:''})
+		event.preventDefault();
+	}
 	return(
 		<>
-			<div>
-				{contents.map((content, index)=>{
-					return(
-						<div key={index} style={{display:'flex', flexDirection:'row'}}>
-							<div 
-								contentEditable='true'
-								suppressContentEditableWarning="true"
-								id={`term${index}`} 
-								data-index={index} 
-								data-name='term'  
-								onBlur={submitData}>
-									{content.term}
+			<div className={css.createFlashcardWrapper}>
+				<div>
+					{contents.map((content, index)=>{
+						return(
+							<div className={css.contentFlashcardWrapper} key={index}>
+								<div className={css.contentFlashcardContainer}>
+									<div>
+										<p>TERM</p>
+										<div 
+											contentEditable='true'
+											suppressContentEditableWarning="true"
+											id={`term${index}`} 
+											data-index={index} 
+											data-name='term'  
+											onBlur={submitData}
+											className={css.flashcardContent}>
+												{content.term}
+										</div>
+									</div>
+									<div>
+										<p>DESCRIPTION</p>
+										<div 
+											contentEditable='true'
+											suppressContentEditableWarning="true"
+											id={`description${index}`}  
+											data-index={index} 
+											data-name='description' 
+											onBlur={submitData}
+											className={css.flashcardContent}>
+												{content.description}
+										</div>
+									</div>
+								</div>
+								<button className={css.deletebtn} onClick={()=>{handleDelete(index)}}><Clear/></button>
 							</div>
-							<div 
-								contentEditable='true'
-								suppressContentEditableWarning="true"
-								id={`description${index}`}  
-								data-index={index} 
-								data-name='description' 
-								onBlur={submitData}>
-									{content.description}
+						)
+					})}
+					<form onSubmit={handleSubmit} className={css.contentFlashcardWrapper} style={{backgroundColor:'#294481'}}>
+						<div className={css.contentFlashcardContainer}>
+							<div>
+								<p>TERM</p>
+								<input type='text' value={inputValue.term} name='term' onChange={handleChange} placeholder='Term' />
 							</div>
-							<button onClick={()=>{handleDelete(index)}}>Delete</button>
+							<div>
+								<p>DESCRIPTION</p>
+								<input type='text' value={inputValue.description} name='description' onChange={handleChange} placeholder='Description' />
+							</div>
 						</div>
-					)
-				})}
+						<button className={css.addbtn} type='submit'><AddCircle/></button>
+					</form>
+				</div>
 			</div>
 		</>
 	)

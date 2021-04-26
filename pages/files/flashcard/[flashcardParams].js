@@ -1,9 +1,9 @@
 import {getSession} from 'next-auth/client'
 import {User} from '../../../models/userModel' 
 import {FlashcardSet} from '../../../models/flashcardModel'
+import { useState } from 'react'
 import css from './flashcard.module.css'
 import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
-import { useState } from 'react'
 import {Menu} from '@material-ui/icons'
 import Sidebar from '../../../components/dashboard/sidebar'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
@@ -26,7 +26,7 @@ export default function FlashcardSetPage(props){
 					</>
 				)}
 				<div className={css.folderOverlay}></div>
-				<div className={css.folderWrapperFiles}>
+				<div className={css.folderWrapperFiles} style={{paddingLeft:session?'':'0px'}}>
 					<ContentFlashcard contents={flashcards} title={title} />
 				</div>
 			</FolderWrapper>

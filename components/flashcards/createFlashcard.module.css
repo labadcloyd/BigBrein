@@ -1,3 +1,27 @@
+.flashcardComponentWrapper{
+	z-index: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 20px 20px 20px;
+	display: flex;
+	justify-content: center;
+}
+.flashcardComponentContainer{
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 100%;
+	width: 100%; 
+	max-width: 1000px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+
+
+
+
+
+/*FOR THE SIDEBAR*/
 .hamburger{
 	display: none;
 	z-index: 3;
@@ -17,13 +41,8 @@
 	position: fixed;
 }
 .folderWrapperFiles{
-	margin-top: 60px;
 	width: 100%;
-	min-width: 300px;
-	max-width: 800px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	padding-left: 300px;
 }
 .folderOverlay{
 	background-color: rgb(255, 255, 255, 0.2);
@@ -37,7 +56,7 @@
     display: none;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
 	.hamburger{
 		display: block;
 	}

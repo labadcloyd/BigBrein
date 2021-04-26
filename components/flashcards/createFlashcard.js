@@ -1,28 +1,108 @@
-import {useState} from 'react'
+import { useState } from "react";
+import EditableContentFlashcard from "./editableContentFlashcard";
+import axios from "axios";
+import {useRouter} from 'next/router'
+import css from './createFlashcard.module.css'
+import Sidebar from '../dashboard/sidebar'
+import FolderWrapper from '../dashboard/folderWrapper'
+import {Menu} from '@material-ui/icons'
 
 export default function CreateFlashcard(props){
-	const [inputValue, setInputValue] = useState({});
-	function handleChange(event){
-		const {name, value} = event.target
-		setInputValue((prevInput)=>{
-			return({
-				...prevInput,
-				[name]:value
-			})
+	const router = useRouter()
+	/* getting the user information from the session props */
+	const {session, userFolders} = props
+	/* for showing the api response when adding a new flashcard*/
+	const [apiResponse, setResponse] = useState('');
+	const [isApiResponse, setResponseAvailable] = useState(false);
+	/* array of all flashcards */
+	const [flashcardValues, setFlashcardValues] = useState([]);
+	/* title of flashcards */
+	const [flashcardTitle, setName] = useState();
+	/* title of folder to be saved in */
+	const [folderID, setFolderID] = useState('');
+	/* controlling the file title input */
+	function handleSelect(event){
+		setFolderID(event.target.value)
+	}
+	/* adding flashcardSet name */
+	function flashcardNameChange(event){
+		setName(event.target.value)
+	}
+	/* adding a flashcard */
+	function getValue(inputValue){
+		setFlashcardValues((prevValue)=>{
+			return[...prevValue, inputValue]
 		})
 	}
-	function handleSubmit(event){
-		props.onSubmit(inputValue)
-		setInputValue({term:'', description:''})
-		event.preventDefault();
+	/*changing flashcardset data */
+	function changeFlashcardData(inputValue, inputIndex, inputName){
+		const newFlashcardSet = [...flashcardValues]
+		/* here we look for the object with the index of dataset's index and name of dataset's name	and change its value */
+		if(inputValue){
+			newFlashcardSet[inputIndex][inputName] = inputValue;
+			setFlashcardValues(newFlashcardSet)
+		}
 	}
+	/* deleting the flashcard using its index */
+	function deleteFlashcard(flashcardIndex){
+		setFlashcardValues((prevFlashcards) => {
+			return prevFlashcards.filter((prevFlashcards, index) => {
+			  return index !== flashcardIndex;
+			});
+		});
+	}
+	/* sending post request to the api */
+	async function postData(){
+		try{
+			if(!flashcardTitle || !flashcardValues || !folderID){
+				return
+			}
+			const username = session.user.name
+			const response = await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, folderID: folderID, username:username})
+			const query = response.data.flashcardID 
+			router.push(`/files/Flashcard/${query}`)
+		}
+		catch(error){
+			const errorData = error.response
+			const response = errorData.data.message
+			setResponse(response)
+			setResponseAvailable(true)
+		}
+	}
+	/* for design purposes only */
+
 	return(
-		<>
-			<form onSubmit={handleSubmit}>
-				<input type='text' value={inputValue.term} name='term' onChange={handleChange} placeholder='term' />
-				<input type='text' value={inputValue.description} name='description' onChange={handleChange} placeholder='description' />
-				<button type='submit'>Add</button>
-			</form>
-		</>
+		<FolderWrapper >
+			{session && (
+					<>
+						<label for="bar-checker" className={css.hamburger}>
+							<Menu fontSize="large"/>
+						</label>
+						<input type="checkbox" className={css.checker} id="bar-checker"/>
+						<div className={css.folderWrapperSidebar} >
+							<Sidebar session={session} userFolders={userFolders}/>
+						</div>
+					</>
+				)}
+			<div className={css.folderOverlay}></div>
+			<div className={css.folderWrapperFiles}>
+				<div className={css.flashcardComponentWrapper}>
+					<div className={css.flashcardComponentContainer}>
+						<div>
+							{isApiResponse && (<h2>{apiResponse}</h2>)}
+							<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxLength="50" required />
+							<select onChange={handleSelect} placeholder='File Type' required>
+								<option value="" disabled selected>Select where to save</option>
+								{userFolders.map((folder, index)=>{
+									return <option value={folder._id}>{folder.title}</option>
+								})}
+							</select>
+							<button onClick={postData}>Save FLashcard Set</button>
+						</div>
+						<EditableContentFlashcard onSubmit={getValue} onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
+					</div>
+				</div>
+			</div>
+		</FolderWrapper>
 	)
 }

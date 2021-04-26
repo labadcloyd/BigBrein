@@ -1,0 +1,90 @@
+.createFlashcardWrapper{
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	min-width: 250px;
+	width: 100%;
+	padding-right: 10px;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+.contentFlashcardWrapper{
+	display: grid;
+	grid-template-columns: 5fr .1fr;
+	align-items: flex-start;
+	word-break: break-word;
+	gap: 15px;
+	background-color:#152142;
+	border-radius: 10px;
+	margin-bottom: 15px;
+	width: 100%;
+	padding: 15px;
+}
+.contentFlashcardWrapper button{
+	border: none;
+	outline: none;
+	color: white;
+	height: 35px;
+	width:35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.addbtn{
+	background-color: #152142;
+}
+.addbtn:hover{
+	background-color: #40BFF8;
+}
+.deletebtn{
+	background-color: #294481;
+}
+.deletebtn:hover{
+	background-color: #f84040;
+}
+.contentFlashcardContainer{
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+	gap: 15px;
+}
+.contentFlashcardContainer p{
+	font-size: .8rem;
+	font-weight: bold;
+	color: #c7c7c7;
+}
+.contentFlashcardContainer input{
+	font-size: 1.1rem;
+	width: 100%;
+	padding: 12px;
+	background-color: #152142;
+	border-radius: 10px;
+	color: #ffffff;
+	margin-top: 10px;
+	border-radius: 10px;
+	outline: none;
+	border:none;
+}
+.contentFlashcardContainer input:focus{
+	outline: none;
+	border: 3px solid #40BFF8;
+}
+.flashcardContent{
+	font-size: 1.1rem;
+	padding: 12px;
+	border-radius: 10px;
+	background-color: #0d1429;
+	margin-top: 10px;
+}
+.flashcardContent:focus{
+	outline: none;
+	border: 3px solid #40BFF8;
+}
+@media only screen and (max-width: 600px) {
+	.contentFlashcardContainer{
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+}
