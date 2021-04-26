@@ -13,7 +13,7 @@ export default function DashboardPage(props) {
 		<>
 			<FolderWrapper >
 				{session && (
-					<label for="bar-checker" className={css.hamburger}>
+					<label htmlFor="bar-checker" className={css.hamburger}>
 						<Menu fontSize="large"/>
 					</label>
 				)}

@@ -105,6 +105,7 @@
 .fileWrapper{
 	position: relative;
 	height: 100%;
+	overflow-y: auto;
 }
 .selectContainer{
 	justify-content: center;
@@ -145,15 +146,23 @@
 	font-size: 1rem;
 	border-radius: 10px;
 	display: flex;
-	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
+	flex-direction: column;
 	margin-bottom: 10px;
 	overflow: hidden;
-	gap: 10px;
+	gap: 4px;
 }
 .fileContainer:hover{
 	background-color: #294481;
 }
 .fileContainer span{
 	overflow:hidden;
+	font-size: 1.1rem;
+}
+.fileContainer div{
+	font-size: .8rem;
+	color: #dbdbdb;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }

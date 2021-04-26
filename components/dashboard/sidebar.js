@@ -62,9 +62,9 @@ export default function Sidebar(props){
 		setFileType(event.target.value)
 	}
 	/* icons for files */
-	const flashcardIcon = <Style/>
-	const noteIcon = <LibraryBooks/>
-	const quizIcon = <Subtitles/>
+	const flashcardIcon = <Style fontSize="small"/>
+	const noteIcon = <LibraryBooks fontSize="small"/>
+	const quizIcon = <Subtitles fontSize="small"/>
 	/* controlling the folder title input */
 	function handleChange(event){
 		/* clearing any response when adding a new folder*/
@@ -141,10 +141,13 @@ export default function Sidebar(props){
 								const title = file.title
 								return(
 									<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}`}>
-										{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
-										{file.fileType==='Note'?<>{noteIcon}</>:<></>}
-										{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
 										<span>{title}</span>
+										<div>
+											{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
+											{file.fileType==='Note'?<>{noteIcon}</>:<></>}
+											{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
+											{file.fileType}
+										</div>
 									</a>
 								)
 							})}
