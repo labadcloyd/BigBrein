@@ -1,26 +1,17 @@
 import Sidebar from '../../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
 import {User} from '../../models/userModel'
-import Files from '../../components/dashboard/files'
 import css from './folderID.module.css'
-import { useState } from 'react'
-import FolderWrapper from '../../components/dashboard/folderWrapper'
 import {Menu} from '@material-ui/icons'
+import FolderWrapper from '../../components/dashboard/folderWrapper'
 
-//this is the specific folder directory, where you can find all the files inside the folder
-export default function FolderPage(props) {
-	const {session, userFolders, currentFolder, folderFiles} = props;
-
-	/* STYLING PURPOSES ONLY */
-	const [displaySidebar, setDisplaySidebar] = useState(true)
-	function toggleSidebar(){
-		setDisplaySidebar((prevValue)=>{
-			return !prevValue
-		})
-	}
+//this is the dashboard, where all the study files will be found
+export default function DashboardPage(props) {
+	
+	const {session, userFolders, currentFolderQuery} = props;
 	return (
-		<>	
-			<FolderWrapper>
+		<>
+			<FolderWrapper >
 				{session && (
 					<label for="bar-checker" className={css.hamburger}>
 						<Menu fontSize="large"/>
@@ -28,11 +19,16 @@ export default function FolderPage(props) {
 				)}
 				<input type="checkbox" className={css.checker} id="bar-checker"/>
 				<div className={css.folderWrapperSidebar}>
-					<Sidebar session={session} userFolders={userFolders} />
+					<Sidebar session={session} userFolders={userFolders} currentFolderQuery={currentFolderQuery}/>
 				</div>
 				<div className={css.folderOverlay}></div>
 				<div className={css.folderWrapperFiles}>
-					<Files currentFolderID={currentFolder._id}  session={session} currentFolder={currentFolder.title} folderFiles={folderFiles}></Files>
+					<div className={css.fileComponentWrapper} >	
+						<div className={css.fileComponentContainer}>
+							<h2>Create or open a folder.</h2>
+							<p>Open the folder on the sidebar and start making flashcards, notes, or quiz sets.</p>
+						</div>
+					</div>
 				</div>
 			</FolderWrapper>
 		</>
@@ -40,7 +36,6 @@ export default function FolderPage(props) {
 }
 
 export async function getServerSideProps(context){
-	const {folderID} = context.query
 	/*we get the session by passing the req and checking if it includes a jwt*/
 	const session = await getSession({req:context.req})
 	if(!session){
@@ -52,21 +47,24 @@ export async function getServerSideProps(context){
 	}
 	/*we only start gathering the data once confirmed that the user is signed in*/
 	const username= session.user.name
-	/*we get the user and their folders and their files*/
+	/*we get the user and their folders*/
+	const query= context.params.folderID;
 	const user = await User.findOne({username:username})
-	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
+	/* NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
-	const currentFolderUnserialized = folders.find((folder, index) => {
-		return folder._id === folderID;
-	  });
-	const currentFolder = JSON.parse(JSON.stringify(currentFolderUnserialized))
-	const files = JSON.parse(JSON.stringify(currentFolder.files))
+	const currentFolderQuery = await folders.find((folder)=>{
+		return folder._id === query
+	})
+	if(!currentFolderQuery){
+		return{
+			notFound:true
+		}
+	}
 	return{
 		props:{
 			session:session,
 			userFolders: folders,
-			currentFolder: currentFolder,
-			folderFiles: files
+			currentFolderQuery: currentFolderQuery
 		}
 	}
 }

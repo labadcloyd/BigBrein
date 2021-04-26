@@ -1,22 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import css from './sidebar.module.css'
-import {AddCircle, Folder } from '@material-ui/icons'
+import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style } from '@material-ui/icons'
+
 export default function Sidebar(props){
 	const router = useRouter();
-	const {session, userFolders} = props;
+	const {session, userFolders, currentFolderQuery} = props;
 	const [folderTitle, setFolderTitle] = useState('');
 	/* for showing the api response when adding a new folder*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
-	/* controlling the folder title input */
-	function handleChange(event){
-		/* clearing any response when adding a new folder*/
-		setResponseAvailable(false)
-		setFolderTitle(event.target.value)
-	}
-	/* function that makes the post request */
+	
+	/* BACK END */
+
+	/* function that makes the post request for adding a folder*/
 	async function submitFolder(data){
 		try{
 			const username = session.user.name
@@ -49,29 +47,111 @@ export default function Sidebar(props){
 			router.push(`/files/${folderID}`)
 		}
 	}
+	/* function that makes the post request for adding a file*/
+	async function addFile(){
+		router.push(`/files/${fileType}/create${fileType}`)
+	}
+
+	/* FRONT END */
+
+	/* showing the addfile div */
+	const [showAddFile, setShowAddFile] = useState(false)
+	const [fileType, setFileType] = useState();
+	/* controlling the file title input */
+	function handleSelect(event){
+		setFileType(event.target.value)
+	}
+	/* icons for files */
+	const flashcardIcon = <Style/>
+	const noteIcon = <LibraryBooks/>
+	const quizIcon = <Subtitles/>
+	/* controlling the folder title input */
+	function handleChange(event){
+		/* clearing any response when adding a new folder*/
+		setResponseAvailable(false)
+		setFolderTitle(event.target.value)
+	}
+	/* showing or hiding folder options */
+	const [isOptionShown, toggleOption] = useState(false)
+	/* changing current folder of sidebar */
+	const [currentFolder, setCurrentFolder] = useState('Select or Add Folder')
+	function changeFolder(folder){
+		setCurrentFolder(folder.title)
+		setCurrentFiles(folder.files)
+		toggleOption(false)
+		setShowAddFile(true)
+	}
+	/* changing current files of sidebar */
+	const [currentFiles, setCurrentFiles] = useState([])
+	/* checking if queried folder is available */
+	if(currentFolderQuery){
+		useEffect(()=>{
+			const queriedFoldery = userFolders.find((folder)=>{
+				return folder._id === currentFolderQuery._id
+			})
+			setCurrentFolder(queriedFoldery.title)
+			setCurrentFiles(queriedFoldery.files)
+			toggleOption(false)
+			setShowAddFile(true)
+		},[currentFolderQuery])
+	}
+	
 	return(
 		<>	
 			<div className={css.sidebarWrapper}>
-				<div className={css.sidebarContainerContainer}>
-					<div className={css.sidebarContainer}>
-						{isApiResponse && (<h2>{apiResponse}</h2>)}
-						{userFolders.map((folder, index)=>{
-							const title = folder.title
-							return(
-								<a key={index} className={css.folderContainer} href={`/files/${folder._id}`}>
-									<Folder/>
-									{ title.length>10?<>{title.slice(0,10)+'...'}</>:title}
-								</a>
-							)
-						})}
+				<div className={css.sidebarContainer}>
+					<div className={css.optionTitle} onClick={()=>{toggleOption((prevValue)=>{return !prevValue})}} style={{backgroundColor:isOptionShown?'#294481':'#19274e'}}>
+						<Folder/>
+						<span>{currentFolder}</span>
+						<ExpandMore/>
 					</div>
+					<div className={css.optionWrapper} style={{display:isOptionShown?'block':'none'}}>
+						<div className={css.optionContainer}>
+							{isApiResponse && (<h2>{apiResponse}</h2>)}
+							<form onSubmit={submitHandler}>
+								<div className={css.addFolderContainer}>
+									<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
+									<button type='submit'><AddCircle/></button>
+								</div>
+							</form> 
+							{userFolders.map((folder, index)=>{
+								const title = folder.title
+								return(
+									<a key={index} className={css.folderContainer} onClick={()=>{changeFolder(folder)}}>
+										<Folder/>
+										<span>{title}</span>
+									</a>
+								)
+							})}
+						</div>
+					</div>
+
+					<div className={css.fileWrapper} style={{display:isOptionShown?'none':'block'}}>
+						<div className={css.selectContainer} style={{display:showAddFile?'flex':'none'}}>
+							<select onChange={handleSelect} placeholder='File Type'>
+								<option value="" disabled selected>Select file type to add</option>
+								<option value='Flashcard'>Flashcard</option>
+								<option value='Note'>Note</option>
+								<option value='Quiz'>Quiz</option>
+							</select>
+							<button onClick={addFile} style={{backgroundColor:fileType?'#40BFF8':'#3b3b3b'}} disabled={!fileType? true: false}><AddCircle/></button>
+						</div>
+						<div className={css.filesContainer}>
+							{currentFiles.map((file, index)=>{
+								const title = file.title
+								return(
+									<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}`}>
+										{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
+										{file.fileType==='Note'?<>{noteIcon}</>:<></>}
+										{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
+										<span>{title}</span>
+									</a>
+								)
+							})}
+						</div>
+					</div>
+
 				</div>
-				<form onSubmit={submitHandler}>
-					<div className={css.addFolderContainer}>
-						<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
-						<button type='submit'><AddCircle/></button>
-					</div>
-				</form> 
 			</div>
 		</>
 	)

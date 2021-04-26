@@ -26,7 +26,7 @@ export default function DashboardPage(props) {
 					<div className={css.fileComponentWrapper} >	
 						<div className={css.fileComponentContainer}>
 							<h2>Create or open a folder.</h2>
-							<p>Open the folder so you can start making flashcards, notes, or quiz sets.</p>
+							<p>Open the folder on the sidebar and start making flashcards, notes, or quiz sets.</p>
 						</div>
 					</div>
 				</div>
