@@ -9,8 +9,7 @@ import Sidebar from '../../../components/dashboard/sidebar'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
 
 export default function FlashcardSetPage(props){
-	const {title, flashcards, session, userFolders} = props
-	
+	const {title, flashcards, session, userFolders, folderQuery} = props
 	return(
 		<>	
 			<FolderWrapper >
@@ -21,7 +20,7 @@ export default function FlashcardSetPage(props){
 						</label>
 						<input type="checkbox" className={css.checker} id="bar-checker"/>
 						<div className={css.folderWrapperSidebar} >
-							<Sidebar session={session} userFolders={userFolders}/>
+							<Sidebar folderQuery={folderQuery} session={session} userFolders={userFolders}/>
 						</div>
 					</>
 				)}
@@ -38,7 +37,7 @@ export async function getServerSideProps(context){
 	const session = await getSession({req:context.req})
 
 	/* getting the flashcardid and/or the currentfolderID */
-	const query= context.params.flashcardParams;
+	const [query, folderQueryID ]= context.params.flashcardParams;
 	/* finding the specific flashcard */
 	const specificFlashcardSet = await FlashcardSet.findOne({_id:query},(err, foundSet)=>{
 			return foundSet
@@ -62,6 +61,20 @@ export async function getServerSideProps(context){
 	if(!specificFlashcardSet){
 		return{
 			notFound:true
+		}
+	}
+	if (folderQueryID && specificFlashcardSet && session){
+		const folderQuery = await folders.find((folder)=>{
+			return folder._id === folderQueryID
+		})
+		return{
+			props:{
+				title: plainData.title,
+				flashcards: plainData.flashcards,
+				session: session,
+				userFolders: folders,
+				folderQuery: folderQuery
+			}
 		}
 	}
 	else if(session && specificFlashcardSet){

@@ -81,7 +81,7 @@ export default function CreateFlashcard(props){
 			const username = session.user.name
 			const response = await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, folderID: folderID, username:username})
 			const query = response.data.flashcardID 
-			router.push(`/files/Flashcard/${query}`)
+			router.push(`/files/Flashcard/${query}/${folderID}`)
 		}
 		catch(error){
 			const errorData = error.response

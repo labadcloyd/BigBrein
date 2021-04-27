@@ -6,7 +6,7 @@ import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style } from '@m
 
 export default function Sidebar(props){
 	const router = useRouter();
-	const {session, userFolders, currentFolderQuery} = props;
+	const {session, userFolders, folderQuery, currentFolderQuery} = props;
 	const [folderTitle, setFolderTitle] = useState('');
 	/* for showing the api response when adding a new folder*/
 	const [apiResponse, setResponse] = useState('');
@@ -78,19 +78,27 @@ export default function Sidebar(props){
 	function changeFolder(folder){
 		setCurrentFolder(folder.title)
 		setCurrentFiles(folder.files)
+		setfileFolder(folder._id)
 		toggleOption(false)
 		setShowAddFile(true)
 	}
 	/* changing current files of sidebar */
 	const [currentFiles, setCurrentFiles] = useState([])
+	/* adding folder id to file link */
+	const [fileFolderID, setfileFolder] = useState()
 	/* checking if queried folder is available */
+	useEffect(()=>{
+		if(folderQuery){
+			changeFolder(folderQuery)
+		}
+	},[])
 	if(currentFolderQuery){
 		useEffect(()=>{
-			const queriedFoldery = userFolders.find((folder)=>{
+			const queriedFolder = userFolders.find((folder)=>{
 				return folder._id === currentFolderQuery._id
 			})
-			setCurrentFolder(queriedFoldery.title)
-			setCurrentFiles(queriedFoldery.files)
+			setCurrentFolder(queriedFolder.title)
+			setCurrentFiles(queriedFolder.files)
 			toggleOption(false)
 			setShowAddFile(true)
 		},[currentFolderQuery])
@@ -140,7 +148,7 @@ export default function Sidebar(props){
 							{currentFiles.map((file, index)=>{
 								const title = file.title
 								return(
-									<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}`}>
+									<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}/${fileFolderID}`}>
 										<span>{title}</span>
 										<div>
 											{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
