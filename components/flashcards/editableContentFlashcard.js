@@ -44,6 +44,9 @@ export default function EditableContentFlashcard(props){
 					{contents.map((content, index)=>{
 						return(
 							<div className={css.contentFlashcardWrapper} key={index}>
+								<div className={css.contentBar}>
+									<button className={css.deletebtn} onClick={()=>{handleDelete(index)}}><Clear/></button>
+								</div>
 								<div className={css.contentFlashcardContainer}>
 									<div>
 										<p>TERM</p>
@@ -72,11 +75,13 @@ export default function EditableContentFlashcard(props){
 										</div>
 									</div>
 								</div>
-								<button className={css.deletebtn} onClick={()=>{handleDelete(index)}}><Clear/></button>
 							</div>
 						)
 					})}
-					<form onSubmit={handleSubmit} className={css.contentFlashcardWrapper} style={{backgroundColor:'#294481'}}>
+					<form onSubmit={handleSubmit} className={css.contentFlashcardWrapper} style={{backgroundColor:'#1f3063'}}>
+						<div className={css.contentBar}>
+							<button className={css.addbtn} type='submit'><AddCircle/></button>
+						</div>
 						<div className={css.contentFlashcardContainer}>
 							<div>
 								<p>TERM</p>
@@ -87,7 +92,6 @@ export default function EditableContentFlashcard(props){
 								<input type='text' value={inputValue.description} name='description' onChange={handleChange} placeholder='Description' />
 							</div>
 						</div>
-						<button className={css.addbtn} type='submit'><AddCircle/></button>
 					</form>
 				</div>
 			</div>

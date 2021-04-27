@@ -15,8 +15,71 @@
 	max-width: 1000px;
 	border-radius: 10px;
 	margin-bottom: 20px;
+	box-sizing: border-box;
 }
-
+.optionWrapper{
+	display: flex;
+	flex-direction: row;
+	margin-right: 10px;
+	padding: 15px;
+	border-radius: 10px;
+	gap: 15px;
+	background-color: #1f3063;
+}
+.optionWrapper input{
+	background-color: #1f3063;
+	width: 100%;
+	padding: 15px;
+	border-radius: 10px;
+	border:none;
+	color: white;
+	font-size: 1.1rem;
+}
+.optionWrapper input:hover{
+	background-color: #2a4185;
+}
+.optionWrapper input:focus{
+	outline: none;
+	background-color: #2a4185;
+}
+.optionWrapper select{
+	background-color: #1f3063;
+	font-size: 1.1rem;
+	min-width: 230px;
+	width: 230px;
+	padding: 15px;
+	border-radius: 10px;
+	color: white;
+	border:none;
+	cursor: pointer;
+}
+.optionWrapper select:focus{
+	background-color: #2a4185;
+	outline: none;
+}
+.optionWrapper select:hover{
+	background-color: #2a4185;
+}
+.optionWrapper option{
+	overflow-x: hidden;
+	width: 300px;
+}
+.optionWrapper button{
+	font-size: 1.1rem;
+	min-width: 110px;
+	padding: 15px;
+	border-radius: 10px;
+	background-color: #2a4185;
+	color: white;
+	border:none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.optionWrapper button:hover{
+	background-color: #40BFF8;
+}
 
 
 

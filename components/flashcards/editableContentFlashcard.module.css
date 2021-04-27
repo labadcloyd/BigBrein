@@ -4,24 +4,28 @@
 	overflow-y: auto;
 	min-width: 250px;
 	width: 100%;
-	padding-right: 10px;
-	padding: 10px;
+	padding: 10px 20px 10px 0px;
 	border-radius: 10px;
 	margin-top: 10px;
 }
 .contentFlashcardWrapper{
-	display: grid;
-	grid-template-columns: 5fr .1fr;
+	display: flex;
+	flex-direction: column;
 	align-items: flex-start;
 	word-break: break-word;
-	gap: 15px;
-	background-color:#152142;
+	background-color:#0c152b;
 	border-radius: 10px;
 	margin-bottom: 15px;
 	width: 100%;
-	padding: 15px;
 }
-.contentFlashcardWrapper button{
+.contentBar{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: -45px;
+	z-index: 1;
+}
+.contentBar button{
 	border: none;
 	outline: none;
 	color: white;
@@ -32,9 +36,10 @@
 	align-items: center;
 	border-radius: 10px;
 	cursor: pointer;
+	margin:10px 10px 0px 0px;
 }
 .addbtn{
-	background-color: #152142;
+	background-color: #294481;
 }
 .addbtn:hover{
 	background-color: #40BFF8;
@@ -47,23 +52,25 @@
 }
 .contentFlashcardContainer{
 	display: grid;
-	grid-template-columns: 2fr 3fr;
+	grid-template-columns: 3fr 3.3fr;
 	gap: 15px;
+	width: 100%;
+	padding:15px
 }
 .contentFlashcardContainer p{
 	font-size: .8rem;
 	font-weight: bold;
 	color: #c7c7c7;
+	padding: 15px 0px 0px 15px;
 }
 .contentFlashcardContainer input{
 	font-size: 1.1rem;
 	width: 100%;
 	padding: 12px;
-	background-color: #152142;
+	background-color: #2d468d;
 	border-radius: 10px;
 	color: #ffffff;
 	margin-top: 10px;
-	border-radius: 10px;
 	outline: none;
 	border:none;
 }
@@ -72,11 +79,11 @@
 	border: 3px solid #40BFF8;
 }
 .flashcardContent{
-	font-size: 1.1rem;
-	padding: 12px;
+	padding: 15px;
 	border-radius: 10px;
-	background-color: #0d1429;
-	margin-top: 10px;
+	font-size: 1.1rem;
+	background-color: #152142;
+	margin-top: 10px; 
 }
 .flashcardContent:focus{
 	outline: none;

@@ -5,7 +5,7 @@ import {useRouter} from 'next/router'
 import css from './createFlashcard.module.css'
 import Sidebar from '../dashboard/sidebar'
 import FolderWrapper from '../dashboard/folderWrapper'
-import {Menu} from '@material-ui/icons'
+import {Menu, Save} from '@material-ui/icons'
 
 export default function CreateFlashcard(props){
 	const router = useRouter()
@@ -23,10 +23,14 @@ export default function CreateFlashcard(props){
 	/* controlling the file title input */
 	function handleSelect(event){
 		setFolderID(event.target.value)
+		setResponse('')
+		setResponseAvailable(false)
 	}
 	/* adding flashcardSet name */
 	function flashcardNameChange(event){
 		setName(event.target.value)
+		setResponse('')
+		setResponseAvailable(false)
 	}
 	/* adding a flashcard */
 	function getValue(inputValue){
@@ -36,6 +40,8 @@ export default function CreateFlashcard(props){
 	}
 	/*changing flashcardset data */
 	function changeFlashcardData(inputValue, inputIndex, inputName){
+		setResponse('')
+		setResponseAvailable(false)
 		const newFlashcardSet = [...flashcardValues]
 		/* here we look for the object with the index of dataset's index and name of dataset's name	and change its value */
 		if(inputValue){
@@ -54,7 +60,22 @@ export default function CreateFlashcard(props){
 	/* sending post request to the api */
 	async function postData(){
 		try{
-			if(!flashcardTitle || !flashcardValues || !folderID){
+			if(!flashcardTitle){
+				const response = 'Missing Input: No title added'
+				setResponse(response)
+				setResponseAvailable(true)
+				return
+			}
+			if(!flashcardValues){
+				const response = 'Missing Input: No flashcards added'
+				setResponse(response)
+				setResponseAvailable(true)
+				return
+			}
+			if(!folderID){
+				const response = 'Missing Input: Please select a folder to save the flashcard set'
+				setResponse(response)
+				setResponseAvailable(true)
 				return
 			}
 			const username = session.user.name
@@ -74,22 +95,22 @@ export default function CreateFlashcard(props){
 	return(
 		<FolderWrapper >
 			{session && (
-					<>
-						<label for="bar-checker" className={css.hamburger}>
-							<Menu fontSize="large"/>
-						</label>
-						<input type="checkbox" className={css.checker} id="bar-checker"/>
-						<div className={css.folderWrapperSidebar} >
-							<Sidebar session={session} userFolders={userFolders}/>
-						</div>
-					</>
+				<>
+					<label htmlFor="bar-checker" className={css.hamburger}>
+						<Menu fontSize="large"/>
+					</label>
+					<input type="checkbox" className={css.checker} id="bar-checker"/>
+					<div className={css.folderWrapperSidebar} >
+						<Sidebar session={session} userFolders={userFolders}/>
+					</div>
+				</>
 				)}
 			<div className={css.folderOverlay}></div>
 			<div className={css.folderWrapperFiles}>
 				<div className={css.flashcardComponentWrapper}>
 					<div className={css.flashcardComponentContainer}>
-						<div>
-							{isApiResponse && (<h2>{apiResponse}</h2>)}
+						{isApiResponse && (<h2 style={{color:'#f84040', marginBottom:'10px'}}>{apiResponse}</h2>)}
+						<div className={css.optionWrapper}>
 							<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxLength="50" required />
 							<select onChange={handleSelect} placeholder='File Type' required>
 								<option value="" disabled selected>Select where to save</option>
@@ -97,7 +118,7 @@ export default function CreateFlashcard(props){
 									return <option value={folder._id}>{folder.title}</option>
 								})}
 							</select>
-							<button onClick={postData}>Save FLashcard Set</button>
+							<button onClick={postData}><Save/>Save</button>
 						</div>
 						<EditableContentFlashcard onSubmit={getValue} onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
 					</div>

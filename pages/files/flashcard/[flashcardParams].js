@@ -16,7 +16,7 @@ export default function FlashcardSetPage(props){
 			<FolderWrapper >
 				{session && (
 					<>
-						<label for="bar-checker" className={css.hamburger}>
+						<label htmlFor="bar-checker" className={css.hamburger}>
 							<Menu fontSize="large"/>
 						</label>
 						<input type="checkbox" className={css.checker} id="bar-checker"/>

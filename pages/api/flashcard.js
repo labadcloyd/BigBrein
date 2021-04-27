@@ -14,17 +14,18 @@ export default async function handler(req, res){
 		const {title, flashcards, username, folderID} = req.body
 		/* validation: if they dont input a title or flashcard */
 		if(!username || !title || !flashcards || title.length>50){
-			return res.status(422).send(`Invalid Input: Please try again`);
-		}
-		else if(title.length > 30){
-			return res.status(422).send(`Invalid Input: Title is too long`);
+			return res.status(422).json({message:`Invalid Input: Please try again`});
 		}
 		else if(title && flashcards){
 			/* NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 			const plainDataFlashcards = JSON.parse(JSON.stringify(flashcards))
+			console.log(plainDataFlashcards)
+			const validatedFlashcards = plainDataFlashcards.filter((flashcard)=>{
+				return flashcard.term.length > 0 || flashcard.description.length > 0
+			})
 			const createdFlashcardSet = new FlashcardSet({
 				title:title, 
-				flashcards:plainDataFlashcards,
+				flashcards:validatedFlashcards,
 				fileType:'flashcard'
 			})
 			try{
