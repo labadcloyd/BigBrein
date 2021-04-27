@@ -58,6 +58,8 @@ export default function CreateFlashcard(props){
 		});
 	}
 	/* sending post request to the api */
+	/* state for checking the function if its running */
+	const [isSubmitLoading, setSubmitLoading] = useState(false)
 	async function postData(){
 		try{
 			if(!flashcardTitle){
@@ -78,12 +80,17 @@ export default function CreateFlashcard(props){
 				setResponseAvailable(true)
 				return
 			}
+			if(isSubmitLoading===true){
+				return
+			}
+			setSubmitLoading(true)
 			const username = session.user.name
 			const response = await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, folderID: folderID, username:username})
 			const query = response.data.flashcardID 
 			router.push(`/files/Flashcard/${query}/${folderID}`)
 		}
 		catch(error){
+			setSubmitLoading(false)
 			const errorData = error.response
 			const response = errorData.data.message
 			setResponse(response)
@@ -118,7 +125,7 @@ export default function CreateFlashcard(props){
 									return <option value={folder._id}>{folder.title}</option>
 								})}
 							</select>
-							<button onClick={postData}><Save/>Save</button>
+							<button onClick={postData} disabled={isSubmitLoading?true:false} style={{backgroundColor:isSubmitLoading?'#3b3b3b':'#2a4185'}}><Save/>Save</button>
 						</div>
 						<EditableContentFlashcard onSubmit={getValue} onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
 					</div>

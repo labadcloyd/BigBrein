@@ -11,7 +11,6 @@
 }
 .sidebarContainer{
 	height: 100%;
-	padding:20px;
 	border-radius: 10px;
 	background-color: #0c152b;
 	display: flex;
@@ -23,9 +22,11 @@
 .optionWrapper{
 	height: 100%;
 	position: relative;
+	margin: 0px 20px 20px 20px;
 }
 .optionTitle{
 	padding: 15px;
+	margin: 20px 20px 0px 20px;
 	background-color:#19274e;
 	margin-bottom: 10px;
 	border-radius: 10px;
@@ -106,6 +107,7 @@
 	position: relative;
 	height: 100%;
 	overflow-y: auto;
+	padding: 0px 20px 20px 20px;
 }
 .selectContainer{
 	justify-content: center;

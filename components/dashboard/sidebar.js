@@ -17,7 +17,7 @@ export default function Sidebar(props){
 	/* function that makes the post request for adding a folder*/
 	async function submitFolder(data){
 		try{
-			const username = session.user.name
+			const username = session.user.name	
 			const response = await axios.post('/api/userFolder', {folderTitle:folderTitle, username: username})
 			return response
 		}catch(error){
@@ -26,25 +26,34 @@ export default function Sidebar(props){
 		}		
 	}
 	/* handling submit request */
+	/* state for checking the function if its running */
+	const [isSubmitLoading, setSubmitLoading] = useState(false)
 	async function submitHandler(event){
-		event.preventDefault()
-		/* checking if input is all just spaces */
-		if(folderTitle.trim() === ''){
-			setFolderTitle('')
-			return
-		}
-		/* calling the function that sends the post request */
-		const response = await submitFolder()
-		/* handling the response */
-		if(response.status !== 201){
+		try{
+			event.preventDefault()
+			if(isSubmitLoading===true){
+				return
+			}
+			setSubmitLoading(true)
+			/* checking if input is all just spaces */
+			if(folderTitle.trim() === ''){
+				setFolderTitle('')
+				return
+			}
+			/* calling the function that sends the post request */
+			const response = await submitFolder()
+			/* handling the response */
+			if(response.status === 201){
+				setFolderTitle('')
+				const folderID = response.data.folderID
+				router.push(`/files/${folderID}`)
+				setSubmitLoading(false)
+			}
+		}catch(error){
+			setSubmitLoading(false)
 			setResponseAvailable(true)
 			setFolderTitle('')
-			setResponse(response.data.message)
-		}
-		if(response.status === 201){
-			setFolderTitle('')
-			const folderID = response.data.folderID
-			router.push(`/files/${folderID}`)
+			setResponse(error.response)
 		}
 	}
 	/* function that makes the post request for adding a file*/
@@ -119,7 +128,7 @@ export default function Sidebar(props){
 							<form onSubmit={submitHandler}>
 								<div className={css.addFolderContainer}>
 									<input onChange={handleChange} value={folderTitle} placeholder='Create Folder' maxLength='30' required />
-									<button type='submit'><AddCircle/></button>
+									<button type='submit' disabled={isSubmitLoading?true:false} style={{color:isSubmitLoading?'#3b3b3b':'#ffffff'}}><AddCircle/></button>
 								</div>
 							</form> 
 							{userFolders.map((folder, index)=>{

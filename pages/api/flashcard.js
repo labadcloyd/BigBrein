@@ -19,7 +19,6 @@ export default async function handler(req, res){
 		else if(title && flashcards){
 			/* NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 			const plainDataFlashcards = JSON.parse(JSON.stringify(flashcards))
-			console.log(plainDataFlashcards)
 			const validatedFlashcards = plainDataFlashcards.filter((flashcard)=>{
 				return flashcard.term.length > 0 || flashcard.description.length > 0
 			})

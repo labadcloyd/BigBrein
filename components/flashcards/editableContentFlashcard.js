@@ -85,11 +85,11 @@ export default function EditableContentFlashcard(props){
 						<div className={css.contentFlashcardContainer}>
 							<div>
 								<p>TERM</p>
-								<input type='text' value={inputValue.term} name='term' onChange={handleChange} placeholder='Term' />
+								<input type='text' autoComplete='off' value={inputValue.term} name='term' onChange={handleChange} placeholder='Term' />
 							</div>
 							<div>
 								<p>DESCRIPTION</p>
-								<input type='text' value={inputValue.description} name='description' onChange={handleChange} placeholder='Description' />
+								<input type='text' autoComplete='off' value={inputValue.description} name='description' onChange={handleChange} placeholder='Description' />
 							</div>
 						</div>
 					</form>
