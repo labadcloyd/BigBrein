@@ -29,22 +29,26 @@
 	border: none;
 	outline: none;
 	color: white;
-	height: 35px;
-	width:35px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
 	cursor: pointer;
-	margin:10px 10px 0px 0px;
+	margin:10px 15px 0px 0px;
 }
 .addbtn{
+	height: 35px;
+	width:auto;
+	padding: 0px 10px 0px 10px;
 	background-color: #294481;
+	gap: 10px;
 }
 .addbtn:hover{
 	background-color: #40BFF8;
 }
 .deletebtn{
+	height: 35px;
+	width:35px;
 	background-color: #294481;
 }
 .deletebtn:hover{

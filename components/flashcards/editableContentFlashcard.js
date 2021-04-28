@@ -80,7 +80,7 @@ export default function EditableContentFlashcard(props){
 					})}
 					<form onSubmit={handleSubmit} className={css.contentFlashcardWrapper} style={{backgroundColor:'#1f3063'}}>
 						<div className={css.contentBar}>
-							<button className={css.addbtn} type='submit'><AddCircle/></button>
+							<button className={css.addbtn} type='submit'><AddCircle/>Add Flashcard</button>
 						</div>
 						<div className={css.contentFlashcardContainer}>
 							<div>
