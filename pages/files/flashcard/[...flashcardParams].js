@@ -7,6 +7,7 @@ import ContentFlashcard from '../../../components/flashcards/contentFlashcard'
 import {Menu} from '@material-ui/icons'
 import Sidebar from '../../../components/dashboard/sidebar'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
+import CarouselFlashcard from '../../../components/flashcards/carouselFlashcard'
 
 export default function FlashcardSetPage(props){
 	const {title, flashcards, session, userFolders, folderQuery} = props
@@ -26,6 +27,7 @@ export default function FlashcardSetPage(props){
 				)}
 				<div className={css.folderOverlay}></div>
 				<div className={css.folderWrapperFiles} style={{paddingLeft:session?'':'0px'}}>
+					<CarouselFlashcard contents={flashcards} />
 					<ContentFlashcard contents={flashcards} title={title} />
 				</div>
 			</FolderWrapper>
