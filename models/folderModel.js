@@ -7,7 +7,7 @@ const folderSchema = new mongoose.Schema({
 		max: 50,
 		required:true,
 	},
-	files:[{title:String, fileType:String}],
+	files:[{title:String, filetype:String}],
 })
 //it is very important to structure the model like this as Nextjs has a bug that creates the model again every render if the model is not done like this
 const Folder = mongoose.models.Folder || mongoose.model('Folder', folderSchema )

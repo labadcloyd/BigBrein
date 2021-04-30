@@ -8,7 +8,7 @@ const flashcardSetSchema = new mongoose.Schema({
 		required:true,
 	},
 	flashcards:[{term: String, description: String}],
-	fileType:{
+	filetype:{
 		type: String,
 		required:true,
 	}

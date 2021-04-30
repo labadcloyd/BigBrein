@@ -58,14 +58,14 @@ export default function Sidebar(props){
 	}
 	/* function that makes the post request for adding a file*/
 	async function addFile(){
-		router.push(`/files/${fileType}/create${fileType}`)
+		router.push(`/files/${filetype}/create${filetype}`)
 	}
 
 	/* FRONT END */
 
 	/* showing the addfile div */
 	const [showAddFile, setShowAddFile] = useState(false)
-	const [fileType, setFileType] = useState();
+	const [filetype, setFileType] = useState();
 	/* controlling the file title input */
 	function handleSelect(event){
 		setFileType(event.target.value)
@@ -147,23 +147,23 @@ export default function Sidebar(props){
 						<div className={css.selectContainer} style={{display:showAddFile?'flex':'none'}}>
 							<select onChange={handleSelect} placeholder='File Type'>
 								<option value="" disabled selected>Select file type to add</option>
-								<option value='Flashcard'>Flashcard</option>
-								<option value='Note'>Note</option>
-								<option value='Quiz'>Quiz</option>
+								<option value='flashcard'>Flashcard</option>
+								<option value='note'>Note</option>
+								<option value='quiz'>Quiz</option>
 							</select>
-							<button onClick={addFile} style={{backgroundColor:fileType?'#40BFF8':'#3b3b3b'}} disabled={!fileType? true: false}><AddCircle/></button>
+							<button onClick={addFile} style={{backgroundColor:filetype?'#40BFF8':'#3b3b3b'}} disabled={!filetype? true: false}><AddCircle/></button>
 						</div>
 						<div className={css.filesContainer}>
 							{currentFiles.map((file, index)=>{
 								const title = file.title
 								return(
-									<a key={index} className={css.fileContainer} href={`/files/${file.fileType}/${file.fileID}/${fileFolderID}`}>
+									<a key={index} className={css.fileContainer} href={`/files/${file.filetype}/${file.fileID}/${fileFolderID}`}>
 										<span>{title}</span>
 										<div>
-											{file.fileType==='Flashcard'?<>{flashcardIcon}</>:<></>}
-											{file.fileType==='Note'?<>{noteIcon}</>:<></>}
-											{file.fileType==='Quiz'?<>{quizIcon}</>:<></>}
-											{file.fileType}
+											{file.filetype==='flashcard'?<>{flashcardIcon}</>:<></>}
+											{file.filetype==='note'?<>{noteIcon}</>:<></>}
+											{file.filetype==='quiz'?<>{quizIcon}</>:<></>}
+											{file.filetype}
 										</div>
 									</a>
 								)
