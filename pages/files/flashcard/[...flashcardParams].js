@@ -27,8 +27,8 @@ export default function FlashcardSetPage(props){
 				)}
 				<div className={css.folderOverlay}></div>
 				<div className={css.folderWrapperFiles} style={{paddingLeft:session?'':'0px'}}>
-					<CarouselFlashcard contents={flashcards} />
-					<ContentFlashcard contents={flashcards} title={title} />
+					<CarouselFlashcard contents={flashcards} title={title} />
+					<ContentFlashcard contents={flashcards}/>
 				</div>
 			</FolderWrapper>
 		</>
