@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import {User} from '../../../models/userModel'
+import {User} from '../../../models/usermodel'
 import {verifyPassword} from '../../../utilsServer/hash'
 
 export default NextAuth({

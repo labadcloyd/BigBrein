@@ -1,5 +1,5 @@
 import {getSession} from 'next-auth/client'
-import {User} from '../../../models/userModel'
+import {User} from '../../../models/usermodel'
 import CreateFlashcard from '../../../components/flashcards/createFlashcard'
 
 export default function CreateFlashcardPage(props){

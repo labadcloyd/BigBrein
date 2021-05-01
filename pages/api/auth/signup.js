@@ -1,4 +1,4 @@
-import {User} from '../../../models/userModel'
+import {User} from '../../../models/usermodel'
 import {hashPassword} from '../../../utilsServer/hash'
 
 export default async function handler(req, res){

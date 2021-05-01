@@ -1,6 +1,6 @@
 import Sidebar from '../../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
-import {User} from '../../models/userModel'
+import {User} from '../../models/usermodel'
 import css from './folderID.module.css'
 import {Menu} from '@material-ui/icons'
 import FolderWrapper from '../../components/dashboard/folderWrapper'

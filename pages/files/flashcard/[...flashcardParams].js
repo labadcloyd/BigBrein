@@ -1,6 +1,6 @@
 import {getSession} from 'next-auth/client'
-import {User} from '../../../models/userModel' 
-import {FlashcardSet} from '../../../models/flashcardModel'
+import {User} from '../../../models/usermodel' 
+import {FlashcardSet} from '../../../models/flashcardmodel'
 import { useState } from 'react'
 import css from './flashcard.module.css'
 import ContentFlashcard from '../../../components/flashcards/contentFlashcard'

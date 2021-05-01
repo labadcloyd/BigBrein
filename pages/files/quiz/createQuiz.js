@@ -1,4 +1,4 @@
-import css from './createNote.module.css'
+import css from './createQuiz.module.css'
 export default function CreateQuizPage(){
 	return(
 		<>

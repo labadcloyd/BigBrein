@@ -1,9 +1,9 @@
-import Sidebar from '../components/dashboard/sidebar'
+import Sidebar from '../../../components/dashboard/sidebar'
 import {getSession} from 'next-auth/client'
-import {User} from '../models/userModel'
+import {User} from '../../../models/usermodel'
 import css from './dashboard.module.css'
 import {Menu} from '@material-ui/icons'
-import FolderWrapper from '../components/dashboard/folderWrapper'
+import FolderWrapper from '../../../components/dashboard/folderWrapper'
 
 //this is the dashboard, where all the study files will be found
 export default function DashboardPage(props) {

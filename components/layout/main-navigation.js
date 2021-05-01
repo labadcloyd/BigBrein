@@ -29,7 +29,7 @@ export default function MainNavigation() {
             )}
             {session && (
               <li>
-                <Link href='/dashboard'>Dashboard</Link>
+                <Link href='/user/account/dashboard'>Dashboard</Link>
               </li>
             )}
             {session && (

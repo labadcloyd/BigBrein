@@ -1,4 +1,4 @@
-import {FlashcardSet} from '../../models/flashcardModel'
+import {FlashcardSet} from '../../models/flashcardmodel'
 import {User} from '../../models/userModel'
 import {Folder} from '../../models/folderModel'
 import {getSession} from 'next-auth/client'
