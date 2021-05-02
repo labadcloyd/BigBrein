@@ -7,7 +7,7 @@ import {useRouter} from 'next/router'
 export default function Home() {
 	const router = useRouter()
 	function handleClick(){
-		router.push('/dashboard')
+		router.push('/user/account/dashboard')
 	}
 	return (
 		<>
@@ -31,7 +31,7 @@ export async function getServerSideProps(context){
 	if(session){
 		return{
 			redirect:{
-				destination: '/dashboard'
+				destination: '/user/account/dashboard'
 			}
 		}
 	}
