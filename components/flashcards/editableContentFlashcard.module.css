@@ -21,8 +21,9 @@
 .contentBar{
 	width: 100%;
 	display: flex;
-	justify-content: flex-end;
-	margin-bottom: -45px;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
 	z-index: 1;
 }
 .contentBar button{
@@ -34,21 +35,34 @@
 	align-items: center;
 	border-radius: 10px;
 	cursor: pointer;
-	margin:10px 15px 0px 0px;
+}
+.addbtnContainer{
+	width: 100%;
+	z-index: 1;
 }
 .addbtn{
-	height: 35px;
-	width:auto;
-	padding: 0px 10px 0px 10px;
-	background-color: #294481;
+	font-size: 1.2rem;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #152142;
+	border: none;
+	outline: none;
+	color: white;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
 	gap: 10px;
+	border-radius: 10px;
 }
 .addbtn:hover{
 	background-color: #40BFF8;
 }
 .deletebtn{
 	height: 35px;
-	width:35px;
+	width: 35px;
 	background-color: #294481;
 }
 .deletebtn:hover{
@@ -56,7 +70,7 @@
 }
 .contentFlashcardContainer{
 	display: grid;
-	grid-template-columns: 3fr 3.3fr;
+	grid-template-columns: 3fr 3fr 35px;
 	gap: 15px;
 	width: 100%;
 	padding:15px
@@ -65,27 +79,12 @@
 	font-size: .8rem;
 	font-weight: bold;
 	color: #c7c7c7;
-	padding: 15px 0px 0px 15px;
-}
-.contentFlashcardContainer input{
-	font-size: 1.1rem;
-	width: 100%;
-	padding: 12px;
-	background-color: #2d468d;
-	border-radius: 10px;
-	color: #ffffff;
-	margin-top: 10px;
-	outline: none;
-	border:none;
-}
-.contentFlashcardContainer input:focus{
-	outline: none;
-	border: 3px solid #40BFF8;
+	padding: 0px 0px 0px 10px;
 }
 .flashcardContent{
-	padding: 15px;
+	padding: 10px;
 	border-radius: 10px;
-	font-size: 1.1rem;
+	font-size: 1rem;
 	background-color: #152142;
 	margin-top: 10px; 
 }
@@ -97,5 +96,23 @@
 	.contentFlashcardContainer{
 		grid-template-columns: 1fr;
 		gap: 15px;
+		padding: 10px;
+		border-radius: 6px;
+	}
+	.flashcardContent{
+		font-size: .9rem;
+		padding: 8px;
+		border-radius: 6px;
+	}
+	.contentFlashcardContainer p{
+		font-size: .6rem;
+	}
+	.contentBar{
+		flex-direction: row;
+		justify-content: center;
+		border-radius: 6px;
+	}
+	.deletebtn{
+		font-size: small;
 	}
 }

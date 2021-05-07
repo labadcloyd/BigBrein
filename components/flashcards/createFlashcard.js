@@ -15,7 +15,7 @@ export default function CreateFlashcard(props){
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	/* array of all flashcards */
-	const [flashcardValues, setFlashcardValues] = useState([]);
+	const [flashcardValues, setFlashcardValues] = useState([{term:'', description:''},{term:'', description:''},{term:'', description:''}]);
 	/* title of flashcards */
 	const [flashcardTitle, setName] = useState();
 	/* title of folder to be saved in */
@@ -116,7 +116,7 @@ export default function CreateFlashcard(props){
 			<div className={css.folderWrapperFiles}>
 				<div className={css.flashcardComponentWrapper}>
 					<div className={css.flashcardComponentContainer}>
-						{isApiResponse && (<h2 style={{color:'#f84040', marginBottom:'10px'}}>{apiResponse}</h2>)}
+						{isApiResponse && (<h2 style={{color:'#f84040', marginBottom:'10px', fontSize:'1rem'}}>{apiResponse}</h2>)}
 						<div className={css.optionWrapper}>
 							<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxLength="50" required />
 							<select onChange={handleSelect} placeholder='File Type' required>
@@ -125,7 +125,7 @@ export default function CreateFlashcard(props){
 									return <option value={folder._id}>{folder.title}</option>
 								})}
 							</select>
-							<button onClick={postData} disabled={isSubmitLoading?true:false} style={{backgroundColor:isSubmitLoading?'#3b3b3b':'#2a4185'}}><Save/>Save</button>
+							<button onClick={postData} disabled={isSubmitLoading?true:false} style={{backgroundColor:isSubmitLoading?'#3b3b3b':'#40BFF8'}}><Save/>Save</button>
 						</div>
 						<EditableContentFlashcard onSubmit={getValue} onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>
 					</div>
