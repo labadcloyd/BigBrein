@@ -2,7 +2,7 @@
 	z-index: 0;
 	height: 100vh;  
 	width: 100%;
-	padding: 80px 20px 20px 20px;
+	padding: 80px 0px 20px 20px;
 	display: flex;
 	justify-content: center;
 }
@@ -16,20 +16,18 @@
 	border-radius: 10px;
 	margin-bottom: 20px;
 	box-sizing: border-box;
+	overflow-y: auto;
 }
 .optionWrapper{
 	display: flex;
 	flex-direction: row;
 	margin-right: 20px;
-	padding: 15px;
-	border-radius: 10px;
 	gap: 15px;
-	background-color: #1f3063;
 }
 .optionWrapper input{
 	background-color: #1f3063;
 	width: 100%;
-	padding: 10px;
+	padding: 15px;
 	border-radius: 10px;
 	border:none;
 	color: white;
@@ -80,7 +78,37 @@
 .optionWrapper button:hover{
 	background-color: #40BFF8;
 }
-
+@media only screen and (max-width: 750px) {
+	.optionWrapper{
+		flex-direction: column;
+	}
+	.optionWrapper button{
+		justify-content: center;
+	}
+	.optionWrapper select{
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.optionWrapper select{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.optionWrapper input{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.optionWrapper button{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.flashcardComponentContainer{
+		border-radius: 6px;
+	}
+}
 
 
 

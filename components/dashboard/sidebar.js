@@ -144,6 +144,9 @@ export default function Sidebar(props){
 					</div>
 
 					<div className={css.fileWrapper} style={{display:isOptionShown?'none':'block'}}>
+						<div style={{display:showAddFile?'flex':'none', fontWeight:'bold', padding:'10px 0px 15px 0px'}}>
+							Add File
+						</div>
 						<div className={css.selectContainer} style={{display:showAddFile?'flex':'none'}}>
 							<select onChange={handleSelect} placeholder='File Type'>
 								<option value="" disabled selected>Select file type to add</option>
