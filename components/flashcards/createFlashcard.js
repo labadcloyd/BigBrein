@@ -120,9 +120,9 @@ export default function CreateFlashcard(props){
 						<div className={css.optionWrapper}>
 							<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxLength="50" required />
 							<select onChange={handleSelect} placeholder='File Type' required>
-								<option value="" disabled selected>Select where to save</option>
+								<option key={0} value="" disabled selected>Select where to save</option>
 								{userFolders.map((folder, index)=>{
-									return <option value={folder._id}>{folder.title}</option>
+									return <option key={index + 1} value={folder._id}>{folder.title}</option>
 								})}
 							</select>
 							<button onClick={postData} disabled={isSubmitLoading?true:false} style={{backgroundColor:isSubmitLoading?'#3b3b3b':'#40BFF8'}}><Save/>Save</button>
