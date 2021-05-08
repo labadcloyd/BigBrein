@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/client';
 import {useRouter, userRouter} from 'next/router'
 import css from './main-navigation.module.css';
+import {ExpandMore, Dashboard, AccountCircle, ExitToApp} from '@material-ui/icons'
 
 export default function MainNavigation() {
   const router = useRouter();
@@ -28,19 +29,39 @@ export default function MainNavigation() {
               </Link> 
             )}
             {session && (
-              <li>
-                <Link href='/user/account/dashboard'>Dashboard</Link>
-              </li>
+              <div className={css.navOptionRow}>
+                <li>
+                  <Link href='/user/account/dashboard'>Dashboard</Link>
+                </li>
+                <li>
+                  <Link href='/user/editprofile'>{session.user.name}</Link>
+                </li>
+                <li>
+                  <button onClick={logoutHandler}>Logout</button>
+                </li>
+              </div>
             )}
             {session && (
-              <li>
-                <Link href='/profile'>{session.user.name}</Link>
-              </li>
-            )}
-            {session && (
-              <li>
-                <button onClick={logoutHandler}>Logout</button>
-              </li>
+              <div className={css.navOptionColumn}>
+                <label htmlFor="dropdown-checker" className={css.dropdownbtn}>
+                  <ExpandMore fontSize="large"/>
+                </label>
+                <input type="checkbox" className={css.checker} id="dropdown-checker"/>
+                <div className={css.navOptionColumnContainer}>
+                  <li>
+                    <Dashboard/>
+                    <Link href='/user/account/dashboard'>Dashboard</Link>
+                  </li>
+                  <li>
+                    <AccountCircle/>
+                    <Link href='/user/editprofile'>{session.user.name}</Link>
+                  </li>
+                  <li>
+                    <ExitToApp/>
+                    <button onClick={logoutHandler}>Logout</button>
+                  </li>
+                </div>
+              </div>
             )}
           </ul>
         </nav>
