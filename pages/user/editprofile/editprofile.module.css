@@ -1,0 +1,78 @@
+.fileComponentContainer{
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	color: white;
+	height: 100%;
+	width: 100%;
+	background-color: #0c152b;
+	border-radius: 10px;
+}
+.fileComponentWrapper{
+	z-index: 0;
+	position: relative;
+	right: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 20px 20px 20px;
+}
+.hamburger{
+	display: none;
+	z-index: 3;
+	background-color: transparent;
+	color: white;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+}
+.hamburger:hover{
+	color: #40BFF8;
+}
+.folderWrapperSidebar{
+	z-index: 2;
+	position: fixed;
+}
+.folderWrapperFiles{
+	width: 100%;
+	padding-left: 300px;
+}
+.folderOverlay{
+	background-color: rgb(255, 255, 255, 0.2);
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	display: none;
+}
+.checker {
+    display: none;
+}
+
+@media only screen and (max-width: 700px) {
+	.hamburger{
+		display: block;
+	}
+    .folderWrapperFiles{
+		position: fixed;
+		width: 100vw;
+		padding-left: 0px;
+	}
+    .checker:not(:checked) ~ .folderWrapperSidebar {
+        transform: translateX(-350px);
+    }
+    .checker:checked ~ .folderWrapperSidebar{
+        transform: translateX(0px);
+    }
+	.checker:checked ~ .hamburger{
+		color: #40BFF8;
+	}
+	.checker:not(:checked) ~ .hamburger {
+		color: white;
+    }
+	.checker:checked ~ .folderOverlay{
+		display: block;
+	}
+}

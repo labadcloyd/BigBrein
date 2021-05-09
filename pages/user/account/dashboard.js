@@ -4,6 +4,7 @@ import {User} from '../../../models/usermodel'
 import css from './dashboard.module.css'
 import {Menu} from '@material-ui/icons'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
+import Head from 'next/head'
 
 //this is the dashboard, where all the study files will be found
 export default function DashboardPage(props) {
@@ -11,6 +12,9 @@ export default function DashboardPage(props) {
 	const {session, userFolders} = props;
 	return (
 		<>
+			<Head>
+				<title>AcadDen - Your Best Study App</title>
+			</Head>
 			<FolderWrapper >
 				{session && (
 					<label htmlFor="bar-checker" className={css.hamburger}>

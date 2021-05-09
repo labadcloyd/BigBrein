@@ -8,11 +8,22 @@ import {Menu} from '@material-ui/icons'
 import Sidebar from '../../../components/dashboard/sidebar'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
 import CarouselFlashcard from '../../../components/flashcards/carouselFlashcard'
+import Head from 'next/head'
 
 export default function FlashcardSetPage(props){
 	const {title, flashcards, session, userFolders, folderQuery} = props
 	return(
 		<>	
+			{!folderQuery &&
+				<Head>
+					<title>{title}</title>
+				</Head>
+			}
+			{folderQuery &&
+				<Head>
+					<title>{`${title} - ${folderQuery.title} | Acadden`}</title>
+				</Head>
+			}
 			<FolderWrapper >
 				{session && (
 					<>

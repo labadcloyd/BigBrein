@@ -33,9 +33,9 @@ export default function MainNavigation() {
                 <li>
                   <Link href='/user/account/dashboard'>Dashboard</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href='/user/editprofile'>{session.user.name}</Link>
-                </li>
+                </li> */}
                 <li>
                   <button onClick={logoutHandler}>Logout</button>
                 </li>
@@ -52,10 +52,10 @@ export default function MainNavigation() {
                     <Dashboard/>
                     <Link href='/user/account/dashboard'>Dashboard</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <AccountCircle/>
                     <Link href='/user/editprofile'>{session.user.name}</Link>
-                  </li>
+                  </li> */}
                   <li>
                     <ExitToApp/>
                     <button onClick={logoutHandler}>Logout</button>
