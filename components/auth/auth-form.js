@@ -158,11 +158,14 @@ function AuthForm() {
 							<label htmlFor='password'>Confirm Your Password</label>
 							<input type='password' name='confirmPassword' value={confirmPassword} onChange={handleConfirmation}/>
 						</div>
+						<div className={css.control} style={ {display:isLogin ? 'none': 'block', textDecoration:'none', textAlign:'left', fontSize:'.9rem'}}>
+							By clicking Sign up, you agree to our <a href='/policies' style={{color:'#45afe3'}}>Terms</a> and <a style={{color:'#45afe3'}} href='/policies'>Privacy Policy</a>. 
+						</div>
 						<div className={css.actions}>
 							<button 
 								disabled={isRegisterError} 
 								style={{backgroundColor:isRegisterError? '#4a4a4a': '', color:isRegisterError? 'black': '', cursor:isRegisterError? 'not-allowed': 'pointer'}}>
-									{isLogin ? 'Login' : 'Create Account'}
+									{isLogin ? 'Login' : 'Sign up'}
 							</button>
 							<button
 								type='button'
