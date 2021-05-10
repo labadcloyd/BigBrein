@@ -1,16 +1,16 @@
 import {getSession} from 'next-auth/client'
-import {User} from '../../../models/usermodel'
-import CreateFlashcard from '../../../components/flashcards/createFlashcard'
+import {User} from '../../../../models/usermodel'
+import CreateFlashcard from '../../../../components/flashcards/createFlashcard'
 import Head from 'next/head'
 
 export default function CreateFlashcardPage(props){
-	const {session, userFolders} = props
+	const {session, userFolders, folderQuery} = props
 	return(
 		<>
 			<Head>
 				<title>Create Flashcard Set | AcadDen</title>
 			</Head>
-			<CreateFlashcard session={session} userFolders={userFolders} />
+			<CreateFlashcard session={session} folderQuery={folderQuery} userFolders={userFolders} />
 		</>
 	)
 }
@@ -30,6 +30,22 @@ export async function getServerSideProps(context){
 	const user = await User.findOne({username:username})
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
+	/* getting the flashcardID and/or the currentfolderID */
+	const [folderQueryID]= context.params.flashcardParams;
+
+	if (folderQueryID && session){
+		const folderQuery = await folders.find((folder)=>{
+			return folder._id === folderQueryID
+		})
+		return{
+			props:{
+				session: session,
+				userFolders: folders,
+				folderQuery: folderQuery
+			}
+		}
+	}
+	if(!folderQueryID && session)
 	return{
 		props:{
 			session:session,

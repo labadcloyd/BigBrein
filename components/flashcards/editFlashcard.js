@@ -2,31 +2,23 @@ import { useState } from "react";
 import EditableContentFlashcard from "./editableContentFlashcard";
 import axios from "axios";
 import {useRouter} from 'next/router'
-import css from './createFlashcard.module.css'
+import css from './editFlashcard.module.css'
 import Sidebar from '../dashboard/sidebar'
 import FolderWrapper from '../dashboard/folderWrapper'
 import {Menu, Save} from '@material-ui/icons'
 
-export default function CreateFlashcard(props){
+export default function EditFlashcard(props){
 	const router = useRouter()
 	/* getting the user information from the session props */
-	const {session, userFolders, folderQuery} = props
+	const {session, userFolders, currentFlashcardSet, currentFlashcardTitle, folderQuery} = props
 	/* for showing the api response when adding a new flashcard*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	/* array of all flashcards */
-	const [flashcardValues, setFlashcardValues] = useState([{term:'', description:''},{term:'', description:''},{term:'', description:''}]);
+	const [flashcardValues, setFlashcardValues] = useState(currentFlashcardSet);
 	/* title of flashcards */
-	const [flashcardTitle, setName] = useState();
-	/* title of folder to be saved in */
-	const [folderID, setFolderID] = useState('');
-	/* controlling the folder title input */
-	function handleSelect(event){
-		setFolderID(event.target.value)
-		setResponse('')
-		setResponseAvailable(false)
-	}
-	/* adding flashcardSet name */
+	const [flashcardTitle, setName] = useState(currentFlashcardTitle);
+	/* updating flashcardSet name */
 	function flashcardNameChange(event){
 		setName(event.target.value)
 		setResponse('')
@@ -74,19 +66,13 @@ export default function CreateFlashcard(props){
 				setResponseAvailable(true)
 				return
 			}
-			if(!folderID){
-				const response = 'Missing Input: Please select a folder to save the flashcard set'
-				setResponse(response)
-				setResponseAvailable(true)
-				return
-			}
 			if(isSubmitLoading===true){
 				return
 			}
 			setSubmitLoading(true)
 			const username = session.user.name
 			const response = await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, folderID: folderID, username:username})
-			const query = response.data.flashcardID 
+			const query = response.data.flashcardID
 			router.push(`/files/flashcard/${query}/${folderID}`)
 		}
 		catch(error){
@@ -97,6 +83,7 @@ export default function CreateFlashcard(props){
 			setResponseAvailable(true)
 		}
 	}
+	/* for design purposes only */
 
 	return(
 		<FolderWrapper >
@@ -107,7 +94,7 @@ export default function CreateFlashcard(props){
 					</label>
 					<input type="checkbox" className={css.checker} id="bar-checker"/>
 					<div className={css.folderWrapperSidebar} >
-						<Sidebar session={session} folderQuery={folderQuery} userFolders={userFolders}/>
+						<Sidebar session={session} userFolders={userFolders} folderQuery={folderQuery} />
 					</div>
 				</>
 				)}
@@ -118,12 +105,6 @@ export default function CreateFlashcard(props){
 						{isApiResponse && (<h2 style={{color:'#f84040', marginBottom:'10px', fontSize:'1rem'}}>{apiResponse}</h2>)}
 						<div className={css.optionWrapper}>
 							<input placeholder='Name of Flashcard Set' value={flashcardTitle} onChange={flashcardNameChange} maxLength="50" required />
-							<select onChange={handleSelect} placeholder='File Type' required>
-								<option key={0} value="" disabled selected>Select where to save</option>
-								{userFolders.map((folder, index)=>{
-									return <option key={index + 1} value={folder._id}>{folder.title}</option>
-								})}
-							</select>
 							<button onClick={postData} disabled={isSubmitLoading?true:false} style={{backgroundColor:isSubmitLoading?'#3b3b3b':'#40BFF8'}}><Save/>Save</button>
 						</div>
 						<EditableContentFlashcard onSubmit={getValue} onChange={changeFlashcardData} handleDelete={deleteFlashcard} contents={flashcardValues}/>

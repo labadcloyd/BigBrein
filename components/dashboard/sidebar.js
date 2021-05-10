@@ -58,7 +58,7 @@ export default function Sidebar(props){
 	}
 	/* function that makes the post request for adding a file*/
 	async function addFile(){
-		router.push(`/files/${filetype}/create${filetype}`)
+		router.push(`/files/${filetype}/create${filetype}/${fileFolderID}`)
 	}
 
 	/* FRONT END */

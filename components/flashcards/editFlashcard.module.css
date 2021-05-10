@@ -1,0 +1,174 @@
+.flashcardComponentWrapper{
+	z-index: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 0px 20px 20px;
+	display: flex;
+	justify-content: center;
+}
+.flashcardComponentContainer{
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 100%;
+	width: 100%; 
+	max-width: 1200px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.optionWrapper{
+	display: flex;
+	flex-direction: row;
+	margin: 0px 20px 20px 0px;
+	gap: 15px;
+}
+.optionWrapper input{
+	background-color: #1f3063;
+	width: 100%;
+	padding: 15px;
+	border-radius: 10px;
+	border:none;
+	color: white;
+	font-size: 1.1rem;
+}
+.optionWrapper input:hover{
+	border: 3px solid #40BFF8;
+}
+.optionWrapper input:focus{
+	outline: none;
+	border: 3px solid #40BFF8;
+}
+.optionWrapper select{
+	background-color: #1f3063;
+	font-size: 1.1rem;
+	min-width: 230px;
+	width: 230px;
+	padding: 15px;
+	border-radius: 10px;
+	color: white;
+	border:none;
+	cursor: pointer;
+}
+.optionWrapper select:focus{
+	background-color: #2a4185;
+	outline: none;
+}
+.optionWrapper select:hover{
+	background-color: #2a4185;
+}
+.optionWrapper option{
+	overflow-x: hidden;
+	width: 300px;
+}
+.optionWrapper button{
+	font-size: 1.1rem;
+	min-width: 110px;
+	padding: 15px;
+	border-radius: 10px;
+	background-color: #2a4185;
+	color: white;
+	border:none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.optionWrapper button:hover{
+	background-color: #40BFF8;
+}
+@media only screen and (max-width: 750px) {
+	.optionWrapper{
+		flex-direction: column;
+	}
+	.optionWrapper button{
+		justify-content: center;
+	}
+	.optionWrapper select{
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.optionWrapper select{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.optionWrapper input{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.optionWrapper button{
+		font-size: .9rem;
+		border-radius: 6px;
+		padding: 12px;
+	}
+	.flashcardComponentContainer{
+		border-radius: 6px;
+	}
+}
+
+
+
+/*FOR THE SIDEBAR*/
+.hamburger{
+	display: none;
+	z-index: 3;
+	background-color: transparent;
+	color: white;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+}
+.hamburger:hover{
+	color: #40BFF8;
+}
+.folderWrapperSidebar{
+	z-index: 2;
+	position: fixed;
+}
+.folderWrapperFiles{
+	width: 100%;
+	padding-left: 300px;
+}
+.folderOverlay{
+	background-color: rgb(255, 255, 255, 0.2);
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	display: none;
+}
+.checker {
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+	.hamburger{
+		display: block;
+	}
+    .folderWrapperFiles{
+		position: fixed;
+		width: 100vw;
+		padding-left: 0px;
+	}
+    .checker:not(:checked) ~ .folderWrapperSidebar {
+        transform: translateX(-350px);
+    }
+    .checker:checked ~ .folderWrapperSidebar{
+        transform: translateX(0px);
+    }
+	.checker:checked ~ .hamburger{
+		color: #40BFF8;
+	}
+	.checker:not(:checked) ~ .hamburger {
+		color: white;
+    }
+	.checker:checked ~ .folderOverlay{
+		display: block;
+	}
+}
