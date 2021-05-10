@@ -146,16 +146,16 @@ function AuthForm() {
 					<form onSubmit={submitHandler}>
 						<div className={css.control}>
 							<div style={{color:'red'}}> {isUsernameError ? [errorMessage] : ''}</div>
-							<label htmlFor='username'>Your Username</label>
+							<label htmlFor='username'>Username</label>
 							<input type='text' name='username' required value={credentials.username} onChange={handleChange} maxLength='50' />
 						</div>
 						<div className={css.control}>
-							<label htmlFor='password'>Your Password</label>
+							<label htmlFor='password'>Password</label>
 							<input type='password' name='password' required value={credentials.password} onChange={handleChange} />
 						</div>
 						<div className={css.control} style={ {display:isLogin ? 'none': 'block'}}>
 							<div style={{color:'red'}}> {isConfirmationError ? 'Password does not match' : ''}</div>
-							<label htmlFor='password'>Confirm Your Password</label>
+							<label htmlFor='password'>Confirm Password</label>
 							<input type='password' name='confirmPassword' value={confirmPassword} onChange={handleConfirmation}/>
 						</div>
 						<div className={css.control} style={ {display:isLogin ? 'none': 'block', textDecoration:'none', textAlign:'left', fontSize:'.9rem'}}>
