@@ -1,4 +1,10 @@
+.pageWrapper{
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+}
 .HeaderContainer{
+	box-sizing: border-box;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -56,7 +62,27 @@
 	border: 1px solid #40BFF8;
 	background-color: #40BFF8;
 	color: #ffffff;
-} 
+}
+.footerContainer{
+	background-color: #0c152b;
+	height: 120px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.footerContainer h1{
+	font-size: 1.3rem;
+	margin-bottom: 10px;
+}
+.footerContainer p{
+	text-decoration: none;
+	font-size: .9rem;
+}
+.footerContainer a{
+	color: #40BFF8;
+}
 @media only screen and (max-width: 700px) {
 	.MainContainer{
 		width: 100%;

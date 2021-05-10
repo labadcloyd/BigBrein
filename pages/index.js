@@ -9,17 +9,27 @@ export default function Home() {
 	function handleClick(){
 		router.push('/user/account/dashboard')
 	}
+	const d = new Date();
+	const year = d.getFullYear();
 	return (
 		<>
 			<Head>
 				<title>AcadDen - Your Best Study App</title>
 			</Head>
-			<div className={css.HeaderContainer}>
-				<div className={css.MainContainer}>
-					<div className={css.TitleContainer}>
-						<h1>AcadDen</h1>
-						<h2>The last study app you'll ever need. Easily create flashcards, notes, and practice quizzes.</h2>
-						<button onClick={handleClick}>Study Now</button>
+			<div className={css.pageWrapper}>
+				<div className={css.HeaderContainer}>
+					<div className={css.MainContainer}>
+						<div className={css.TitleContainer}>
+							<h1>AcadDen</h1>
+							<h2>The last study app you'll ever need. Easily create flashcards, notes, and practice quizzes.</h2>
+							<button onClick={handleClick}>Study Now</button>
+						</div>
+					</div>
+				</div>
+				<div className={css.footerContainer}>
+					<div>
+						<h1>©{year} AcadDen </h1>
+						<p>Designed and Developed by: <a href='https://github.com/labadcloyd'>Cloyd Abad</a></p>
 					</div>
 				</div>
 			</div>
