@@ -1,17 +1,17 @@
 import {getSession} from 'next-auth/client'
 import {User} from '../../../../models/usermodel' 
 import {FlashcardSet} from '../../../../models/flashcardmodel'
-import EditFlashcard from '../../../components/flashcards/editFlashcard'
+import EditFlashcard from '../../../../components/flashcards/editFlashcard'
 import Head from 'next/head'
 
 export default function CreateFlashcardPage(props){
-	const {session, userFolders, title, flashcards, folderQuery} = props
+	const {session, userFolders, title, flashcards, folderQuery, flashcardID} = props
 	return(
 		<>
 			<Head>
 				<title>Create Flashcard Set | AcadDen</title>
 			</Head>
-			<EditFlashcard session={session} userFolders={userFolders} />
+			<EditFlashcard session={session} userFolders={userFolders} currentFlashcardSet={flashcards} currentFlashcardTitle={title} currentFlashcardID={flashcardID} folderQuery={folderQuery} />
 		</>
 	)
 }
@@ -51,6 +51,7 @@ export async function getServerSideProps(context){
 			props:{
 				title: plainData.title,
 				flashcards: plainData.flashcards,
+				flashcardID:plainData._id,
 				session: session,
 				userFolders: folders,
 				folderQuery: folderQuery
