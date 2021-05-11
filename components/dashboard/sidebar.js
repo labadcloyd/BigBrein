@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import css from './sidebar.module.css'
-import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style } from '@material-ui/icons'
+import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style, MoreVert, Delete, Edit } from '@material-ui/icons'
+import Filebutton from './filebutton'
 
 export default function Sidebar(props){
 	const router = useRouter();
@@ -158,17 +159,12 @@ export default function Sidebar(props){
 						</div>
 						<div className={css.filesContainer}>
 							{currentFiles.map((file, index)=>{
-								const title = file.title
+								const {title, filetype, fileID} = file
+								console.log(title)
 								return(
-									<a key={index} className={css.fileContainer} href={`/files/${file.filetype}/${file.fileID}/${fileFolderID}`}>
-										<span>{title}</span>
-										<div>
-											{file.filetype==='flashcard'?<>{flashcardIcon}</>:<></>}
-											{file.filetype==='note'?<>{noteIcon}</>:<></>}
-											{file.filetype==='quiz'?<>{quizIcon}</>:<></>}
-											{file.filetype}
-										</div>
-									</a>
+									<>
+										<Filebutton flashcardIcon={flashcardIcon} noteIcon={noteIcon} quizIcon={quizIcon} title={title} filetype={filetype} fileID={fileID} fileFolderID={fileFolderID} index={index}/>
+									</>
 								)
 							})}
 						</div>

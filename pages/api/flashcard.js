@@ -41,9 +41,9 @@ export default async function handler(req, res){
 		if(!session){
 			return res.status(401).json({message:`Unauthorized request`});
 		}
-		const {title, flashcards, currentFlashcardID} = req.body
+		const {title, flashcards, currentFlashcardID, username, folderID} = req.body
 		/* validation: if they dont input a title or flashcard */
-		if(!title || !flashcards || title.length>50){
+		if(!username || !title || !flashcards || title.length>50){
 			return res.status(422).json({message:`Invalid Input: Please try again`});
 		}
 		else if(title && flashcards){
@@ -53,7 +53,7 @@ export default async function handler(req, res){
 				return flashcard.term.length > 0 || flashcard.description.length > 0
 			})
 			try{
-				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards, filetype:'flashcard'}})
+				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards}})
 				return res.status(201).json({message:'Successfully added flashcard'})
 			}catch (error) {
 				console.error(error);

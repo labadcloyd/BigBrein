@@ -10,7 +10,7 @@ import {Menu, Save} from '@material-ui/icons'
 export default function EditFlashcard(props){
 	const router = useRouter()
 	/* getting the user information from the session props */
-	const {session, userFolders, currentFlashcardSet, currentFlashcardTitle, currentFlashcardID, folderQuery} = props
+	const {session, userFolders, currentFlashcardSet, currentFlashcardTitle, currentFlashcardID, folderQuery, username} = props
 	/* for showing the api response when adding a new flashcard*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
@@ -70,7 +70,7 @@ export default function EditFlashcard(props){
 				return
 			}
 			setSubmitLoading(true)
-			await axios.patch('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, currentFlashcardID:currentFlashcardID})
+			await axios.patch('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, currentFlashcardID:currentFlashcardID, username:username, folderID:folderQuery._id})
 			// const query = response.data.flashcardID
 			router.push(`/files/flashcard/${currentFlashcardID}/${folderQuery._id}`)
 		}

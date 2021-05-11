@@ -5,13 +5,13 @@ import EditFlashcard from '../../../../components/flashcards/editFlashcard'
 import Head from 'next/head'
 
 export default function CreateFlashcardPage(props){
-	const {session, userFolders, title, flashcards, folderQuery, flashcardID} = props
+	const {session, userFolders, title, flashcards, folderQuery, flashcardID, username} = props
 	return(
 		<>
 			<Head>
 				<title>Create Flashcard Set | AcadDen</title>
 			</Head>
-			<EditFlashcard session={session} userFolders={userFolders} currentFlashcardSet={flashcards} currentFlashcardTitle={title} currentFlashcardID={flashcardID} folderQuery={folderQuery} />
+			<EditFlashcard username={username} session={session} userFolders={userFolders} currentFlashcardSet={flashcards} currentFlashcardTitle={title} currentFlashcardID={flashcardID} folderQuery={folderQuery} />
 		</>
 	)
 }
@@ -47,14 +47,21 @@ export async function getServerSideProps(context){
 		const folderQuery = await folders.find((folder)=>{
 			return folder._id === folderQueryID
 		})
-		return{
-			props:{
-				title: plainData.title,
-				flashcards: plainData.flashcards,
-				flashcardID:plainData._id,
-				session: session,
-				userFolders: folders,
-				folderQuery: folderQuery
+		if(!folderQuery){
+			return{
+				notFound:true
+			}
+		}if(folderQuery){
+			return{
+				props:{
+					title: plainData.title,
+					flashcards: plainData.flashcards,
+					flashcardID:plainData._id,
+					session: session,
+					userFolders: folders,
+					folderQuery: folderQuery,
+					username: user.username
+				}
 			}
 		}
 	}
@@ -64,7 +71,8 @@ export async function getServerSideProps(context){
 				title: plainData.title,
 				flashcards: plainData.flashcards,
 				session: session,
-				userFolders: folders
+				userFolders: folders,
+				username:user.username
 			}
 		}
 	}

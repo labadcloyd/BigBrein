@@ -1,14 +1,13 @@
 .fileComponentWrapper{
 	z-index: 0;
-	right: 0;
-	height: 100vh;  
+	right: 0;  
 	width: 100%;
 	padding: 80px 20px 20px 20px;
 	display: flex;
 	justify-content: center;
 }
 .flashcardContentWrapper{
-	padding: 20px;
+	padding: 20px 20px 0px 20px;
 	display: flex;
 	flex-direction: column;
 	color: white;
@@ -17,7 +16,6 @@
 	border-radius: 10px;
 	min-width: 230px;
 	max-width: 1000px;
-	margin-bottom: 20px;
 }
 .flashcardContentWrapper h1{
 	margin-bottom: 20px;
