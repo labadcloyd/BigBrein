@@ -54,6 +54,14 @@ export default async function handler(req, res){
 			})
 			try{
 				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards}})
+				await User.findOneAndUpdate(
+					{username:username}, 
+					{"$set": { "folders.$[folder].files.$[file].title": title }}, 
+					{"arrayFilters": [ 
+						{"folder._id": folderID},
+						{"file.fileID": currentFlashcardID} 
+					]}
+				)
 				return res.status(201).json({message:'Successfully added flashcard'})
 			}catch (error) {
 				console.error(error);
