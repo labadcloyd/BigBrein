@@ -30,7 +30,7 @@ export default function FolderPage(props) {
 				)}
 				<input type="checkbox" className={css.checker} id="bar-checker"/>
 				<div className={css.folderWrapperSidebar}>
-					<Sidebar session={session} userFolders={userFolders} currentFolderQuery={currentFolderQuery}/>
+					<Sidebar session={session} userFolders={userFolders} folderQuery={currentFolderQuery}/>
 				</div>
 				<div className={css.folderOverlay}></div>
 				<div className={css.folderWrapperFiles}>

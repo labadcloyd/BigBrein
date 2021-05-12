@@ -8,6 +8,7 @@ import Filebutton from './filebutton'
 export default function Sidebar(props){
 	const router = useRouter();
 	const {session, userFolders, folderQuery, currentFolderQuery} = props;
+	const username = session.user.name	
 	const [folderTitle, setFolderTitle] = useState('');
 	/* for showing the api response when adding a new folder*/
 	const [apiResponse, setResponse] = useState('');
@@ -18,7 +19,6 @@ export default function Sidebar(props){
 	/* function that makes the post request for adding a folder*/
 	async function submitFolder(data){
 		try{
-			const username = session.user.name	
 			const response = await axios.post('/api/userFolder', {folderTitle:folderTitle, username: username})
 			return response
 		}catch(error){
@@ -113,7 +113,15 @@ export default function Sidebar(props){
 			setShowAddFile(true)
 		},[currentFolderQuery])
 	}
-	
+	/* handle for deleting files */
+	async function handleDeleteFile(reqFileID){
+		setCurrentFiles((prevValue)=>{
+			const updatedFiles = prevValue.filter((file)=>{
+				return file.fileID != reqFileID
+			})
+			return updatedFiles
+		})
+	}
 	return(
 		<>	
 			<div className={css.sidebarWrapper}>
@@ -160,10 +168,9 @@ export default function Sidebar(props){
 						<div className={css.filesContainer}>
 							{currentFiles.map((file, index)=>{
 								const {title, filetype, fileID} = file
-								console.log(title)
 								return(
 									<>
-										<Filebutton flashcardIcon={flashcardIcon} noteIcon={noteIcon} quizIcon={quizIcon} title={title} filetype={filetype} fileID={fileID} fileFolderID={fileFolderID} index={index}/>
+										<Filebutton handleDeleteFile={handleDeleteFile} username={username} flashcardIcon={flashcardIcon} noteIcon={noteIcon} quizIcon={quizIcon} title={title} filetype={filetype} fileID={fileID} fileFolderID={fileFolderID} index={index}/>
 									</>
 								)
 							})}

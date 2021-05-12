@@ -62,7 +62,27 @@ export default async function handler(req, res){
 						{"file.fileID": currentFlashcardID} 
 					]}
 				)
-				return res.status(201).json({message:'Successfully added flashcard'})
+				return res.status(201).json({message:'Successfully updatedflashcard'})
+			}catch (error) {
+				console.error(error);
+				return res.status(500).send(`Server error`);
+			}
+		}
+	}
+	if(req.method==='DELETE'){
+		if(!session){
+			return res.status(401).json({message:`Unauthorized request`});
+		}
+		const {fileID, username, folderID} = req.body
+		/* validation: if they dont input a title or flashcard */
+		if(!username){
+			return res.status(422).json({message:`Invalid Input: Please try again`});
+		}
+		else if(fileID && folderID && username){
+			try{
+				await FlashcardSet.findOneAndDelete({_id:fileID})
+				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$pull: {"folders.$.files": {fileID: fileID} } })
+				return res.status(201).json({message:'Successfully deleted flashcard'})
 			}catch (error) {
 				console.error(error);
 				return res.status(500).send(`Server error`);
