@@ -9,7 +9,7 @@ export default function CreateFlashcardPage(props){
 	return(
 		<>
 			<Head>
-				<title>Create Flashcard Set | AcadDen</title>
+				<title>Create Flashcard Set | BitBrein</title>
 			</Head>
 			<EditFlashcard username={username} session={session} userFolders={userFolders} currentFlashcardSet={flashcards} currentFlashcardTitle={title} currentFlashcardID={flashcardID} folderQuery={folderQuery} />
 		</>

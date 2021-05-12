@@ -14,12 +14,12 @@ export default function FolderPage(props) {
 		<>	
 			{!currentFolderQuery &&
 				<Head>
-					<title>AcadDen - Your Best Study App</title>
+					<title>BitBrein - Your Best Study App</title>
 				</Head>
 			}
 			{currentFolderQuery &&
 				<Head>
-					<title>{`${currentFolderQuery.title} | AcadDen`}</title>
+					<title>{`${currentFolderQuery.title} | BitBrein`}</title>
 				</Head>
 			}
 			<FolderWrapper >

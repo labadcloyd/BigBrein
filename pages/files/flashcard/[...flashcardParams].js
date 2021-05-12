@@ -16,12 +16,12 @@ export default function FlashcardSetPage(props){
 		<>	
 			{!folderQuery &&
 				<Head>
-					<title>{`${title} | AcadDen`}</title>
+					<title>{`${title} | BitBrein`}</title>
 				</Head>
 			}
 			{folderQuery &&
 				<Head>
-					<title>{`${title} - ${folderQuery.title} | AcadDen`}</title>
+					<title>{`${title} - ${folderQuery.title} | BitBrein`}</title>
 				</Head>
 			}
 			<FolderWrapper >

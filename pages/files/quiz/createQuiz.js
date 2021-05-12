@@ -5,7 +5,7 @@ export default function CreateQuizPage(){
 	return(
 		<>
 			<Head>
-				<title>Create Note Set | AcadDen</title>
+				<title>Create Note Set | BitBrein</title>
 			</Head>
 			<div style={{height:'100vh', width:'100vw', display:'flex', justifyContent:'center', alignItems:'center'}}>
 				<div style={{height:'100%', width:'100%', maxWidth:'1000px', textAlign:'center', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>	

@@ -5,7 +5,7 @@ function AuthPage() {
   return (
       <>
         <Head>
-          <title>Login or Signup to AcadDen</title>
+          <title>Login or Signup to BitBrein</title>
         </Head>
         <AuthForm />
       </>

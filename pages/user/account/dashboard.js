@@ -13,7 +13,7 @@ export default function DashboardPage(props) {
 	return (
 		<>
 			<Head>
-				<title>AcadDen - Your Best Study App</title>
+				<title>BitBrein - Your Best Study App</title>
 			</Head>
 			<FolderWrapper >
 				{session && (
