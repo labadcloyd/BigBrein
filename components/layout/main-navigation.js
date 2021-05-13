@@ -3,6 +3,7 @@ import { useSession, signOut } from 'next-auth/client';
 import {useRouter, userRouter} from 'next/router'
 import css from './main-navigation.module.css';
 import {ExpandMore, Dashboard, AccountCircle, ExitToApp} from '@material-ui/icons'
+import Image from 'next/image'
 
 export default function MainNavigation() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function MainNavigation() {
       <header className={css.header}>
         <Link href='/'>
           <a>
-            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}>BigBrein</div>
+            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}><Image src='/images/logo.png' width={30} height={42} />BigBrein</div>
           </a>
         </Link>
         <nav>
