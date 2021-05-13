@@ -14,13 +14,13 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>BitBrein - Your Best Study App</title>
+				<title>BigBrein - Your Best Study App</title>
 			</Head>
 			<div className={css.pageWrapper}>
 				<div className={css.HeaderContainer}>
 					<div className={css.MainContainer}>
 						<div className={css.TitleContainer}>
-							<h1>BitBrein</h1>
+							<h1>BigBrein</h1>
 							<h2>The last study app you'll ever need. Easily create flashcards, notes, and practice quizzes.</h2>
 							<button onClick={handleClick}>Study Now</button>
 						</div>
@@ -28,7 +28,7 @@ export default function Home() {
 				</div>
 				<div className={css.footerContainer}>
 					<div>
-						<h1>©{year} BitBrein </h1>
+						<h1>©{year} BigBrein </h1>
 						<p>Designed and Developed by: <a href='https://github.com/labadcloyd'>Cloyd Abad</a></p>
 					</div>
 				</div>

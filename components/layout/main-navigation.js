@@ -18,7 +18,7 @@ export default function MainNavigation() {
       <header className={css.header}>
         <Link href='/'>
           <a>
-            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}>BitBrein</div>
+            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}>BigBrein</div>
           </a>
         </Link>
         <nav>

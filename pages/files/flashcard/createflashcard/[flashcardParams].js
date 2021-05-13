@@ -8,7 +8,7 @@ export default function CreateFlashcardPage(props){
 	return(
 		<>
 			<Head>
-				<title>Create Flashcard Set | BitBrein</title>
+				<title>Create Flashcard Set | BigBrein</title>
 			</Head>
 			<CreateFlashcard session={session} folderQuery={folderQuery} userFolders={userFolders} />
 		</>
