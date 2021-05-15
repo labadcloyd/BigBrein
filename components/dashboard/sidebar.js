@@ -62,8 +62,6 @@ export default function Sidebar(props){
 		router.push(`/files/${filetype}/create${filetype}/${fileFolderID}`)
 	}
 
-	/* FRONT END */
-
 	/* showing the addfile div */
 	const [showAddFile, setShowAddFile] = useState(false)
 	const [filetype, setFileType] = useState();

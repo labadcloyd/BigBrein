@@ -27,7 +27,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/labadcloyd/Acadden.git"
+    "url": "git+https://github.com/labadcloyd/BigBrein.git"
   },
   "cacheDirectories": [
     "node_modules/",
@@ -36,8 +36,8 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/labadcloyd/Acadden/issues"
+    "url": "https://github.com/labadcloyd/BigBrein/issues"
   },
-  "homepage": "https://github.com/labadcloyd/Acadden#readme",
+  "homepage": "https://github.com/labadcloyd/BigBrein#readme",
   "description": ""
 }
