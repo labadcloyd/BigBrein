@@ -59,6 +59,7 @@
 	align-items: center;
 	font-size: 1.2rem;
 	user-select: none;
+	white-space: pre;
 }
 .flashcardDescription{
 	background-color: #3399c9;
@@ -73,6 +74,7 @@
 	align-items: center;
 	font-size: 1.2rem;
 	user-select: none;
+	white-space: pre;
 }
 .moveControls{
 	display: flex;
