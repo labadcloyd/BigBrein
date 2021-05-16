@@ -183,15 +183,3 @@ function AuthForm() {
 }
 
 export default AuthForm;
-
-export async function getServerSideProps(context){
-	const session = await getSession({req:context.req})
-
-	if(session){
-		return{
-			redirect:{
-				destination: '/user/account/dashboard'
-			}
-		}
-	}
-}
