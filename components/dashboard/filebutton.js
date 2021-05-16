@@ -7,12 +7,19 @@ import css from './filebutton.module.css'
 
 export default function Filebutton(props){
 	const router = useRouter();
-	const {flashcardIcon, noteIcon, quizIcon, title, filetype, fileID, fileFolderID, index, username} = props
+	const {flashcardIcon, noteIcon, quizIcon, title, filetype, fileID, fileFolderID, index, username, currentFileID} = props
 	/* for deleting file */
 	async function handleDelete(){
 		const response = await axios.delete(`/api/${filetype}`, {data:{fileID:fileID, folderID:fileFolderID, username:username}})
 		props.handleDeleteFile(fileID)
-		return router.push(`/files/${fileFolderID}`)
+		if(currentFileID){
+			if(currentFileID===fileID){
+				return router.push(`/files/${fileFolderID}`)
+			}
+		}
+		/* hiding file button after deleting */
+		toggleOption(false)
+		return
 	}
 	/* for showing or hiding file button */
 	const [showOptions, toggleOption] = useState(false)

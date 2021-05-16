@@ -11,7 +11,7 @@ import CarouselFlashcard from '../../../components/flashcards/carouselFlashcard'
 import Head from 'next/head'
 
 export default function FlashcardSetPage(props){
-	const {title, flashcards, session, userFolders, folderQuery} = props
+	const {title, flashcards, session, userFolders, folderQuery, queryFileID} = props
 	return(
 		<>	
 			{!folderQuery &&
@@ -32,7 +32,7 @@ export default function FlashcardSetPage(props){
 						</label>
 						<input type="checkbox" className={css.checker} id="bar-checker"/>
 						<div className={css.folderWrapperSidebar} >
-							<Sidebar folderQuery={folderQuery} session={session} userFolders={userFolders}/>
+							<Sidebar queryFileID={queryFileID} folderQuery={folderQuery} session={session} userFolders={userFolders}/>
 						</div>
 					</>
 				)}
@@ -84,6 +84,7 @@ export async function getServerSideProps(context){
 			props:{
 				title: plainData.title,
 				flashcards: plainData.flashcards,
+				queryFileID: plainData._id,
 				session: session,
 				userFolders: folders,
 				folderQuery: folderQuery
@@ -95,6 +96,7 @@ export async function getServerSideProps(context){
 			props:{
 				title: plainData.title,
 				flashcards: plainData.flashcards,
+				queryFileID: plainData._id,
 				session: session,
 				userFolders: folders
 			}

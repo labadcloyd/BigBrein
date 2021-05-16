@@ -2,20 +2,18 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRouter} from 'next/router'
 import css from './sidebar.module.css'
-import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style, MoreVert, Delete, Edit } from '@material-ui/icons'
+import {AddCircle, Folder, ExpandMore, LibraryBooks, Subtitles, Style} from '@material-ui/icons'
 import Filebutton from './filebutton'
 
 export default function Sidebar(props){
 	const router = useRouter();
-	const {session, userFolders, folderQuery, currentFolderQuery} = props;
+	const {session, userFolders, folderQuery, currentFolderQuery, queryFileID} = props;
 	const username = session.user.name	
 	const [folderTitle, setFolderTitle] = useState('');
 	/* for showing the api response when adding a new folder*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	
-	/* BACK END */
-
 	/* function that makes the post request for adding a folder*/
 	async function submitFolder(data){
 		try{
@@ -168,7 +166,7 @@ export default function Sidebar(props){
 								const {title, filetype, fileID} = file
 								return(
 									<>
-										<Filebutton handleDeleteFile={handleDeleteFile} username={username} flashcardIcon={flashcardIcon} noteIcon={noteIcon} quizIcon={quizIcon} title={title} filetype={filetype} fileID={fileID} fileFolderID={fileFolderID} index={index}/>
+										<Filebutton currentFileID={queryFileID} handleDeleteFile={handleDeleteFile} username={username} flashcardIcon={flashcardIcon} noteIcon={noteIcon} quizIcon={quizIcon} title={title} filetype={filetype} fileID={fileID} fileFolderID={fileFolderID} index={index}/>
 									</>
 								)
 							})}

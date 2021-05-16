@@ -21,7 +21,7 @@
 .optionWrapper{
 	display: flex;
 	flex-direction: row;
-	margin: 0px 20px 20px 0px;
+	margin: 0px 20px 0px 0px;
 	gap: 15px;
 }
 .optionWrapper input{
