@@ -32,7 +32,7 @@ export default function MainNavigation() {
             {session && (
               <div className={css.navOptionRow}>
                 <li>
-                  <Link href='/user/account/dashboard'>Dashboard</Link>
+                  <Link href='/dashboard'>Dashboard</Link>
                 </li>
                 {/* <li>
                   <Link href='/user/editprofile'>{session.user.name}</Link>
@@ -51,7 +51,7 @@ export default function MainNavigation() {
                 <div className={css.navOptionColumnContainer}>
                   <li>
                     <Dashboard/>
-                    <Link href='/user/account/dashboard'>Dashboard</Link>
+                    <Link href='/dashboard'>Dashboard</Link>
                   </li>
                   {/* <li>
                     <AccountCircle/>

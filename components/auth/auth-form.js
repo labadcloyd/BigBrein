@@ -91,7 +91,7 @@ function AuthForm() {
 				password: credentials.password
 			})
 			if(!result.error){
-				router.push('/user/account/dashboard')
+				router.push('/dashboard')
 			}
 			if(result.error){
 				setUsernameError(true)
@@ -117,7 +117,7 @@ function AuthForm() {
 					password: credentials.password
 				})
 				if(!result.error){
-					router.push('/user/account/dashboard')
+					router.push('/dashboard')
 				}
 				if(result.error){
 					setUsernameError(true)
