@@ -1,0 +1,213 @@
+.flashcardComponentWrapper{
+	z-index: 0;
+	height: 100vh;  
+	width: 100%;
+	padding: 80px 0px 20px 20px;
+	display: flex;
+	justify-content: center;
+}
+.flashcardComponentContainer{
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 100%;
+	width: 100%; 
+	max-width: 1200px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	position: relative;
+}
+.optionWrapperWrapper{
+	position: absolute;
+	right: 20px;
+	top: 5px;
+	z-index: 2;
+}
+.optionWrapperWrapperButton{
+	position: absolute;
+	right: 20px;
+	top: 0;
+	z-index: 3;
+	padding: 8px 15px 8px 12px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	background-color: #2a4185;
+}
+.optionWrapper{
+	display: flex;
+	flex-direction: row;
+	margin: 0px 100px 0px 0px;
+	gap: 15px;
+}
+.optionWrapper input{
+	background-color: #121f3f;
+	width: 100%;
+	padding: 8px 8px 8px 12px;
+	border-radius: 10px;
+	border:none;
+	color: white;
+	font-size: .9rem;
+}
+.optionWrapper input:hover{
+	border: 3px solid #40BFF8;
+}
+.optionWrapper input:focus{
+	outline: none;
+	border: 3px solid #40BFF8;
+}
+.optionWrapper select{
+	background-color: #121f3f;
+	font-size: .9rem;
+	min-width: 230px;
+	width: 230px;
+	padding: 8px;
+	border-radius: 10px;
+	color: white;
+	border:none;
+	cursor: pointer;
+}
+.optionWrapper select:focus{
+	background-color: #2a4185;
+	outline: none;
+}
+.optionWrapper select:hover{
+	background-color: #2a4185;
+}
+.optionWrapper option{
+	overflow-x: hidden;
+	width: 300px;
+}
+.optionWrapper button{
+	font-size: .9rem;
+	min-width: 90px;
+	padding: 8px;
+	border-radius: 10px;
+	background-color: #2a4185;
+	color: white;
+	border:none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+.optionWrapper button:hover{
+	background-color: #40BFF8;
+}
+@media only screen and (max-width:900px){
+	.optionWrapperWrapper{
+		padding-left: 10px;
+		border-left: solid #0c0e13;
+		background-color: #121f3f;
+	}
+}
+@media only screen and (max-width: 750px) {
+	.optionWrapperWrapper{
+		padding-left: 0;
+		border-left: none;
+	}
+	.optionWrapper{
+		position: absolute;
+		flex-direction: column;
+		background-color: #2a4185;
+		padding: 10px;
+		margin: 0px;
+		top: 45px;
+		right: 20px;
+		border-radius: 10px;
+	}
+	.optionWrapper button{
+		justify-content: center;
+	}
+	.optionWrapper select{
+		width: 100%;
+	}
+}
+@media only screen and (max-width: 600px) {
+	.optionWrapper select{
+		font-size: .8rem;
+		border-radius: 6px;
+		padding: 10px;
+	}
+	.optionWrapper input{
+		font-size: .8rem;
+		border-radius: 6px;
+		padding: 10px;
+	}
+	.optionWrapper button{
+		font-size: .8rem;
+		border-radius: 6px;
+		padding: 10px;
+	}
+	.flashcardComponentContainer{
+		border-radius: 6px;
+	}
+}
+
+
+
+/*FOR THE SIDEBAR*/
+.hamburger{
+	display: none;
+	z-index: 3;
+	background-color: transparent;
+	color: white;
+	border:none;
+	cursor: pointer;
+	position: fixed;
+	top: 10px;
+	left: 20px;
+}
+.hamburger:hover{
+	color: #40BFF8;
+}
+.folderWrapperSidebar{
+	z-index: 2;
+	position: fixed;
+}
+.folderWrapperFiles{
+	width: 100%;
+	padding-left: 300px;
+}
+.folderOverlay{
+	background-color: rgb(255, 255, 255, 0.2);
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+	display: none;
+}
+.checker {
+    display: none;
+}
+
+@media only screen and (max-width: 900px) {
+	.hamburger{
+		display: block;
+	}
+    .folderWrapperFiles{
+		position: fixed;
+		width: 100vw;
+		padding-left: 0px;
+	}
+    .checker:not(:checked) ~ .folderWrapperSidebar {
+        transform: translateX(-350px);
+    }
+    .checker:checked ~ .folderWrapperSidebar{
+        transform: translateX(0px);
+    }
+	.checker:checked ~ .hamburger{
+		color: #40BFF8;
+	}
+	.checker:not(:checked) ~ .hamburger {
+		color: white;
+    }
+	.checker:checked ~ .folderOverlay{
+		display: block;
+	}
+}

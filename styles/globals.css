@@ -6,6 +6,7 @@
  ::-webkit-scrollbar-thumb {
   background: #a7c7eb;
   border-radius: 15px;
+  z-index: 5;
  }
  ::-webkit-scrollbar-thumb:hover{
   background: #c1e0eb;
@@ -13,6 +14,7 @@
  ::-webkit-scrollbar-track{
   background: #19274e;
   border-radius: 15px;
+  z-index: 5;
  }
 html {
   font-family: 'Montserrat', sans-serif;
@@ -35,4 +37,49 @@ a {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+
+/* for quill editor style */
+.ql-wrapper .ql-toolbar.ql-snow{
+  font-size: 16px;
+  background-color: #121f3f;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  top: 5px;
+  z-index: 1;
+}
+.ql-picker-label{
+  color: #dadada;
+  border-radius: 5px;
+}
+.ql-formats button{
+  color: #dadada;
+  border-radius: 5px;
+}
+.ql-wrapper .ql-container.ql-snow{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: #dadada;
+  background-color: #121f3f;
+  border: none;
+  border-radius: 10px;
+  height: 100%;
+  padding-top: 50px;
+}
+.quill > .ql-container > .ql-editor.ql-blank::before{
+  color: #a8a8a8;
+}
+.quill > .ql-container > .ql-editor{
+  padding: 0px 15px 15px 15px;
+}
+.ql-wrapper{
+	padding-right: 20px;
+  border-radius: 10px;
+  height: 100%;
+  position: relative;
+}
+.quill{
+  height: 100%;
 }

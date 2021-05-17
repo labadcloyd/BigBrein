@@ -19,7 +19,7 @@ export default function MainNavigation() {
       <header className={css.header}>
         <Link href='/'>
           <a>
-            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}><Image src='/images/logo.png' width={24} height={34} />BigBrein</div>
+            <div className={css.logo} style={currentRoute.includes('/dashboard')||currentRoute.includes('/files')?{marginLeft:'20px'}:{marginLeft:'0'}}><Image src='/images/logo.png' width={34} height={34} /><span>BigBrein</span></div>
           </a>
         </Link>
         <nav>

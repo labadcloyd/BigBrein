@@ -7,7 +7,7 @@ import {useRouter} from 'next/router'
 export default function Home() {
 	const router = useRouter()
 	function handleClick(){
-		router.push('/user/account/dashboard')
+		router.push('/dashboard')
 	}
 	const d = new Date();
 	const year = d.getFullYear();
@@ -41,7 +41,7 @@ export async function getServerSideProps(context){
 	if(session){
 		return{
 			redirect:{
-				destination: '/user/account/dashboard'
+				destination: '/dashboard'
 			}
 		}
 	}

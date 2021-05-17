@@ -1,16 +1,16 @@
 import {getSession} from 'next-auth/client'
 import {User} from '../../../../models/usermodel'
-import CreateFlashcard from '../../../../components/flashcards/createFlashcard'
 import Head from 'next/head'
+import CreateNote from '../../../../components/notes/createNote'
 
 export default function CreateNotePage(props){
 	const {session, userFolders, folderQuery} = props
 	return(
 		<>
 			<Head>
-				<title>Create Flashcard Set | BigBrein</title>
+				<title>Create Notes | BigBrein</title>
 			</Head>
-			<CreateFlashcard session={session} folderQuery={folderQuery} userFolders={userFolders} />
+			<CreateNote session={session} folderQuery={folderQuery} userFolders={userFolders} />
 		</>
 	)
 }
