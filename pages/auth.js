@@ -1,7 +1,10 @@
 import AuthForm from '../components/auth/auth-form';
 import Head from 'next/head'
+import {getSession} from 'next-auth/client'
 
-function AuthPage() {
+function AuthPage(props) {
+  const {sessions} = props
+
   return (
       <>
         <Head>
@@ -19,9 +22,17 @@ export async function getServerSideProps(context){
 
 	if(session){
 		return{
+      props:{
+        session:session
+      },
 			redirect:{
 				destination: '/user/account/dashboard'
 			}
 		}
 	}
+  return{
+    props:{
+      fakeProps:'fake props'
+    }
+  }
 }
