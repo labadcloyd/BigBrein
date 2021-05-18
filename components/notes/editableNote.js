@@ -2,8 +2,6 @@ import {Component, useCallback, useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "quill/dist/quill.snow.css"
-import css from "./editableNote.module.css"
-import { ClickAwayListener } from "@material-ui/core";
 
 // export default function EditableNote(props){
 // 	const modules = {
@@ -67,7 +65,7 @@ class RichTextEditor extends Component {
 	  	];
 
 	  	this.state = {
-			data: ''
+			data: this.props.currentNote || ''
 		}
 
 		this.rteChange = this.rteChange.bind(this);

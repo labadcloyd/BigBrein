@@ -14,7 +14,13 @@ const noteSetSchema = new mongoose.Schema({
 	filetype:{
 		type: String,
 		required:true,
+	},
+	createdBy:{
+		type: String,
+		required:true,
 	}
+}, {
+    timestamps: true
 })
 //it is very important to structure the model like this as Nextjs has a bug that creates the model again every render if the model is not done like this
 const NoteSet = mongoose.models.NoteSet || mongoose.model('NoteSet', noteSetSchema )

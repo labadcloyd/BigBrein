@@ -25,7 +25,7 @@ export default async function handler(req, res){
 				filetype:'flashcard'
 			})
 			try{
-				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  filetype:"flashcard", title:title} } })
+				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  filetype:"flashcard", title:title, createdBy:username} } })
 				await FlashcardSet.insertMany(createdFlashcardSet)
 				return res.status(201).json({message:'Successfully added flashcard', flashcardID:createdFlashcardSet._id})
 			}catch (error) {
@@ -50,7 +50,7 @@ export default async function handler(req, res){
 				return flashcard.term.length > 0 || flashcard.description.length > 0
 			})
 			try{
-				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards}})
+				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards, createdBy:username}})
 				await User.findOneAndUpdate(
 					{username:username}, 
 					{"$set": { "folders.$[folder].files.$[file].title": title }}, 

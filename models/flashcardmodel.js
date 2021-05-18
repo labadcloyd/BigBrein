@@ -7,11 +7,20 @@ const flashcardSetSchema = new mongoose.Schema({
 		max: 50,
 		required:true,
 	},
-	flashcards:[{term: String, description: String}],
+	flashcards:[{
+		term: String, 
+		description: String
+	}],
 	filetype:{
 		type: String,
 		required:true,
+	},
+	createdBy:{
+		type: String,
+		required:true,
 	}
+}, {
+    timestamps: true
 })
 //it is very important to structure the model like this as Nextjs has a bug that creates the model again every render if the model is not done like this
 const FlashcardSet = mongoose.models.FlashcardSet || mongoose.model('FlashcardSet', flashcardSetSchema )

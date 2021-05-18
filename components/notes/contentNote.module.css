@@ -1,0 +1,25 @@
+.ql-wrapper .quill .ql-toolbar.ql-snow{
+	display: none;
+}
+.fileComponentWrapper{
+	z-index: 0;
+	right: 0;  
+	width: 100%;
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+}
+.noteContentWrapper{
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 100%;
+	width: 100%; 
+	border-radius: 10px;
+	min-width: 230px;
+	max-width: 900px;
+}
+.noteContentWrapper h1{
+	margin-bottom: 20px;
+}

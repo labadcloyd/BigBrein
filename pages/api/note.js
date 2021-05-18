@@ -22,7 +22,7 @@ export default async function handler(req, res){
 				filetype:'note'
 			})
 			try{
-				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdNoteSet._id,  filetype:"note", title:title} } })
+				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdNoteSet._id,  filetype:"note", title:title, createdBy:username} } })
 				await NoteSet.insertMany(createdNoteSet)
 				return res.status(201).json({message:'Successfully added notes', noteID:createdNoteSet._id})
 			}catch (error) {
@@ -35,28 +35,25 @@ export default async function handler(req, res){
 		if(!session){
 			return res.status(401).json({message:`Unauthorized request`});
 		}
-		const {title, flashcards, currentFlashcardID, username, folderID} = req.body
-		/* validation: if they dont input a title or flashcard */
-		if(!username || !title || !flashcards || title.length>50){
+		const {title, notes, currentNoteID, username, folderID} = req.body
+		/* validation: if they dont input a title or note */
+		if(!username || !title || !notes || title.length>50){
 			return res.status(422).json({message:`Invalid Input: Please try again`});
 		}
-		else if(title && flashcards){
+		else if(title && notes){
 			/* NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
-			const plainDataFlashcards = JSON.parse(JSON.stringify(flashcards))
-			const validatedFlashcards = plainDataFlashcards.filter((flashcard)=>{
-				return flashcard.term.length > 0 || flashcard.description.length > 0
-			})
+			const plainDataNotes = JSON.parse(JSON.stringify(notes))
 			try{
-				await FlashcardSet.findOneAndUpdate({_id:currentFlashcardID}, {$set:{title:title, flashcards:validatedFlashcards}})
+				await NoteSet.findOneAndUpdate({_id:currentNoteID}, {$set:{title:title, noteData:plainDataNotes, createdBy:username}})
 				await User.findOneAndUpdate(
 					{username:username}, 
 					{"$set": { "folders.$[folder].files.$[file].title": title }}, 
 					{"arrayFilters": [ 
 						{"folder._id": folderID},
-						{"file.fileID": currentFlashcardID} 
+						{"file.fileID": currentNoteID} 
 					]}
 				)
-				return res.status(201).json({message:'Successfully updatedflashcard'})
+				return res.status(201).json({message:'Successfully updated note'})
 			}catch (error) {
 				console.error(error);
 				return res.status(500).send(`Server error`);
@@ -74,7 +71,7 @@ export default async function handler(req, res){
 		}
 		else if(fileID && folderID && username){
 			try{
-				await FlashcardSet.findOneAndDelete({_id:fileID})
+				await NoteSet.findOneAndDelete({_id:fileID})
 				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$pull: {"folders.$.files": {fileID: fileID} } })
 				return res.status(201).json({message:'Successfully deleted flashcard'})
 			}catch (error) {

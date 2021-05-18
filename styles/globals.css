@@ -83,3 +83,15 @@ a {
 .quill{
   height: 100%;
 }
+
+/* for quil content */
+
+.ql-content-wrapper .ql-wrapper{
+  padding: 0;
+}
+.ql-content-wrapper .ql-wrapper .ql-toolbar.ql-snow{
+  display: none;
+}
+.ql-content-wrapper .ql-wrapper .ql-container.ql-snow.ql-disabled{
+  padding-top: 10px;
+}
