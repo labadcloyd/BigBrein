@@ -16,6 +16,8 @@ export default function CreateNote(props){
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	/* title of folder to be saved in */
 	const [folderID, setFolderID] = useState('');
+	/* content of the notes */
+	const [noteData, setNoteData] = useState()
 	/* controlling the folder id to be saved in */
 	function handleSelect(event){
 		setFolderID(event.target.value)
@@ -36,8 +38,9 @@ export default function CreateNote(props){
 		})
 	}
 	/* getting the notes data when clicking outside the div */
-	function getData(data){
+	async function getData(data){
 		console.log(data)
+		await setNoteData(data)
 	}
 	/* sending post request to the api */
 	/* state for checking the function if its running */
@@ -50,14 +53,14 @@ export default function CreateNote(props){
 				setResponseAvailable(true)
 				return
 			}
-			if(!noteValues){
+			if(!noteData){
 				const response = 'Missing Input: No notes added'
 				setResponse(response)
 				setResponseAvailable(true)
 				return
 			}
 			if(!folderID){
-				const response = 'Missing Input: Please select a folder to save the flashcard set'
+				const response = 'Missing Input: Please select a folder to save the note set'
 				setResponse(response)
 				setResponseAvailable(true)
 				return
@@ -67,9 +70,9 @@ export default function CreateNote(props){
 			}
 			setSubmitLoading(true)
 			const username = session.user.name
-			const response = await axios.post('/api/flashcard', {title: flashcardTitle, flashcards:flashcardValues, folderID: folderID, username:username})
-			const query = response.data.flashcardID 
-			router.push(`/files/flashcard/${query}/${folderID}`)
+			const response = await axios.post('/api/note', {title: noteTitle, noteData:noteData, folderID: folderID, username:username})
+			const query = response.data.noteID 
+			router.push(`/files/note/${query}/${folderID}`)
 		}
 		catch(error){
 			setSubmitLoading(false)

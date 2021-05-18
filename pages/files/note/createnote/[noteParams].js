@@ -30,9 +30,8 @@ export async function getServerSideProps(context){
 	const user = await User.findOne({username:username})
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
-	/* getting the flashcardID and/or the currentfolderID */
-	const folderQueryID = context.params.flashcardParams;
-
+	/* getting the noteID and/or the currentfolderID */
+	const folderQueryID = context.params.noteParams;
 	if (folderQueryID && session){
 		const folderQuery = await folders.find((folder)=>{
 			return folder._id === folderQueryID

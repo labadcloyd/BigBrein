@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "quill/dist/quill.snow.css"
 import css from "./editableNote.module.css"
+import { ClickAwayListener } from "@material-ui/core";
 
 // export default function EditableNote(props){
 // 	const modules = {
@@ -70,28 +71,27 @@ class RichTextEditor extends Component {
 		}
 
 		this.rteChange = this.rteChange.bind(this);
-
-		this.backupData = ''
 	}
 	rteChange = (content, delta, source, editor) => {
 		this.state.data = editor.getContents();
 	}
 	handleBlur = () => {
-		this.backupData = this.state.data
-		this.props.getData(this.backupData)
+		this.props.getData(this.state.data)
 	}
 
 	render() {
 	    return (
-	      <div className='ql-wrapper' onBlur={this.handleBlur}>
-	        <ReactQuill theme="snow"
-            modules={this.modules}
-            formats={this.formats} 
-            onChange={this.rteChange}
-            value={this.state.data || ''}
-            placeholder='Start typing down your notes...'
-          />
-	      </div>
+				<div className='ql-wrapper'>
+					<ReactQuill theme="snow"
+					modules={this.modules}
+					formats={this.formats} 
+					onChange={this.rteChange}
+					defaultValue={this.state.data}
+					placeholder='Start typing down your notes...'
+					onBlur={this.handleBlur}
+
+					/>
+				</div>
 	    );
 	}
 
