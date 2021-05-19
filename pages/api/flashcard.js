@@ -22,7 +22,8 @@ export default async function handler(req, res){
 			const createdFlashcardSet = new FlashcardSet({
 				title:title, 
 				flashcards:validatedFlashcards,
-				filetype:'flashcard'
+				filetype:'flashcard',
+				createdBy:username
 			})
 			try{
 				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdFlashcardSet._id,  filetype:"flashcard", title:title, createdBy:username} } })

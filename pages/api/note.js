@@ -19,7 +19,8 @@ export default async function handler(req, res){
 			const createdNoteSet = new NoteSet({
 				title:title, 
 				noteData: plainDataNotes,
-				filetype:'note'
+				filetype:'note',
+				createdBy:username
 			})
 			try{
 				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$push: {"folders.$.files": {fileID: createdNoteSet._id,  filetype:"note", title:title, createdBy:username} } })
