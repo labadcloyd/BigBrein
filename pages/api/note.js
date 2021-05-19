@@ -65,7 +65,7 @@ export default async function handler(req, res){
 			return res.status(401).json({message:`Unauthorized request`});
 		}
 		const {fileID, username, folderID} = req.body
-		/* validation: if they dont input a title or flashcard */
+		/* validation: if they dont input a title or note */
 		if(!username){
 			return res.status(422).json({message:`Invalid Input: Please try again`});
 		}
@@ -73,7 +73,7 @@ export default async function handler(req, res){
 			try{
 				await NoteSet.findOneAndDelete({_id:fileID})
 				await User.findOneAndUpdate({username:username, "folders._id": folderID }, {$pull: {"folders.$.files": {fileID: fileID} } })
-				return res.status(201).json({message:'Successfully deleted flashcard'})
+				return res.status(201).json({message:'Successfully deleted note'})
 			}catch (error) {
 				console.error(error);
 				return res.status(500).send(`Server error`);
