@@ -65,7 +65,8 @@ export async function getServerSideProps(context){
 		return{
 			props:{
 				title: plainData.title,
-				flashcards: plainData.flashcards,
+				notes: notes,
+				queryFileID: plainData._id,
 			}
 		}
 	}
