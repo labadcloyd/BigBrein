@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {getSession} from 'next-auth/client'
 import css from '../styles/index.module.css'
-import Image from 'next/image'
+import Footer from '../components/layout/footer'
 import {useRouter} from 'next/router'
 //This is the homepage, users can search for notes, flashcards and quizes
 export default function Home() {
@@ -9,8 +9,6 @@ export default function Home() {
 	function handleClick(){
 		router.push('/dashboard')
 	}
-	const d = new Date();
-	const year = d.getFullYear();
 	return (
 		<>
 			<Head>
@@ -21,17 +19,15 @@ export default function Home() {
 					<div className={css.MainContainer}>
 						<div className={css.TitleContainer}>
 							<h1>BigBrein</h1>
-							<h2>The last study app you'll ever need. Easily create flashcards, notes, and practice quizzes.</h2>
+							<h2>Make learning efficient and easy through flashcards, notes, quizes and more on Bigbrein.com</h2>
 							<button onClick={handleClick}>Study Now</button>
+						</div>
+						<div className={css.wallpaperContainer}>
+
 						</div>
 					</div>
 				</div>
-				<div className={css.footerContainer}>
-					<div>
-						<h1>©{year} BigBrein </h1>
-						<p>Designed and Developed by: <a href='https://github.com/labadcloyd'>Cloyd Abad</a></p>
-					</div>
-				</div>
+				<Footer/>
 			</div>
 		</>
 	)

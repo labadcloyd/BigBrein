@@ -170,7 +170,7 @@
 		display: none;
 	}
 	.header {
-		justify-content: center;
+		justify-content: space-between;
 		margin-left: -20px;
 	}
 }

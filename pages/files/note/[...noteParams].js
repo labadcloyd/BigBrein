@@ -5,6 +5,7 @@ import {NoteSet} from '../../../models/notemodel'
 import { useState } from 'react'
 import css from './note.module.css'
 import {Menu} from '@material-ui/icons'
+import Footer from '../../../components/layout/footer'
 import Sidebar from '../../../components/dashboard/sidebar'
 import FolderWrapper from '../../../components/dashboard/folderWrapper'
 import ContentNote from '../../../components/notes/contentNote'
@@ -38,6 +39,9 @@ export default function NoteSetPage(props){
 				<div className={css.folderOverlay}></div>
 				<div className={css.folderWrapperFiles} style={{paddingLeft:session?'':'0px'}}>
 					<ContentNote notes={notes} title={title} />
+					{!session &&
+						<Footer/>
+					}
 				</div>
 			</FolderWrapper>
 		</>

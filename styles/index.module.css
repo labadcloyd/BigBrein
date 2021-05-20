@@ -2,6 +2,8 @@
 	box-sizing: border-box;
 	height: 100%;
 	width: 100%;
+	background-color: #40bff8;
+	background-image: linear-gradient(25deg, #40bff8 0%, #121f3f 20%, #121f3f 85%, #914cff 100%);	
 }
 .HeaderContainer{
 	box-sizing: border-box;
@@ -9,9 +11,6 @@
 	display: flex;
 	justify-content: center;
 	height: 100%;
-	background-image: url('/images/homeWallpaper.jpg');
-	background-size: cover;
-	background-position: left;
 }
 .MainContainer{
 	margin: 0px 40px 0px 40px;
@@ -22,10 +21,14 @@
 	flex-direction: row;
 	justify-content: space-between;
 }
-.ImageContainer{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+.wallpaperContainer{
+	height: 100%;
+	width: 100%;
+	background-image: url('/images/wallpaper.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: left;
+	padding: 0px 0px 0px 40px;
 }
 .TitleContainer{
 	display: flex;
@@ -44,44 +47,23 @@
 	font-weight:lighter;
 	color: #ffffff;
 	font-size: 1.3rem;
-	margin: 10px 50px 30px 0px;
+	margin: 10px 0px 30px 0px;
 }
 .TitleContainer button{
 	transition: .5s;
 	font: inherit;
 	background-color: transparent;
-	border: 1px solid #ffffff;
+	border: none;
+	background-color: #40BFF8;
 	color: #ffffff;
 	font-weight: bold;
-	padding: 0.5rem 1.5rem;
+	padding: 10px 20px;
 	border-radius: 6px;
 	cursor: pointer;
 	width: 170px;
 }
-.TitleContainer button:hover {
-	border: 1px solid #40BFF8;
-	background-color: #40BFF8;
-	color: #ffffff;
-}
-.footerContainer{
-	background-color: #0c152b;
-	height: 120px;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-}
-.footerContainer h1{
-	font-size: 1.3rem;
-	margin-bottom: 10px;
-}
-.footerContainer p{
-	text-decoration: none;
-	font-size: .9rem;
-}
-.footerContainer a{
-	color: #40BFF8;
+.TitleContainer button:hover{
+	background-color: #38a5d8;
 }
 @media only screen and (max-width: 700px) {
 	.MainContainer{
@@ -89,7 +71,8 @@
 		height: 100vh;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		padding-top: 150px;
+		justify-content: flex-start;
 		align-items: center;
 	}
 	.TitleContainer{
