@@ -56,15 +56,15 @@ export async function getServerSideProps(context){
 	/* finding the specific note */
 	const specificNoteSet = await NoteSet.findOne({_id:query},(err, foundSet)=>{
 			return foundSet
-	}) 
-	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
-	const plainData = JSON.parse(JSON.stringify(specificNoteSet))
-	const notes = JSON.parse(JSON.stringify(plainData.noteData.ops))
+	})
 	if(!specificNoteSet){
 		return{
 			notFound:true
 		}
 	}
+	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
+	const plainData = JSON.parse(JSON.stringify(specificNoteSet))
+	const notes = JSON.parse(JSON.stringify(plainData.noteData.ops))
 	if(!session && specificNoteSet){
 		return{
 			props:{

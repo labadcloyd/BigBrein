@@ -55,6 +55,11 @@ export async function getServerSideProps(context){
 	const specificFlashcardSet = await FlashcardSet.findOne({_id:query},(err, foundSet)=>{
 			return foundSet
 	}) 
+	if(!specificFlashcardSet){
+		return{
+			notFound:true
+		}
+	}
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const plainData = JSON.parse(JSON.stringify(specificFlashcardSet))
 	
@@ -71,11 +76,6 @@ export async function getServerSideProps(context){
 	const user = await User.findOne({username:username})
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
-	if(!specificFlashcardSet){
-		return{
-			notFound:true
-		}
-	}
 	if (folderQueryID && specificFlashcardSet && session){
 		const folderQuery = await folders.find((folder)=>{
 			return folder._id === folderQueryID

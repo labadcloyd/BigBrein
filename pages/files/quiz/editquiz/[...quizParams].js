@@ -1,17 +1,17 @@
 import {getSession} from 'next-auth/client'
 import {User} from '../../../../models/usermodel' 
-import {FlashcardSet} from '../../../../models/flashcardmodel'
-import EditFlashcard from '../../../../components/flashcards/editFlashcard'
+import {QuizSet} from '../../../../models/quizmodel'
 import Head from 'next/head'
+import EditQuiz from '../../../../components/quiz/editQuiz'
 
-export default function EditFlashcardPage(props){
-	const {session, userFolders, title, flashcards, folderQuery, flashcardID, username} = props
+export default function EditNotePage(props){
+	const {session, userFolders, title, notes, folderQuery, noteID, username} = props
 	return(
 		<>
 			<Head>
-				<title>Edit Flashcard Set | BigBrein</title>
+				<title>Edit Note Set | BigBrein</title>
 			</Head>
-			<EditFlashcard username={username} session={session} userFolders={userFolders} currentFlashcardSet={flashcards} currentFlashcardTitle={title} currentFlashcardID={flashcardID} folderQuery={folderQuery} />
+			<EditQuiz username={username} session={session} userFolders={userFolders} currentNoteSet={notes} currentNoteTitle={title} currentNoteID={noteID} folderQuery={folderQuery} />
 		</>
 	)
 }
@@ -25,25 +25,25 @@ export async function getServerSideProps(context){
 			}
 		}
 	}
-	/* getting the flashcardID and/or the currentfolderID */
-	const [flashcardQueryID, folderQueryID ]= context.params.flashcardParams;
-	/* finding the specific flashcard */
-	const specificFlashcardSet = await FlashcardSet.findOne({_id:flashcardQueryID},(err, foundSet)=>{
+	/* getting the QuizID and/or the currentfolderID */
+	const [quizQueryID, folderQueryID ]= context.params.quizParams;
+	/* finding the specific note */
+	const specificQuizSet = await NoteSet.findOne({_id:quizQueryID},(err, foundSet)=>{
 		return foundSet
 	})
-	if(!specificFlashcardSet){
+	if(!specificQuizSet){
 		return{
 			notFound:true
 		}
-	}
+	} 
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
-	const plainData = JSON.parse(JSON.stringify(specificFlashcardSet))
+	const plainData = JSON.parse(JSON.stringify(specificQuizSet))
 	/*we get the user and their folders and their files only if its confirmed that currentFolderID exists*/
 	const username = session.user.name
 	const user = await User.findOne({username:username})
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
-	if (folderQueryID && specificFlashcardSet && session){
+	if (folderQueryID && specificNoteSet && session){
 		const folderQuery = await folders.find((folder)=>{
 			return folder._id === folderQueryID
 		})
@@ -55,8 +55,8 @@ export async function getServerSideProps(context){
 			return{
 				props:{
 					title: plainData.title,
-					flashcards: plainData.flashcards,
-					flashcardID:plainData._id,
+					notes: plainData.noteData,
+					noteID:plainData._id,
 					session: session,
 					userFolders: folders,
 					folderQuery: folderQuery,
@@ -65,12 +65,12 @@ export async function getServerSideProps(context){
 			}
 		}
 	}
-	else if(session && specificFlashcardSet){
+	else if(session && specificNoteSet){
 		return{
 			props:{
 				title: plainData.title,
-				flashcards: plainData.flashcards,
-				flashcardID:plainData._id,
+				notes: plainData.noteData,
+				noteID:plainData._id,
 				session: session,
 				userFolders: folders,
 				username:user.username

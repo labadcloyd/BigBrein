@@ -30,7 +30,12 @@ export async function getServerSideProps(context){
 	/* finding the specific note */
 	const specificNoteSet = await NoteSet.findOne({_id:noteQueryID},(err, foundSet)=>{
 		return foundSet
-	}) 
+	})
+	if(!specificNoteSet){
+		return{
+			notFound:true
+		}
+	}
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const plainData = JSON.parse(JSON.stringify(specificNoteSet))
 	/*we get the user and their folders and their files only if its confirmed that currentFolderID exists*/
@@ -38,11 +43,6 @@ export async function getServerSideProps(context){
 	const user = await User.findOne({username:username})
 	/*  NEXTJS requires data to be POJO (Plain Ol Javascript Object), So the data received should be stringified and then parsed. */
 	const folders = JSON.parse(JSON.stringify(user.folders))
-	if(!specificNoteSet){
-		return{
-			notFound:true
-		}
-	}
 	if (folderQueryID && specificNoteSet && session){
 		const folderQuery = await folders.find((folder)=>{
 			return folder._id === folderQueryID

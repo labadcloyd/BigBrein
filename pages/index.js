@@ -19,7 +19,7 @@ export default function Home() {
 					<div className={css.MainContainer}>
 						<div className={css.TitleContainer}>
 							<h1>BigBrein</h1>
-							<h2>Make learning efficient and easy through flashcards, notes, quizes and more on Bigbrein.com</h2>
+							<h2>Make learning efficient and easy through flashcards, notes, and quizes</h2>
 							<button onClick={handleClick}>Study Now</button>
 						</div>
 						<div className={css.wallpaperContainer}>
