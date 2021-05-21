@@ -157,7 +157,6 @@ export default function Sidebar(props){
 								<option value="" disabled selected>Select file type to add</option>
 								<option value='flashcard'>Flashcard</option>
 								<option value='note'>Note</option>
-								<option value='quiz'>Quiz</option>
 							</select>
 							<button onClick={addFile} style={{backgroundColor:filetype?'#40BFF8':'#3b3b3b'}} disabled={!filetype? true: false}><AddCircle/></button>
 						</div>

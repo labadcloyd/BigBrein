@@ -40,6 +40,9 @@ function AuthForm() {
 		}
 		if(!isLogin){
 			if(confirmPassword !== credentials.password){
+				if(!confirmPassword ){
+					return
+				}
 				setRegisterError(true)
 				return setPasswordError(true)
 			} else{

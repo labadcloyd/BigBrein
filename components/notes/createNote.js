@@ -11,7 +11,7 @@ export default function CreateNote(props){
 	const router = useRouter()
 	/* getting the user information from the session props */
 	const {session, userFolders, folderQuery} = props
-	/* for showing the api response when adding a new flashcard*/
+	/* for showing the api response when adding a new quiz*/
 	const [apiResponse, setResponse] = useState('');
 	const [isApiResponse, setResponseAvailable] = useState(false);
 	/* title of folder to be saved in */

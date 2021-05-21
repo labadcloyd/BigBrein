@@ -3,7 +3,6 @@ import Head from 'next/head'
 import {getSession} from 'next-auth/client'
 
 function AuthPage(props) {
-  const {sessions} = props
 
   return (
       <>
