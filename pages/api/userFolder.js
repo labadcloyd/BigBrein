@@ -1,6 +1,6 @@
 import {FlashcardSet} from '../../models/flashcardmodel'
-import {User} from '../../models/userModel'
-import {Folder} from '../../models/folderModel'
+import {User} from '../../models/usermodel'
+import {Folder} from '../../models/foldermodel'
 import {getSession} from 'next-auth/client'
 
 export default async function handler(req, res){

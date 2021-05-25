@@ -74,6 +74,9 @@ export default function EditableContentFlashcard(props){
 									<button className={css.deletebtn} onClick={()=>{handleDelete(index)}}><Clear/></button>
 								</div>
 							</div>
+							<div className={css.flashcardLinebreakContainer}>
+								<hr className={css.flashcardLinebreak}></hr>
+							</div>
 						</div>
 					)
 				})}

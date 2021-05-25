@@ -5,8 +5,16 @@ import {verifyPassword} from '../../../utilsServer/hash'
 
 export default NextAuth({
   session:{
-    jwt:true,
+    jwt: true
+    /* I ABSOLUTELY have NO IDEA how this works */
+    // jwt: {
+    //   secret: "jwtSecret",
+    //   encryption: true,
+    //   signingKey: '{"kty":"oct","kid":"the-kid","alg":"HS512","k":"the-key"}',
+    //   encryptionKey: '{"kty":"oct","kid":"the-kid","alg":"A256GCM","k":"the-key"}',
+    // },
   },
+  
   providers: [
     Providers.Credentials({
       authorize: 

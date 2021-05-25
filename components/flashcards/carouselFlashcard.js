@@ -40,10 +40,14 @@ export default function CarouselFlashcard(props){
 									<div key={index} className={css.flashcardWrapper} style={{transform:"translateX(1000px)"}}>
 										<div className={css.flashcardContainer}>
 											<div className={css.flashcardTerm}  style={{transform:'translateY(0%)'}} >
-												{content.term}
+												<div className={css.flashcardTermText}>
+													{content.term}
+												</div>
 											</div>
 											<div className={css.flashcardDescription}>
-												{content.description}
+												<div className={css.flashcardTermText}>
+													{content.description}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -52,11 +56,15 @@ export default function CarouselFlashcard(props){
 								return(
 									<div key={index} className={css.flashcardWrapper} style={{transform:"translateX(-1000px)"}}>
 										<div className={css.flashcardContainer}>
-											<div className={css.flashcardTerm}  style={{transform:'translateY(0%)'}}>
-												{content.term}
+											<div className={css.flashcardTerm}  style={{transform:'translateY(0%)'}} >
+												<div className={css.flashcardTermText}>
+													{content.term}
+												</div>
 											</div>
-											<div className={css.flashcardDescription} >
-												{content.description}
+											<div className={css.flashcardDescription}>
+												<div className={css.flashcardTermText}>
+													{content.description}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -65,11 +73,15 @@ export default function CarouselFlashcard(props){
 								return(
 									<div key={index} className={css.flashcardWrapper} style={{transform:"translateX(0px)"}}>
 										<div className={css.flashcardContainer} onClick={openFlashcard} >
-											<div className={css.flashcardTerm} style={{transform:isFlashcardOpen?'translateY(90%)':'translateY(0%)'}} >
-												{content.term}
+											<div className={css.flashcardTerm}  style={{transform:isFlashcardOpen?'translateY(90%)':'translateY(0%)'}} >
+												<div className={css.flashcardTermText}>
+													{content.term}
+												</div>
 											</div>
 											<div className={css.flashcardDescription}>
-												{content.description}
+												<div className={css.flashcardDescriptionText}>
+													{content.description}
+												</div>
 											</div>
 										</div>
 									</div>
